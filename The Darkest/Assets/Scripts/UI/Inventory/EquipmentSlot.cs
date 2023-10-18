@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Rendering.UI;
 
 public class EquipmentSlot : MonoBehaviour, IDropHandler
 {
+    [SerializeField]
     public bool have = false;
-    ItemIcon i;
+
+    public PlayerStat pStat;
     public enum Slot
     {
         Body, Bow, Head, Shoes, Comsumable
@@ -15,13 +16,20 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler
 
     void Update()
     {
-        if(transform.childCount != 0)
-            have = true;
+        if(transform.childCount != 0 && !have)
+        {
+            pStat.once = true;
+            have = true;    
+        }
+        else if(transform.childCount == 0 && have)
+        {
+            pStat.once = true;
+            have = false;
+        }
     }
 
     public void OnDrop(PointerEventData eventData)
     {
-        
         ItemIcon haveItem = transform.GetComponentInChildren<ItemIcon>();
 
         ItemIcon item = eventData.pointerDrag.GetComponent<ItemIcon>();
@@ -33,12 +41,12 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler
         {
             if (haveItem != null && dropItem != null)
             {
-                //되긴함 문제는 scale이 변경 됨
                 haveItem.transform.SetParent(item.previousParent, false);
                 haveItem.transform.localScale = Vector3.one;
             }
             eventData.pointerDrag.transform.SetParent(transform);//icon이 slot에서 drop되었을때 현재 ItemSlot class를 가지고 있는
             eventData.pointerDrag.transform.localPosition = Vector2.zero;
         }
+        pStat.once = true;
     }
 }

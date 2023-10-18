@@ -76,7 +76,7 @@ public class ItemIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         transform.position = eventData.position;
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    public void OnEndDrag(PointerEventData eventData) // 드래그 끝
     {
         GetComponent<Image>().raycastTarget = true;
  
@@ -86,9 +86,8 @@ public class ItemIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             transform.localPosition = Vector2.zero;
         }
 
-        if(!IsOverUI())
+        if(!IsOverUI()) // 밖으로 나가지면
         {
-            //버렸으면 player바닥에 버린 아이템을 생성해야겠죠? 생성은 되는데 위치가 잘 안잡히네
             PlayerPos = GameObject.FindWithTag("Player");
             Instantiate(IT, PlayerPos.transform);
             IT.transform.localPosition = Vector3.zero;            

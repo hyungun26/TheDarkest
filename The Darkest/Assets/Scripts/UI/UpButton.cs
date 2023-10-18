@@ -1,14 +1,11 @@
 using System;
-using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class UpButton : MonoBehaviour, IPointerClickHandler
 {
     public PlayerStat PlayerStat;
-
     public PlayerStat2 playerUI;
     public TextMeshProUGUI val;
     public TextMeshProUGUI Point;

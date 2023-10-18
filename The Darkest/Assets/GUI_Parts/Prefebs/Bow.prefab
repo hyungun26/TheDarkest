@@ -104,8 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd7f6b3714f876b4a959a3e09b97df3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 0
-  Health: 0
-  Stamina: 0
-  Defence: 0
-  Critical: 0
+  Dam: 100
+  Hea: 0
+  Sta: 20
+  Def: 0
+  Cri: 15
