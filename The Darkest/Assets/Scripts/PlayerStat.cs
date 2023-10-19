@@ -1,5 +1,3 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerStat : MonoBehaviour
@@ -26,15 +24,10 @@ public class PlayerStat : MonoBehaviour
     void Start()
     {
         saveDam = Damage;
-        StatClient[0].statText.text = saveDam.ToString();
         saveHea = Health;
-        StatClient[1].statText.text = saveHea.ToString();
         saveSta = Stamina;
-        StatClient[2].statText.text = saveSta.ToString();
-        saveDef = Defence;
-        StatClient[3].statText.text = saveDef.ToString();
+        saveDef = Defence;        
         saveCri = Critical;
-        StatClient[4].statText.text = saveCri.ToString();
     }
     void Update()
     {
@@ -42,7 +35,6 @@ public class PlayerStat : MonoBehaviour
         {
             StatManager();
             once = false;
-            //이러면 딱 한번만 실행이됩니다. 해제를 했을때 상황을 어떻게 처리해야하나
         }
     }
 
@@ -147,6 +139,6 @@ public class PlayerStat : MonoBehaviour
         Defence = saveDef + Wdef + Bdef + Hdef + Sdef + buttonUp[3].num;
         StatClient[3].statText.text = Defence.ToString();
         Critical = saveCri + Wcri + Bcri + Hcri + Scri + buttonUp[4].num;
-        StatClient[4].statText.text = Critical.ToString();
+        StatClient[4].statText.text = Critical.ToString() + "%";
     }
 }

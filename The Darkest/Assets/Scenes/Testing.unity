@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2179,6 +2179,7 @@ GameObject:
   - component: {fileID: 288443467}
   - component: {fileID: 288443466}
   - component: {fileID: 288443468}
+  - component: {fileID: 288443469}
   m_Layer: 5
   m_Name: Cri
   m_TagString: Untagged
@@ -2203,8 +2204,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -200}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -39.0916, y: -200}
+  m_SizeDelta: {x: 121.8168, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &288443466
 MonoBehaviour:
@@ -2317,6 +2318,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StatManager: {fileID: 1187966801}
   statText: {fileID: 0}
+--- !u!114 &288443469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288443464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 0
 --- !u!1 &291498825
 GameObject:
   m_ObjectHideFlags: 0
@@ -2948,6 +2963,8 @@ MonoBehaviour:
   Once: {fileID: 1187966802}
   num: 0
   LvPoint: {fileID: 460942851}
+  ability: {fileID: 922224674}
+  abilityPoint: {fileID: 1520677932}
 --- !u!1 &317170639
 GameObject:
   m_ObjectHideFlags: 0
@@ -8405,6 +8422,8 @@ MonoBehaviour:
   Once: {fileID: 1187966802}
   num: 0
   LvPoint: {fileID: 460942851}
+  ability: {fileID: 113644241}
+  abilityPoint: {fileID: 288443466}
 --- !u!1 &1154668089
 GameObject:
   m_ObjectHideFlags: 0
@@ -8776,6 +8795,8 @@ MonoBehaviour:
   Once: {fileID: 1187966802}
   num: 0
   LvPoint: {fileID: 460942851}
+  ability: {fileID: 829803549}
+  abilityPoint: {fileID: 1215237157}
 --- !u!1 &1187966801
 GameObject:
   m_ObjectHideFlags: 0
@@ -15860,6 +15881,8 @@ MonoBehaviour:
   Once: {fileID: 1187966802}
   num: 0
   LvPoint: {fileID: 460942851}
+  ability: {fileID: 1875467506}
+  abilityPoint: {fileID: 1514907694}
 --- !u!1 &1602390903
 GameObject:
   m_ObjectHideFlags: 0
@@ -16028,6 +16051,8 @@ MonoBehaviour:
   Once: {fileID: 1187966802}
   num: 0
   LvPoint: {fileID: 460942851}
+  ability: {fileID: 1504668590}
+  abilityPoint: {fileID: 1592269233}
 --- !u!1 &1611834976
 GameObject:
   m_ObjectHideFlags: 0
