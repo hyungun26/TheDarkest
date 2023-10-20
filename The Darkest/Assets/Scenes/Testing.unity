@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2943,11 +2943,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fcd14ca6990fb7469f32d06e3743e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerStat: {fileID: 1187966802}
-  playerUI: {fileID: 1462477047}
-  val: {fileID: 1520677932}
-  Point: {fileID: 460942851}
-  ability: {fileID: 922224674}
 --- !u!114 &316934717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4589,11 +4584,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45634b8d35c40843b74e25bdd581395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerStat: {fileID: 1187966802}
-  playerUI: {fileID: 1462477047}
-  val: {fileID: 1592269233}
-  Point: {fileID: 460942851}
-  ability: {fileID: 1504668590}
 --- !u!114 &514784090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5245,11 +5235,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45634b8d35c40843b74e25bdd581395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerStat: {fileID: 1187966802}
-  playerUI: {fileID: 1462477047}
-  val: {fileID: 1520677932}
-  Point: {fileID: 460942851}
-  ability: {fileID: 922224674}
 --- !u!114 &652721003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8402,11 +8387,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fcd14ca6990fb7469f32d06e3743e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerStat: {fileID: 1187966802}
-  playerUI: {fileID: 1462477047}
-  val: {fileID: 288443466}
-  Point: {fileID: 460942851}
-  ability: {fileID: 113644241}
 --- !u!114 &1124597054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8775,11 +8755,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fcd14ca6990fb7469f32d06e3743e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerStat: {fileID: 1187966802}
-  playerUI: {fileID: 1462477047}
-  val: {fileID: 1215237157}
-  Point: {fileID: 460942851}
-  ability: {fileID: 829803549}
 --- !u!114 &1166358779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9679,12 +9654,6 @@ MonoBehaviour:
   UIAll: {fileID: 270116796}
   Stamina: {fileID: 823294915}
   PlayerHP: {fileID: 7708602315348380658}
-  LevelT: {fileID: 1312062225}
-  LevelDecimal: {fileID: 1336030546}
-  ExpGauge: {fileID: 39614880}
-  Level: 0
-  Exp: 1
-  MaxExp: 0.5
   PlayerStat: {fileID: 1187966802}
   HpBar: {fileID: 7708602315348380668}
   StaminaBar: {fileID: 823294913}
@@ -9697,6 +9666,12 @@ MonoBehaviour:
   HealOura: {fileID: 929851654}
   anim: {fileID: 429868664}
   UIAim: {fileID: 1522168155}
+  LevelT: {fileID: 1312062225}
+  LevelDecimal: {fileID: 1336030546}
+  ExpGauge: {fileID: 39614880}
+  Level: 0
+  Exp: 1
+  MaxExp: 0.5
   MyState: 0
 --- !u!4 &1283749610
 Transform:
@@ -10002,7 +9977,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c4a71e6953099f44e85f2befe7e14bca, type: 2}
   m_sharedMaterial: {fileID: -3680987822744141087, guid: c4a71e6953099f44e85f2befe7e14bca, type: 2}
@@ -14201,8 +14176,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Point: {fileID: 460942851}
-  usePoint: 0
-  savemaxPoint: 0
 --- !u!4 &1462477048
 Transform:
   m_ObjectHideFlags: 0
@@ -15861,11 +15834,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fcd14ca6990fb7469f32d06e3743e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerStat: {fileID: 1187966802}
-  playerUI: {fileID: 1462477047}
-  val: {fileID: 1514907694}
-  Point: {fileID: 460942851}
-  ability: {fileID: 1875467506}
 --- !u!114 &1598394225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16031,11 +15999,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fcd14ca6990fb7469f32d06e3743e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerStat: {fileID: 1187966802}
-  playerUI: {fileID: 1462477047}
-  val: {fileID: 1592269233}
-  Point: {fileID: 460942851}
-  ability: {fileID: 1504668590}
 --- !u!114 &1602390909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16189,11 +16152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45634b8d35c40843b74e25bdd581395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerStat: {fileID: 1187966802}
-  playerUI: {fileID: 1462477047}
-  val: {fileID: 288443466}
-  Point: {fileID: 460942851}
-  ability: {fileID: 113644241}
 --- !u!114 &1611834982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16474,11 +16432,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45634b8d35c40843b74e25bdd581395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerStat: {fileID: 1187966802}
-  playerUI: {fileID: 1462477047}
-  val: {fileID: 1215237157}
-  Point: {fileID: 460942851}
-  ability: {fileID: 829803549}
 --- !u!114 &1630870251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20845,11 +20798,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b45634b8d35c40843b74e25bdd581395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerStat: {fileID: 1187966802}
-  playerUI: {fileID: 1462477047}
-  val: {fileID: 1514907694}
-  Point: {fileID: 460942851}
-  ability: {fileID: 1875467506}
 --- !u!114 &2140667513
 MonoBehaviour:
   m_ObjectHideFlags: 0

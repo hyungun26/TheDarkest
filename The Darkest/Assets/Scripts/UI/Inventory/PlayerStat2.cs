@@ -7,13 +7,10 @@ public class PlayerStat2 : MonoBehaviour
 {
 
     public TextMeshProUGUI Point;
-
-    public int usePoint;
-    public int savemaxPoint;
-
+    int usePoint;
     public void GetPoint(int p)
     {
-        savemaxPoint += p;
+        usePoint = int.Parse(Point.text);
         usePoint += p;
         string a = usePoint.ToString();
         Point.text = a;

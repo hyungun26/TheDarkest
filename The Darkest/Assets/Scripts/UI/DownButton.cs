@@ -6,9 +6,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
 
-public class DownButton : MonoBehaviour, IPointerClickHandler
+public class DownButton : MonoBehaviour //IPointerClickHandler
 {
-    public PlayerStat PlayerStat;
+    /*public PlayerStat PlayerStat;
 
     public PlayerStat2 playerUI;
     public TextMeshProUGUI val;
@@ -136,5 +136,5 @@ public class DownButton : MonoBehaviour, IPointerClickHandler
             }
             //UI로 띄우면 좋을듯
         }
-    }
+    }*/
 }

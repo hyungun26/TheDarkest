@@ -33,7 +33,9 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler
         ItemIcon haveItem = transform.GetComponentInChildren<ItemIcon>();
 
         ItemIcon item = eventData.pointerDrag.GetComponent<ItemIcon>();
-        Item dropItem = item.IT.GetComponent<Item>();
+        if(item == null) return;
+        Item dropItem = item.IT.GetComponent<Item>();   
+        
         
         string s = dropItem.equipMent.ToString();
         string sa = slot.ToString();

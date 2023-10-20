@@ -35,13 +35,6 @@ public class PlayerController : AnimatorAll
     public Slider PlayerHP;
     bool SGaugeFill = false;
     uint a = 1;
-    public TextMeshProUGUI LevelT;
-    public TextMeshProUGUI LevelDecimal;
-    public Image ExpGauge;
-
-    public int Level = 0;
-    public float Exp = 1;
-    public float MaxExp = 0.01f;
 
     public PlayerStat PlayerStat;
     int dam;
@@ -53,11 +46,11 @@ public class PlayerController : AnimatorAll
     //player DeadScene UI
 
     public RectTransform DeadSceneAll;
-    public Image DeadSceneBorder; // 점점 선명해질것
-    public Image DeadSceneBar; // 점점 선명해질것
+    public Image DeadSceneBorder;
+    public Image DeadSceneBar;
     float currentTime = 0;
     float lerpTime = 5;//값에따라 변하는 속도가 변함
-    public TextMeshProUGUI DeadText; //점점 커질것
+    public TextMeshProUGUI DeadText;
     Color AlphaColorBor;
     Color AlphaColorBar;
     public Animator DeadCamera;
@@ -73,6 +66,15 @@ public class PlayerController : AnimatorAll
 
     public Animator anim;
     public GameObject UIAim;
+
+    //exp 관련
+    public TextMeshProUGUI LevelT;
+    public TextMeshProUGUI LevelDecimal;
+    public Image ExpGauge;
+    public int Level = 0;
+    public float Exp = 0;
+    public float MaxExp = 0.001f;
+    bool expC = false; //경험치가 오르는 관련에 넣으면 됨
 
     public enum PlayerState
     {
@@ -92,7 +94,16 @@ public class PlayerController : AnimatorAll
     {
         ProcessState();
         InvincibleTime();
-        PlayerExp();//임시로 만든것 나중에 몬스터 잡는 기능이 생기면 그때 활용할 것임
+        if (Input.GetKeyDown(KeyCode.Space)) // 임시 코드 대충 몹을 잡았을때 한번 발동하게 만들면 될듯
+        {
+            expC = true; // 경험치가 증가하면 한번만 작동
+            Exp += 100; // 잡은 몹에 따라 경험치량 다르게 변경해야함
+        }
+        if(expC)
+        {
+            PlayerExp();//임시로 만든것 나중에 몬스터 잡는 기능이 생기면 그때 활용할 것임
+            expC = false;
+        }
         PlayerStatus();
         if (Stamina.value != Stamina.maxValue && SGaugeFill)
         {
@@ -391,29 +402,21 @@ public class PlayerController : AnimatorAll
 
     void PlayerExp()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) // 임시 코드 대충 몹을 잡았을때 한번 발동하게 만들면 될듯
-        {
-            Exp += 5000; // 잡은 몹에 따라 경험치량 다르게
-        }
         ExpGauge.fillAmount = Exp * MaxExp;
-        double LevelVal = ExpGauge.fillAmount * 100.0f;
-        LevelVal = System.Math.Truncate(LevelVal * 100) / 100;
-        LevelDecimal.text = LevelVal.ToString() + "%";
+        // double LevelVal = ExpGauge.fillAmount * 100.0f;
+        // LevelVal = System.Math.Truncate(LevelVal * 100) / 100;
+        // LevelDecimal.text = LevelVal.ToString() + "%";
 
         if (ExpGauge.fillAmount == 1.0f) //레벨업 했을때
         {
             GameObject obj = Instantiate(Resources.Load("Prefabs/LevelUp") as GameObject);
             obj.name = "LevelUpParticle";
             obj.transform.SetParent(this.transform, false);
-              
-            float carryforward = Exp * MaxExp; //나머지 경험치량 이월값 (문제 있음)
-            Level += 1;
             PlayerUI.GetPoint(4); // Stat창 포인트 획득
+            Level += 1;
             LevelT.text = Level.ToString();
-            ExpGauge.fillAmount = 0.0f;
-            Exp = 0.0f;
-            Exp = carryforward;
-            MaxExp *= 0.4f;
+            ExpGauge.fillAmount = 0;
+            MaxExp *= 0.1f;
         }
     }
 

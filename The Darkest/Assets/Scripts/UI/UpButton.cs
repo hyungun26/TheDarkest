@@ -3,9 +3,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UpButton : MonoBehaviour, IPointerClickHandler
+public class UpButton : MonoBehaviour //IPointerClickHandler
 {
-    public PlayerStat PlayerStat;
+    /*public PlayerStat PlayerStat;
     public PlayerStat2 playerUI;
     public TextMeshProUGUI val;
     public TextMeshProUGUI Point;
@@ -131,5 +131,5 @@ public class UpButton : MonoBehaviour, IPointerClickHandler
             }
             //포인트 부족하면 오는곳 UI로 띄우면 좋을듯
         }
-    }
+    }*/
 }
