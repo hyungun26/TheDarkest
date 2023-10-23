@@ -21,6 +21,7 @@ public class PlayerStat : MonoBehaviour
     int saveSta = 0;
     int saveDef = 0;
     int saveCri = 0;
+
     void Start()
     {
         saveDam = Damage;

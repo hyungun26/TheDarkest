@@ -66,7 +66,7 @@ public class ItemIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         //slot = null;
         GetComponent<Image>().raycastTarget = false; // 이전에 그림에 영향을 받기위해 false처리한것
         previousParent = transform.parent;
-        transform.SetParent(All);
+        transform.SetParent(All, false);
         transform.SetAsLastSibling();
         //드래그 시작
     }
@@ -82,7 +82,7 @@ public class ItemIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
  
         if(transform.parent == All)
         {
-            transform.SetParent(previousParent);
+            transform.SetParent(previousParent, false);
             transform.localPosition = Vector2.zero;
         }
 

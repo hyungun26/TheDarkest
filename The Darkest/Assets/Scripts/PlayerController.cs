@@ -20,7 +20,7 @@ public class PlayerController : AnimatorAll
     float run = 0.5f;
     [SerializeField]
     public bool invincibility = false;
-    float invincibilityTime = 3.0f; // π´¿˚ Ω√∞£ ¡∂¿˝
+    float invincibilityTime = 3.0f; // Î¨¥Ï†ÅÏãúÍ∞Ñ
     bool running = false;
     public bool hit = false;
     
@@ -49,7 +49,7 @@ public class PlayerController : AnimatorAll
     public Image DeadSceneBorder;
     public Image DeadSceneBar;
     float currentTime = 0;
-    float lerpTime = 5;//∞™ø°µ˚∂Û ∫Ø«œ¥¬ º”µµ∞° ∫Ø«‘
+    float lerpTime = 5;// Ïù¥Í∞íÏùÑ Ï°∞Ï†àÌïòÎ©¥ Î≠êÎìúÎùº
     public TextMeshProUGUI DeadText;
     Color AlphaColorBor;
     Color AlphaColorBar;
@@ -67,14 +67,14 @@ public class PlayerController : AnimatorAll
     public Animator anim;
     public GameObject UIAim;
 
-    //exp ∞¸∑√
+    //exp Í¥ÄÎ†®
     public TextMeshProUGUI LevelT;
     public TextMeshProUGUI LevelDecimal;
     public Image ExpGauge;
     public int Level = 0;
     public float Exp = 0;
-    public float MaxExp = 0.001f;
-    bool expC = false; //∞Ê«Ëƒ°∞° ø¿∏£¥¬ ∞¸∑√ø° ≥÷¿∏∏È µ 
+    public float MaxExp = 1000;
+    public bool expC = false; // Î™πÏùÑ Ïû°ÏïòÏùÑÎïå expCÎ•º ÎÑ£Ïñ¥ Ï£ºÏñ¥ÏïºÌïúÎã§
 
     public enum PlayerState
     {
@@ -94,14 +94,14 @@ public class PlayerController : AnimatorAll
     {
         ProcessState();
         InvincibleTime();
-        if (Input.GetKeyDown(KeyCode.Space)) // ¿”Ω√ ƒ⁄µÂ ¥Î√Ê ∏˜¿ª ¿‚æ“¿ª∂ß «—π¯ πﬂµø«œ∞‘ ∏∏µÈ∏È µ…µÌ
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            expC = true; // ∞Ê«Ëƒ°∞° ¡ı∞°«œ∏È «—π¯∏∏ ¿€µø
-            Exp += 100; // ¿‚¿∫ ∏˜ø° µ˚∂Û ∞Ê«Ëƒ°∑Æ ¥Ÿ∏£∞‘ ∫Ø∞Ê«ÿæﬂ«‘
+            expC = true;
+            Exp += 5000;
         }
-        if(expC)
+        if(expC || Exp > MaxExp)
         {
-            PlayerExp();//¿”Ω√∑Œ ∏∏µÁ∞Õ ≥™¡ﬂø° ∏ÛΩ∫≈Õ ¿‚¥¬ ±‚¥…¿Ã ª˝±‚∏È ±◊∂ß »∞øÎ«“ ∞Õ¿”
+            PlayerExp();
             expC = false;
         }
         PlayerStatus();
@@ -112,7 +112,7 @@ public class PlayerController : AnimatorAll
 
         if(n < transform.childCount)
         {
-            if (transform.GetChild(7).GetComponent<Item>()) //¿Ã ƒ⁄µÂ¥¬ playeræ»ø° ¿⁄Ωƒ ∞πºˆ∞° ¥√æÓ≥™∏È ¡∂¡§«ÿ¡‡æﬂ«‘
+            if (transform.GetChild(7).GetComponent<Item>())
             {
                 transform.GetChild(7).parent = null;
             }
@@ -121,7 +121,7 @@ public class PlayerController : AnimatorAll
 
     public PlayerState MyState = PlayerState.Play;
 
-    public void ChangeState(PlayerState s) // ªÛ≈¬∞° ∫Ø∞Ê µ«∏È √÷√  «—π¯ Ω««‡µ«¥¬ ∞˜
+    public void ChangeState(PlayerState s)// Ïù¥Í≥≥ÏùÄ ÏÉÅÌÉúÍ∞Ä Î∞îÍæ∏Î©¥ ÌïúÎ≤à Ïã§ÌñâÏù¥ ÎêòÎäîÍ≥≥
     {
         if (s == MyState) return;
         MyState = s;
@@ -164,12 +164,10 @@ public class PlayerController : AnimatorAll
 
                 if (animEvent.animAming)
                 {
-                    //»∞Ω√¿ß ¥Á±‚±‚
                     Arch2.position = RightThumb.position;
                 }
                 else if (!animEvent.animAming)
                 {
-                    //»∞ ΩÓ±‚ and √Îº“
                     Arch2.position = Arch2Oripos.position;
                 }
 
@@ -182,8 +180,7 @@ public class PlayerController : AnimatorAll
                     if (!Mathf.Approximately(myAnim.GetFloat("X"), 0) || !Mathf.Approximately(myAnim.GetFloat("Y"), 0))
                     {
                         if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W))
-                        {//πÊ«‚≈∞∏¶ ¥≠∑∂¿ª∂ß
-                            //Ω∫≈¬πÃ≥™ ¡ŸæÓµÂ¥¬ ∞˜
+                        {
                             SGaugeFill = false;
                             Stamina.value -= 10.0f * Time.deltaTime;
                         }
@@ -248,7 +245,6 @@ public class PlayerController : AnimatorAll
                 myAnim.SetFloat("Y", y);
                 break;
             case PlayerState.Die:
-                //border¥¬ 255±Ó¡ˆ bar¥¬ 180±Ó¡ˆ text¥¬ 70ø°º≠ 120±Ó¡ˆ
                 currentTime += Time.deltaTime;
                 if (currentTime >= lerpTime)
                 {
@@ -265,7 +261,6 @@ public class PlayerController : AnimatorAll
                 DeadSceneBar.rectTransform.sizeDelta = new Vector2(0, alphaVal(100.0f, 200.0f, 1f));
                 DeadText.fontSize = alphaVal(100.0f, 120.0f, 2);
 
-                //Scene ¿ÁΩ√¿€ «œ∏È µ…µÌ
                 time += Time.deltaTime;
                 if (ReloadingTime <= time)
                 {
@@ -367,9 +362,8 @@ public class PlayerController : AnimatorAll
 
     public void Attacked(float dam)
     {
-        if (hit && !invincibility) //∏ÛΩ∫≈Õ«—≈◊ ∏¬æ“¿ª∂ß? µÓµÓ
+        if (hit && !invincibility) 
         {
-            //¿Ã∞˜ø°º≠ defence ∞¸∏Æ
             PlayerHP.value -= dam - PlayerStat.Defence;
 
             if(PlayerHP.value <= 0.0f)
@@ -382,14 +376,12 @@ public class PlayerController : AnimatorAll
             checkDir = Vector3.Cross(Vector3.up, hori);
             checkDir.Normalize();
             Vector3 myPosition = (DragonTr.position - Left.position).normalized;
-            if (Vector3.Dot(checkDir, myPosition) < 0.0f) //≥ª¿˚ 
+            if (Vector3.Dot(checkDir, myPosition) < 0.0f)
             {
-                //æ’ø°¿÷¥Ÿ.
                 myAnim.SetTrigger("isGettingBackUp");
             }
             else if (Vector3.Dot(checkDir, myPosition) > 0.0f)
             {
-                //µ⁄ø°¿÷¥Ÿ.
                 myAnim.SetTrigger("isGettingFrontUp");
             }
 
@@ -402,22 +394,25 @@ public class PlayerController : AnimatorAll
 
     void PlayerExp()
     {
-        ExpGauge.fillAmount = Exp * MaxExp;
-        // double LevelVal = ExpGauge.fillAmount * 100.0f;
-        // LevelVal = System.Math.Truncate(LevelVal * 100) / 100;
-        // LevelDecimal.text = LevelVal.ToString() + "%";
-
-        if (ExpGauge.fillAmount == 1.0f) //∑π∫ßæ˜ «ﬂ¿ª∂ß
+        
+        ExpGauge.fillAmount = Exp / MaxExp;
+        Debug.Log(ExpGauge.fillAmount);
+        if (ExpGauge.fillAmount == 1.0f) 
         {
             GameObject obj = Instantiate(Resources.Load("Prefabs/LevelUp") as GameObject);
             obj.name = "LevelUpParticle";
             obj.transform.SetParent(this.transform, false);
-            PlayerUI.GetPoint(4); // Stat√¢ ∆˜¿Œ∆Æ »πµÊ
+            PlayerUI.GetPoint(4); // StatÏ∞Ω Ïóê 4Ìè¨Ïù∏Ìä∏Ï§ÄÎã§
+            float carriedOver = Exp - MaxExp;
             Level += 1;
             LevelT.text = Level.ToString();
-            ExpGauge.fillAmount = 0;
-            MaxExp *= 0.1f;
+            MaxExp += 1000;
+            Exp = carriedOver;
+            ExpGauge.fillAmount = Exp / MaxExp;
         }
+        double LevelVal = ExpGauge.fillAmount * 100.0f;
+        LevelVal = System.Math.Truncate(LevelVal * 100) / 100;
+        LevelDecimal.text = LevelVal.ToString() + "%";
     }
 
     void PlayerStatus()
