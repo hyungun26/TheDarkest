@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -24,7 +24,7 @@ public class Aiming : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(this.transform.localScale.x > 1.0f && anim.GetBool("Aiming") && animEvent.SAim) //aim canvas ≈©±‚ ¡∂¿˝
+        if(this.transform.localScale.x > 1.0f && anim.GetBool("Aiming") && animEvent.SAim) //aim canvas ÌÅ¨Í∏∞ Ï°∞Ï†à
         {
             this.transform.localScale -= new Vector3(1, 1, 1) * Charging * Time.deltaTime;
         }

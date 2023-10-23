@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -27,7 +27,7 @@ public class PlayerRayCast : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.F))
                 {
                     PlayerController.Arrow.gameObject.SetActive(false);
-                    RayDistance = 0.0f; //≈ÿΩ∫∆Æ ≤Ù±‚øÎ
+                    RayDistance = 0.0f; //ÌÖçÏä§Ìä∏ ÎÅÑÍ∏∞Ïö©
                     InteractT.gameObject.SetActive(false);
                     PlayerAnim.SetTrigger("Save");
                     CameraAnim.enabled = true;

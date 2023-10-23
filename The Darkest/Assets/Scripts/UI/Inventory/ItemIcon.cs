@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -17,45 +17,45 @@ public class ItemIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     float clickTime = 0;
     public void OnPointerEnter(PointerEventData eventData)
     {
-        //ÁøÀÔ
+        //ì§„ì…
     }   
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        //³ª°¨
+        //ë‚˜ê°
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         All = GameObject.Find("All").transform;
         Canvas = GameObject.Find("Canvas").transform;
-        //´­·¶À»¶§ 
+        //ëˆŒë €ì„ë•Œ 
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        //¶®À»¶§ 
+        //ë• ì„ë•Œ 
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        //´©¸£°í ¶®À»¶§ ¹İÀÀÇÑ´Ù
-        if ((Time.time - clickTime) < 0.3f) // ´õºí Å¬¸¯
+        //ëˆ„ë¥´ê³  ë• ì„ë•Œ ë°˜ì‘í•œë‹¤
+        if ((Time.time - clickTime) < 0.3f) // ë”ë¸” í´ë¦­
         {
             clickTime = -1;
-            Debug.Log("´õºíÅ¬¸¯");
+            Debug.Log("ë”ë¸”í´ë¦­");
             EquipmentSlot equip = transform.GetComponentInParent<EquipmentSlot>();
             ItemSlot Slot = transform.GetComponentInParent<ItemSlot>();
             if (equip != null)
             {
-                //Á¶°Ç inventory¾È¿¡ ºóÄ­ÀÌ ÀÖ´Â °÷À¸·Î ÀÌµ¿ÇØ¾ßÇÔ Áï for¹®À¸·Î °Ë»çÇØ¼­ ºó slotÃ£°í ³Ö±â
-                Debug.Log("inventory·Î ÀÌµ¿");
+                //ì¡°ê±´ : inventoryì•ˆì— ë¹ˆì¹¸ì´ ìˆëŠ” ê³³ìœ¼ë¡œ ì´ë™í•´ì•¼í•¨ ì¦‰ forë¬¸ìœ¼ë¡œ ê²€ì‚¬í•´ì„œ ë¹ˆ slotì°¾ê³  ë„£ê¸°
+                Debug.Log("inventoryë¡œ ì´ë™");
             }
             if (Slot != null)
             {
-                //Á¶°Ç ÀåºñÃ¢¿¡ ´Ù¸¥ Àåºñ°¡ ÀÖ´Ù¸é ¹Ù²Ù±â
-                Debug.Log("ÀåºñÃ¢À¸·Î ÀÌµ¿");
+                //ì¡°ê±´ : ì¥ë¹„ì°½ì— ë‹¤ë¥¸ ì¥ë¹„ê°€ ìˆë‹¤ë©´ ë°”ê¾¸ê¸°
+                Debug.Log("ì¥ë¹„ì°½ìœ¼ë¡œ ì´ë™");
             }
-            //³ªÁß¿¡ ±¸Çö
+            //ë‚˜ì¤‘ì— êµ¬í˜„
         }
         else
             clickTime = Time.time;
@@ -64,19 +64,19 @@ public class ItemIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnBeginDrag(PointerEventData eventData)
     {
         //slot = null;
-        GetComponent<Image>().raycastTarget = false; // ÀÌÀü¿¡ ±×¸²¿¡ ¿µÇâÀ» ¹Ş±âÀ§ÇØ falseÃ³¸®ÇÑ°Í
+        GetComponent<Image>().raycastTarget = false; // ì´ì „ì— ê·¸ë¦¼ì— ì˜í–¥ì„ ë°›ê¸°ìœ„í•´ falseì²˜ë¦¬í•œê²ƒ
         previousParent = transform.parent;
         transform.SetParent(All, false);
         transform.SetAsLastSibling();
-        //µå·¡±× ½ÃÀÛ
+        //ë“œë˜ê·¸ ì‹œì‘
     }
 
-    public void OnDrag(PointerEventData eventData) //µå·¡±× Áß
+    public void OnDrag(PointerEventData eventData) //ë“œë˜ê·¸ ì¤‘
     {
         transform.position = eventData.position;
     }
 
-    public void OnEndDrag(PointerEventData eventData) // µå·¡±× ³¡
+    public void OnEndDrag(PointerEventData eventData) // ë“œë˜ê·¸ ë
     {
         GetComponent<Image>().raycastTarget = true;
  
@@ -86,7 +86,7 @@ public class ItemIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             transform.localPosition = Vector2.zero;
         }
 
-        if(!IsOverUI()) // ¹ÛÀ¸·Î ³ª°¡Áö¸é
+        if(!IsOverUI()) // ë°–ìœ¼ë¡œ ë‚˜ê°€ì§€ë©´
         {
             PlayerPos = GameObject.FindWithTag("Player");
             Instantiate(IT, PlayerPos.transform);

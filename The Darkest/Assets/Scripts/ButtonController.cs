@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
@@ -21,7 +21,7 @@ public class ButtonController : MonoBehaviour, IPointerClickHandler
     {
         if(eventData.button == PointerEventData.InputButton.Left)
         {
-            Debug.Log("Ȯ��");
+            Debug.Log("확인");
             LevelNumAppear = !LevelNumAppear;
             LevelPersent.gameObject.SetActive(!LevelNumAppear);
             LevelNum.gameObject.SetActive(LevelNumAppear);

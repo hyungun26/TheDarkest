@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,16 +7,16 @@ using UnityEngine;
 
 public class UIControll : MonoBehaviour
 {
-    //staticÀÇ ¿ªÇÒÀº ´ëÃæ ´Ù¸¥ ½ºÅ©¸³Æ®¿¡ ¿µÇâÀ» ¹ŞÀº ÄÚµå¿¡ °ªÀ» staticÀ» ¼±¾ğÇÑ class¿¡¼­µµ ¿µÇâÀ» ¹Ş´Â °Í
+    //staticì˜ ì—­í• ì€ ëŒ€ì¶© ë‹¤ë¥¸ ìŠ¤í¬ë¦½íŠ¸ì— ì˜í–¥ì„ ë°›ì€ ì½”ë“œì— ê°’ì„ staticì„ ì„ ì–¸í•œ classì—ì„œë„ ì˜í–¥ì„ ë°›ëŠ” ê²ƒ
     public List<GameObject> list = new List<GameObject>();
 
     protected static bool inven = false;
     protected static bool stat = false;
 
-    //statÃ¢
+    //statì°½
     public RectTransform StatWin;
 
-    //inventoryÃ¢
+    //inventoryì°½
     public RectTransform Inventory;
 
     private void Start()
@@ -39,7 +39,7 @@ public class UIControll : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.U)) //Áßº¹ÄÚµå °£´ÜÇÏ°Ô Ã³¸® ÇÒ ¼ö ÀÖÀ¸¸é ÁÁ°Ú´Ù.
+        if (Input.GetKeyDown(KeyCode.U)) //ì¤‘ë³µì½”ë“œ ê°„ë‹¨í•˜ê²Œ ì²˜ë¦¬ í•  ìˆ˜ ìˆìœ¼ë©´ ì¢‹ê² ë‹¤.
         {
             stat = !stat;
             StatWin.gameObject.SetActive(stat);

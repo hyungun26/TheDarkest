@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +14,7 @@ public class RootMotion : MonoBehaviour
         transform.parent.rotation *= deltaRotation;
         deltaRotation = Quaternion.identity;
     }
-    private void OnAnimatorMove() //·çÆ® ¸ğ¼ÇÀ» »ç¿ëÇÒ¶§´Â ºÎ¸ğ¿Í °°ÀÌ ¿òÁ÷¿©¾ßÇÑ´Ù. ÀÌ ÇÔ¼ö¸¦ »ç¿ëÇÏ¸é ½ºÅ©¸³Æ®·Î Á¦¾î°¡ °¡´ÉÇÏ´Ù
+    private void OnAnimatorMove() //ë£¨íŠ¸ ëª¨ì…˜ì„ ì‚¬ìš©í• ë•ŒëŠ” ë¶€ëª¨ì™€ ê°™ì´ ì›€ì§ì—¬ì•¼í•œë‹¤. ì´ í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ë©´ ìŠ¤í¬ë¦½íŠ¸ë¡œ ì œì–´ê°€ ê°€ëŠ¥í•˜ë‹¤
     {
         deltaPosition += GetComponent<Animator>().deltaPosition;
         deltaRotation *= GetComponent<Animator>().deltaRotation;

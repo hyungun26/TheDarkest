@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
@@ -20,26 +20,26 @@ public class Arrow : MonoBehaviour
         Ray ray = new Ray(transform.position, transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, delta, crashMask))
         {
-            //¾Õ¿¡ÀÖ´Â ¹°Ã¼ °Ë»ç
+            //ì•ì—ìˆëŠ” ë¬¼ì²´ ê²€ì‚¬
             GameObject brokenArrow = Instantiate(CrashArrow);
             Vector3 pos = transform.position;
 
             if(hit.transform.CompareTag("Monster"))
             {
-                //ÀÌ¹æ½ÄÀ¸·Î DamageÃ³¸®¸¦ ÇßÁö¸¸ ¸÷ÀÌ ´Ã¾î³ª¸é ¹æ½ÄÀ» ¹Ù²ã¾ßÇÔ
-                //µå·¡°ï ÇÇ¸¦ ±ğ´Â ÄÚµå damage°ü·Ã ±â´ÉÀ» ¿©±â¼­ ¼öÇà...
-                //ÀÌ°÷¿¡¼­ Ä¡¸íÅ¸µµ °ü¸®
+                //ì´ë°©ì‹ìœ¼ë¡œ Damageì²˜ë¦¬ë¥¼ í–ˆì§€ë§Œ ëª¹ì´ ëŠ˜ì–´ë‚˜ë©´ ë°©ì‹ì„ ë°”ê¿”ì•¼í•¨
+                //ë“œë˜ê³¤ í”¼ë¥¼ ê¹ëŠ” ì½”ë“œ damageê´€ë ¨ ê¸°ëŠ¥ì„ ì—¬ê¸°ì„œ ìˆ˜í–‰...
+                //ì´ê³³ì—ì„œ ì¹˜ëª…íƒ€ë„ ê´€ë¦¬
                 Hit a = hit.transform.GetComponent<Hit>();
-                int rnd = Random.Range(1, 101); //1¿¡¼­ 100±îÁöÀÇ ¼ö¸¦ ³ÖÀ½
+                int rnd = Random.Range(1, 101); //1ì—ì„œ 100ê¹Œì§€ì˜ ìˆ˜ë¥¼ ë„£ìŒ
                 int moreDam = 1;
                 Debug.Log(a.DragonHP.PlayerStat.Critical);
                 if(a.DragonHP.PlayerStat.Critical > rnd)
                 {
                     moreDam = 2;
-                    Debug.Log("Å©¸®Æ¼ÄÃ!");
+                    Debug.Log("í¬ë¦¬í‹°ì»¬!");
                 }
                 a.DragonHP.HP -= a.DragonHP.PlayerStat.Damage * moreDam;
-                Debug.Log("µ¥¹ÌÁö" + a.DragonHP.PlayerStat.Damage * moreDam);
+                Debug.Log("ë°ë¯¸ì§€" + a.DragonHP.PlayerStat.Damage * moreDam);
             }
 
             brokenArrow.transform.SetParent(hit.transform);

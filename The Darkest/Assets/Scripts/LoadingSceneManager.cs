@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -20,17 +20,17 @@ public class LoadingSceneManager : MonoBehaviour
     {
         nextScene = sceneName;
         SceneManager.LoadScene("LoadingScene");
-        //LoadScene¹æ½ÄÀº µ¿±â ½ÄÀ¸·Î loadingÁßÀÏ¶§ ¾Æ¹«ÀÏµµ ¸øÇÑ´Ù
-        //LoadSceneAsync´Â ºñµ¿±â ½ÄÀ¸·Î loadingÁßÀÏ¶§ ´Ù¸¥ ÀÛ¾÷À» ÇÒ ¼ö ÀÖ´Ù.
+        //LoadSceneë°©ì‹ì€ ë™ê¸° ì‹ìœ¼ë¡œ loadingì¤‘ì¼ë•Œ ì•„ë¬´ì¼ë„ ëª»í•œë‹¤
+        //LoadSceneAsyncëŠ” ë¹„ë™ê¸° ì‹ìœ¼ë¡œ loadingì¤‘ì¼ë•Œ ë‹¤ë¥¸ ì‘ì—…ì„ í•  ìˆ˜ ìˆë‹¤.
     }
 
     IEnumerator LoadScene()
     {
         AsyncOperation op = SceneManager.LoadSceneAsync(nextScene);
-        op.allowSceneActivation = false;//Àå¸éÀÌ ÁØºñµÈ Áï ½Ã Àå¸éÀÌ È°¼ºÈ­µÇ´Â °ÍÀ» Çã¿ëÇÒÁö ¾ÈÇÒÁö
+        op.allowSceneActivation = false;//ì¥ë©´ì´ ì¤€ë¹„ëœ ì¦‰ ì‹œ ì¥ë©´ì´ í™œì„±í™”ë˜ëŠ” ê²ƒì„ í—ˆìš©í• ì§€ ì•ˆí• ì§€
 
         float timer = 0f;
-        while (!op.isDone)//¾À·ÎµùÀÌ ³¡³ªÁö ¾Ê¾Ò´Ù¸é
+        while (!op.isDone)//ì”¬ë¡œë”©ì´ ëë‚˜ì§€ ì•Šì•˜ë‹¤ë©´
         {
             yield return null;
             if(op.progress < 0.9f)

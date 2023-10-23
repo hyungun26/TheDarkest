@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -44,9 +44,9 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler
             {
                 haveItem.transform.SetParent(item.previousParent, false);
                 haveItem.transform.localScale = Vector3.one;
-                //¿©±â°¡ ¹®Á¦ÀÎµí
+                //ì—¬ê¸°ê°€ ë¬¸ì œì¸ë“¯
             }
-            eventData.pointerDrag.transform.SetParent(transform, false);//iconÀÌ slot¿¡¼­ dropµÇ¾úÀ»¶§ ÇöÀç ItemSlot class¸¦ °¡Áö°í ÀÖ´Â
+            eventData.pointerDrag.transform.SetParent(transform, false);//iconì´ slotì—ì„œ dropë˜ì—ˆì„ë•Œ í˜„ì¬ ItemSlot classë¥¼ ê°€ì§€ê³  ìˆëŠ”
             eventData.pointerDrag.transform.localPosition = Vector2.zero;
         }
 

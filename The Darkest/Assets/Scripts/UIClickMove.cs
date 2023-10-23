@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -13,7 +13,7 @@ public class UIClickMove : MonoBehaviour, IPointerDownHandler, IDragHandler
         BeginPos = this.transform.parent.position;
         StartPos = eventData.position;
 
-        //¿©±â¿¡¼­ list¿¡´ëÇÑ Ã³¸®¸¦ ÇÏ¸é ³»°¡ Å¬¸¯À»ÇßÀ»¶§ ´©¸¥ ui°¡ ¾ÕÀ¸·Î ³ª¿À°í escÀ» ´­·¶À»¶§ ¼ø¼­´ë·Î ²¨Áø´Ù
+        //ì—¬ê¸°ì—ì„œ listì—ëŒ€í•œ ì²˜ë¦¬ë¥¼ í•˜ë©´ ë‚´ê°€ í´ë¦­ì„í–ˆì„ë•Œ ëˆ„ë¥¸ uiê°€ ì•ìœ¼ë¡œ ë‚˜ì˜¤ê³  escì„ ëˆŒë €ì„ë•Œ ìˆœì„œëŒ€ë¡œ êº¼ì§„ë‹¤
         for (int i = 0; i < ui.list.Count; i++)
         {
             if (ui.list[i] == this.transform.parent.gameObject)

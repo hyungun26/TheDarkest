@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -18,7 +18,7 @@ public class UIController : MonoBehaviour
     float startAlpha = 0.0f;
     float endAlpha = 1.0f;
     [SerializeField]
-    float lerpTime = 0.5f; // lerpµÇ´Â ½Ã°£ Á¶Àı°¡´É
+    float lerpTime = 0.5f; // lerpë˜ëŠ” ì‹œê°„ ì¡°ì ˆê°€ëŠ¥
     float currentTime = 0.0f;
     [SerializeField]
     public bool dragonState = false;
@@ -49,7 +49,7 @@ public class UIController : MonoBehaviour
         for (int i = 0; i < alpha.Length; i++)
         {
             alpha[i].gameObject.SetActive(true);
-            if (alpha[i].GetComponent<Image>() != null) // Image component¸¦ °¡Áö°íÀÖ´Ù¸é
+            if (alpha[i].GetComponent<Image>() != null) // Image componentë¥¼ ê°€ì§€ê³ ìˆë‹¤ë©´
             {
                 Color color = alpha[i].GetComponent<Image>().color;
                 color.a = alphaControll;
@@ -72,7 +72,7 @@ public class UIController : MonoBehaviour
     }
 
 
-    IEnumerator UIOnOff(float start, float end) // fade in fade out È¿°ú ÄÚµùÀÎµ¥... Áßº¹ÄÚµå¶õ ¸»ÀÌÁö
+    IEnumerator UIOnOff(float start, float end) // fade in fade out íš¨ê³¼ ì½”ë”©ì¸ë°... ì¤‘ë³µì½”ë“œë€ ë§ì´ì§€
     {
         while (!Mathf.Approximately(alphaControll, end))
         {
@@ -81,7 +81,7 @@ public class UIController : MonoBehaviour
             {
                 currentTime = lerpTime;
             }
-            alphaControll = Mathf.Lerp(start, end, currentTime/lerpTime); //lerp¸¦ »ç¿ëÇÒ¶§´Â ½ÃÀÛÁöÁ¡°ú ³¡Á¡À» Á¤ÇØ³õ°í ÇÏ´Â°Ô ÁÁ´Ù.
+            alphaControll = Mathf.Lerp(start, end, currentTime/lerpTime); //lerpë¥¼ ì‚¬ìš©í• ë•ŒëŠ” ì‹œì‘ì§€ì ê³¼ ëì ì„ ì •í•´ë†“ê³  í•˜ëŠ”ê²Œ ì¢‹ë‹¤.
             yield return alphaControll;
         }
         currentTime = 0.0f;

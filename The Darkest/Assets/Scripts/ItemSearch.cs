@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -40,12 +40,12 @@ public class ItemSearch : MonoBehaviour
             InteractT.text = "Press \"Z\"";
             if (Input.GetKeyDown(KeyCode.Z))
             {
-                //ÀÏ´Ü »ı¼ºÀ» ¸ÕÀúÇØ¾ßÇÕ´Ï´Ù instantiate ¸¦ »ı¼ºÀ» ÇØ¾ßÇÒ°Í°°³×¿ä  //¿Ï¼º~
-                //´ÙÀ½¹®Á¦ slot¾È¿¡ itemÀÌ ÀÖ´Ù¸é ´ÙÀ½ slot¿¡ »ı¼º
+                //ì¼ë‹¨ ìƒì„±ì„ ë¨¼ì €í•´ì•¼í•©ë‹ˆë‹¤ instantiate ë¥¼ ìƒì„±ì„ í•´ì•¼í• ê²ƒê°™ë„¤ìš”  //ì™„ì„±~
+                //ë‹¤ìŒë¬¸ì œ slotì•ˆì— itemì´ ìˆë‹¤ë©´ ë‹¤ìŒ slotì— ìƒì„±
                 Item item = list[0].gameObject.GetComponent<Item>();
                 if (item != null)
                 {
-                    for (int i = 0; i < slotList.Count; i++)//¾ÆÀÌÅÛ µé¾î¿Â ¼ø¼­´ë·Î Ä­¿¡ ³Ö±â
+                    for (int i = 0; i < slotList.Count; i++)//ì•„ì´í…œ ë“¤ì–´ì˜¨ ìˆœì„œëŒ€ë¡œ ì¹¸ì— ë„£ê¸°
                     {
                         if (slotList[i].transform.childCount == 0)
                         {

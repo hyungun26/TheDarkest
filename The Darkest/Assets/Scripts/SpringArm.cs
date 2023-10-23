@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,7 +44,7 @@ public class SpringArm : MonoBehaviour
             transform.localRotation = Quaternion.Euler(curRot.x, 0, 0);
             transform.parent.localRotation = Quaternion.Euler(0, curRot.y, 0);
 
-            //Ä«¸Ş¶ó Object¶Õ±â ¹æÁö
+            //ì¹´ë©”ë¼ Objectëš«ê¸° ë°©ì§€
             if (Physics.Raycast(transform.position, -transform.forward, out RaycastHit hit, -camPos.z + Offset, crashMask))
             {
                 myCam.localPosition = new Vector3(0, 0, -hit.distance + Offset);
@@ -68,7 +68,7 @@ public class SpringArm : MonoBehaviour
             {
                 myCam.localPosition = Vector3.Lerp(myCam.localPosition, startPosition.localPosition, 5.0f * Time.deltaTime);
             }
-            //¸Å¿ì ¾ÈÁÁÀº ÄÚµå ³ªÁß¿¡ ¹Ù²ÙÀÚ
+            //ë§¤ìš° ì•ˆì¢‹ì€ ì½”ë“œ ë‚˜ì¤‘ì— ë°”ê¾¸ì
         }
     }
 }

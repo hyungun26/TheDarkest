@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Burst.CompilerServices;
@@ -85,14 +85,14 @@ public class Dragon : AnimatorAll
 
         if (Vector3.Distance(DragonTr.position, Player.position) < AttackLength)
         {
-            attackPossible = true; // °ø°İ°¡´É
+            attackPossible = true; // ê³µê²©ê°€ëŠ¥
         }
         else
         {
-            attackPossible = false; // °ø°İ ºÒ°¡´É
+            attackPossible = false; // ê³µê²© ë¶ˆê°€ëŠ¥
         }
 
-        //Å×½ºÆ® ¾îÅÃ µô·¹ÀÌ
+        //í…ŒìŠ¤íŠ¸ ì–´íƒ ë”œë ˆì´
         AttackDelay -= Time.deltaTime;
         if(DHP != HP)
         {
@@ -110,7 +110,7 @@ public class Dragon : AnimatorAll
         }
     }
 
-    public void ChangeState(MonsterState s) //Çàµ¿ÀÌ ¹Ù²ğ¶§ ÃÖÃÊ ÇÑ¹ø ½ÇÇà ÇÏ´Â°÷
+    public void ChangeState(MonsterState s) //í–‰ë™ì´ ë°”ë€”ë•Œ ìµœì´ˆ í•œë²ˆ ì‹¤í–‰ í•˜ëŠ”ê³³
     {
         if (State == s) return;
         State = s;
@@ -119,7 +119,7 @@ public class Dragon : AnimatorAll
             case MonsterState.Sleep:
                 break;
             case MonsterState.Scream:
-                DragonUI.GetComponent<UIController>().dragonState = true; // UI»ı¼º
+                DragonUI.GetComponent<UIController>().dragonState = true; // UIìƒì„±
                 break;
             case MonsterState.Walk:
                 break;
@@ -128,16 +128,16 @@ public class Dragon : AnimatorAll
             case MonsterState.Fight:
                 break;
             case MonsterState.Dead:
-                PlayerController.Exp += 5000; //player¿¡°Ô ÁÖ´Â °æÇèÄ¡
+                PlayerController.Exp += 5000; //playerì—ê²Œ ì£¼ëŠ” ê²½í—˜ì¹˜
                 PlayerController.expC = true;
-                DragonUI.GetComponent<UIController>().dragonDead = true; // °ªº¯°æ
-                DragonUI.GetComponent<UIController>().dragonState = true; // UI»èÁ¦
+                DragonUI.GetComponent<UIController>().dragonDead = true; // ê°’ë³€ê²½
+                DragonUI.GetComponent<UIController>().dragonState = true; // UIì‚­ì œ
                 myAnim.SetTrigger("IsDead");
                 break;
         }
     }
 
-    public void StateProcess() //Çàµ¿Áß °è¼Ó ÇØ¾ßÇÏ´Â °÷
+    public void StateProcess() //í–‰ë™ì¤‘ ê³„ì† í•´ì•¼í•˜ëŠ” ê³³
     {
         switch (State)
         {
@@ -147,7 +147,7 @@ public class Dragon : AnimatorAll
                 break;
             case MonsterState.Walk:
                 AttackLength = 5.0f;
-                if (!scream) // 1È¸¼º ÄÚµå
+                if (!scream) // 1íšŒì„± ì½”ë“œ
                 {
                     myAnim.SetBool("IsWalk", true);
                     scream = true;
@@ -155,23 +155,23 @@ public class Dragon : AnimatorAll
                 }
                 if (animEvent.Scream)
                 {
-                    if(PlayerController.MyState == PlayerController.PlayerState.Play) //ÇÃ·¹ÀÌ¾î°¡ »ì¾ÆÀÖ´Ù¸é ÂÑ¾Æ°¡¶ó
+                    if(PlayerController.MyState == PlayerController.PlayerState.Play) //í”Œë ˆì´ì–´ê°€ ì‚´ì•„ìˆë‹¤ë©´ ì«“ì•„ê°€ë¼
                     {
-                        if (Vector3.Distance(DragonTr.position, Player.position) < AttackLength) // player °ø°İ»ç°Å¸®
+                        if (Vector3.Distance(DragonTr.position, Player.position) < AttackLength) // player ê³µê²©ì‚¬ê±°ë¦¬
                         {
                             animEvent.Fight = false;
                             ChangeState(MonsterState.Fight);
                         }
                         dir = Player.transform.position - DragonTr.position;
                         DragonTr.rotation = Quaternion.Lerp(DragonTr.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 5.0f);
-                        if (Vector3.Distance(DragonTr.position, Player.position) > runORwalk && !run && !attackPossible) //°Å¸®°¡ ¸Ö¸é ¶Ù¾î°¡¶ó
+                        if (Vector3.Distance(DragonTr.position, Player.position) > runORwalk && !run && !attackPossible) //ê±°ë¦¬ê°€ ë©€ë©´ ë›°ì–´ê°€ë¼
                         {
                             Agent.isStopped = false;
                             run = true;
                             Agent.speed = 60.0f;
                             myAnim.SetTrigger("IsChaingRun");
                         }
-                        else if(Vector3.Distance(DragonTr.position, Player.position) < runORwalk && !run && !attackPossible) //°Å¸®°¡ °¡±î¿ì¸é °É¾î°¡¶ó
+                        else if(Vector3.Distance(DragonTr.position, Player.position) < runORwalk && !run && !attackPossible) //ê±°ë¦¬ê°€ ê°€ê¹Œìš°ë©´ ê±¸ì–´ê°€ë¼
                         {
                             Agent.isStopped = false;
                             run = true;
@@ -191,18 +191,18 @@ public class Dragon : AnimatorAll
                 {
                     ChangeState(MonsterState.Fight);
                 }
-                //ÇÃ·¹ÀÌ¾î°¡ Á×À¸¸é ¿©±â·Î µé¾î¿Â´Ù.
+                //í”Œë ˆì´ì–´ê°€ ì£½ìœ¼ë©´ ì—¬ê¸°ë¡œ ë“¤ì–´ì˜¨ë‹¤.
                 break;
             case MonsterState.Fight:
-                if(PlayerController.MyState == PlayerController.PlayerState.Play) //player°¡ Á×°Å³ª ³Ñ¾îÁ®ÀÖ´Â »óÅÂÀÏ¶§¸¸ °ø°İ
+                if(PlayerController.MyState == PlayerController.PlayerState.Play) //playerê°€ ì£½ê±°ë‚˜ ë„˜ì–´ì ¸ìˆëŠ” ìƒíƒœì¼ë•Œë§Œ ê³µê²©
                 {
                     AttackLength = 6.0f;
-                    //AnimationEvent ¿¡¼­ Fight false Ã³¸®Áß ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ ³¡³ª¸é ´Ù½Ã µé¾î¿Í¼­ °ø°İÇÔ
+                    //AnimationEvent ì—ì„œ Fight false ì²˜ë¦¬ì¤‘ ì• ë‹ˆë©”ì´ì…˜ì´ ëë‚˜ë©´ ë‹¤ì‹œ ë“¤ì–´ì™€ì„œ ê³µê²©í•¨
 
-                    //¹®Á¦Á¡
-                    //fight»óÅÂ¿¡¼­ ¸ø³ª¿Ã¶§°¡ ÀÖÀ½ animEvent.Fight°¡ trueÃ³¸® ¾ÈµÉ¶§°¡ ÀÖÀ½
-                    //°ø°İ¹üÀ§ ¾È¿¡ ÀÖÁö¸¸ °È´Â´Ù. ÀÌÀ¯¸¦ ÆÄ¾ÇÇÔ ÇÃ·¹ÀÌ¾î°¡ hitdownÀ¸·Î °Å¸®°¡ attackRangeº¸´Ù Á¶±İ ¸Ö¾îÁü ±×·¡¼­
-                    //°È´Â »óÅÂ·Î µé¾î°¡ÀÚ¸¶ÀÚ °ø°İ¹üÀ§ ¾È¿¡ µé¾î¿Í¼­ °ø°İÀ» ÇÏ´Â ºÎÀÚ¿¬½º·¯¿î Çö»óÀÌ »ı±è
+                    //ë¬¸ì œì 
+                    //fightìƒíƒœì—ì„œ ëª»ë‚˜ì˜¬ë•Œê°€ ìˆìŒ animEvent.Fightê°€ trueì²˜ë¦¬ ì•ˆë ë•Œê°€ ìˆìŒ
+                    //ê³µê²©ë²”ìœ„ ì•ˆì— ìˆì§€ë§Œ ê±·ëŠ”ë‹¤. ì´ìœ ë¥¼ íŒŒì•…í•¨ í”Œë ˆì´ì–´ê°€ hitdownìœ¼ë¡œ ê±°ë¦¬ê°€ attackRangeë³´ë‹¤ ì¡°ê¸ˆ ë©€ì–´ì§ ê·¸ë˜ì„œ
+                    //ê±·ëŠ” ìƒíƒœë¡œ ë“¤ì–´ê°€ìë§ˆì ê³µê²©ë²”ìœ„ ì•ˆì— ë“¤ì–´ì™€ì„œ ê³µê²©ì„ í•˜ëŠ” ë¶€ìì—°ìŠ¤ëŸ¬ìš´ í˜„ìƒì´ ìƒê¹€
                     if (AttackDelay <= 0.0f)
                     {
                         Agent.isStopped = true;
@@ -226,7 +226,7 @@ public class Dragon : AnimatorAll
 
                     }
 
-                    if (AttackDelay > 0.0f) // °ø°İ µô·¹ÀÌ¿¡ °É·ÁÀÖÀ¸¸é ÃÄ´ÙºÁ¶ó player¸¦
+                    if (AttackDelay > 0.0f) // ê³µê²© ë”œë ˆì´ì— ê±¸ë ¤ìˆìœ¼ë©´ ì³ë‹¤ë´ë¼ playerë¥¼
                     {
                         dir = Player.transform.position - DragonTr.position;
                         DragonTr.rotation = Quaternion.Lerp(DragonTr.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 5.0f);
@@ -242,7 +242,7 @@ public class Dragon : AnimatorAll
                             break;
                     }
 
-                    if (!attackPossible && animEvent.Fight) // ¹üÀ§ ¾ÈÀÌ ¾Æ´Ï¸é ºüÁ®³ª°¡¾ßÇÔ
+                    if (!attackPossible && animEvent.Fight) // ë²”ìœ„ ì•ˆì´ ì•„ë‹ˆë©´ ë¹ ì ¸ë‚˜ê°€ì•¼í•¨
                     {
                         ChangeState(MonsterState.Walk);
                         run = false;

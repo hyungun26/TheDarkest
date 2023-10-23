@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -50,6 +50,6 @@ public class StudyIK : MonoBehaviour
     private void OnAnimatorIK(int layerIndex)
     {
         myAnim.SetIKPositionWeight(AvatarIKGoal.RightHand, IKWeight);
-        myAnim.SetIKPosition(AvatarIKGoal.RightHand, Arch2.position); //SetIkPositionÇÔ¼ö´Â OnAnimatorIKÇÔ¼ö¿¡¼­¸¸ µ¿ÀÛÇÑ´Ù.
+        myAnim.SetIKPosition(AvatarIKGoal.RightHand, Arch2.position); //SetIkPositioní•¨ìˆ˜ëŠ” OnAnimatorIKí•¨ìˆ˜ì—ì„œë§Œ ë™ì‘í•œë‹¤.
     }
 }

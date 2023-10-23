@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting;
@@ -10,7 +10,6 @@ public class UpButton2 : MonoBehaviour, IPointerClickHandler
     public TextMeshProUGUI LvPoint;
     public TextMeshProUGUI ability;
     public TextMeshProUGUI abilityPoint;
-    // Start is called before the first frame update
     int maxAbility = 0;
     void Start()
     {
@@ -33,6 +32,7 @@ public class UpButton2 : MonoBehaviour, IPointerClickHandler
                 break;
         }
     }
+    //보자보자 어디보자
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)

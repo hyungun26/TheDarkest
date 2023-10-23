@@ -1,5 +1,6 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -8,15 +9,36 @@ public class ItemSlot : MonoBehaviour, IDropHandler
 {     
     public void OnDrop(PointerEventData eventData)
     {
-        ItemIcon icon = transform.GetComponentInChildren<ItemIcon>(); //¹Ù²Ù·Á°íÇß´ø slot¾È¿¡ iconÀÌ µé¾î°¨
-        ItemIcon icon2 = eventData.pointerDrag.GetComponent<ItemIcon>();
-        if(icon != null && icon2 != null)
-        {
-            icon.transform.SetParent(icon2.previousParent, false);
-        }
-        eventData.pointerDrag.transform.SetParent(transform, false);//iconÀÌ slot¿¡¼­ dropµÇ¾úÀ»¶§ ÇöÀç ItemSlot class¸¦ °¡Áö°í ÀÖ´Â
+        ItemIcon icon = transform.GetComponentInChildren<ItemIcon>(); //ê°€ë§Œíˆ ìˆë˜ icon
+        ItemIcon icon2 = eventData.pointerDrag.GetComponent<ItemIcon>(); //ë“œë˜ê·¸ ì¤‘ì¸ icon
+
+
+        eventData.pointerDrag.transform.SetParent(transform, false);//iconì´ slotì—ì„œ dropë˜ì—ˆì„ë•Œ í˜„ì¬ ItemSlot classë¥¼ ê°€ì§€ê³  ìˆëŠ”
         eventData.pointerDrag.transform.localScale = Vector3.one;
         eventData.pointerDrag.transform.localPosition = Vector2.zero;
-        //slotÀÇ ÀÚ½ÄÀ¸·Î ÀÌµ¿
+        //slotì˜ ìì‹ìœ¼ë¡œ ì´ë™
+
+        if (icon != null && icon2 != null) // ìœ„ì¹˜ ë°”ê¾¸ê¸°
+        {
+            Item iconitem = icon.IT.GetComponent<Item>();
+            Item iconitem2 = icon2.IT.GetComponent<Item>();
+            if (icon2.previousParent.name == "Frame") // ì°©ìš© ì¤‘ì¸ì¥ë¹„ë©´
+            {
+                if (iconitem.equipMent == iconitem2.equipMent)
+                {
+                    //ì •ìƒ êµí™˜
+                    icon.transform.SetParent(icon2.previousParent, false);
+                }
+                else
+                {
+                    //ì°©ìš© ë¶€ìœ„ê°€ ì•„ë‹˜
+                    icon2.transform.SetParent(icon2.previousParent, false);
+                }
+            }
+            else
+            {
+                icon.transform.SetParent(icon2.previousParent, false);
+            }
+        }
     }
 }
