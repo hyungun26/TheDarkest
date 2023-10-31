@@ -8,8 +8,6 @@ public class PlayerController : AnimatorAll
 {
     public GameObject UI_Aiming;
 
-    //public Animator anim;
-    public SpringArm arm; 
     Vector2 targetDir = Vector2.zero;
     public Transform Left;
     public Transform Right;
@@ -49,7 +47,7 @@ public class PlayerController : AnimatorAll
     public Image DeadSceneBorder;
     public Image DeadSceneBar;
     float currentTime = 0;
-    float lerpTime = 5;// 이값을 조절하면 뭐드라
+    float lerpTime = 5;
     public TextMeshProUGUI DeadText;
     Color AlphaColorBor;
     Color AlphaColorBar;
@@ -104,7 +102,9 @@ public class PlayerController : AnimatorAll
             PlayerExp();
             expC = false;
         }
+
         PlayerStatus();
+
         if (Stamina.value != Stamina.maxValue && SGaugeFill)
         {
             Stamina.value += 2.0f * Time.deltaTime;

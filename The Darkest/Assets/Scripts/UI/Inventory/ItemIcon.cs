@@ -44,7 +44,6 @@ public class ItemIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if ((Time.time - clickTime) < 0.3f) // 더블 클릭
         {
             clickTime = -1;
-            Debug.Log("더블클릭");
             EquipmentSlot equip = transform.GetComponentInParent<EquipmentSlot>();
             ItemSlot Slot = transform.GetComponentInParent<ItemSlot>();
             if (equip != null) // 착용중 이라는 뜻
@@ -87,7 +86,6 @@ public class ItemIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        //slot = null;
         GetComponent<Image>().raycastTarget = false; // 이전에 그림에 영향을 받기위해 false처리한것
         transform.SetParent(All, false);
         transform.SetAsLastSibling();

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9640,7 +9640,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI_Aiming: {fileID: 684643971}
-  arm: {fileID: 2029295626}
   Left: {fileID: 1265784105}
   Right: {fileID: 1631366789}
   Arch2: {fileID: 570650192}
@@ -18174,6 +18173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   list: []
+  Controll: {fileID: 2029295626}
   StatWin: {fileID: 1499695710}
   Inventory: {fileID: 354375250}
 --- !u!1 &1903652925

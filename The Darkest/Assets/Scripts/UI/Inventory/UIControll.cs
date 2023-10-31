@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using TMPro;
 using UnityEngine;
 
 public class UIControll : MonoBehaviour
 {
     //static의 역할은 대충 다른 스크립트에 영향을 받은 코드에 값을 static을 선언한 class에서도 영향을 받는 것
     public List<GameObject> list = new List<GameObject>();
-
+    public SpringArm Controll;
     protected static bool inven = false;
     protected static bool stat = false;
 
@@ -27,6 +24,11 @@ public class UIControll : MonoBehaviour
 
     void Update()
     {
+        if(list.Count != 0)
+            Controll.enabled = false;
+        else
+            Controll.enabled = true;
+
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             if (list.Count != 0)
