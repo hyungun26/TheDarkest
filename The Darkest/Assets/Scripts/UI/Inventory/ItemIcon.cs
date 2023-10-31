@@ -14,6 +14,7 @@ public class ItemIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public GameObject IT;
     GameObject PlayerPos;
 
+
     float clickTime = 0;
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -29,6 +30,7 @@ public class ItemIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         All = GameObject.Find("All").transform;
         Canvas = GameObject.Find("Canvas").transform;
+        previousParent = transform.parent;
         //눌렀을때 
     }
 
@@ -45,17 +47,39 @@ public class ItemIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             Debug.Log("더블클릭");
             EquipmentSlot equip = transform.GetComponentInParent<EquipmentSlot>();
             ItemSlot Slot = transform.GetComponentInParent<ItemSlot>();
-            if (equip != null)
+            if (equip != null) // 착용중 이라는 뜻
             {
-                //조건 : inventory안에 빈칸이 있는 곳으로 이동해야함 즉 for문으로 검사해서 빈 slot찾고 넣기
-                Debug.Log("inventory로 이동");
+                GameObject obj = GameObject.Find("Content");
+                ItemSlot[] itemSlots = obj.GetComponentsInChildren<ItemSlot>();
+                for (int i = 0; i < itemSlots.Length; i++)
+                {
+                    ItemIcon check = itemSlots[i].GetComponentInChildren<ItemIcon>();
+                    if (check == null)
+                    {
+                        this.transform.SetParent(itemSlots[i].transform, false);
+                        break;
+                    }
+                }
             }
-            if (Slot != null)
-            {
-                //조건 : 장비창에 다른 장비가 있다면 바꾸기
-                Debug.Log("장비창으로 이동");
+            if (Slot != null) //slot에 있다는뜻
+            {                 
+                Item Check = IT.GetComponent<Item>();
+                string str = Check.equipMent.ToString();
+                GameObject s = GameObject.Find(str); // find함수에 문제점 장비창이 비활성화 되어있을때는 찾지못한다
+                EquipmentSlot equipmentSlot = s.GetComponentInChildren<EquipmentSlot>();
+                if(equipmentSlot.have == true) //착용중이면
+                {
+                    ItemIcon haveItem = equipmentSlot.GetComponentInChildren<ItemIcon>();
+                    haveItem.transform.SetParent(previousParent, false);
+                    this.transform.SetParent(equipmentSlot.transform, false);
+                }
+                else //착용중이 아니면
+                {
+                    this.transform.SetParent(equipmentSlot.transform, false);
+                }
+                equipmentSlot.pStat.once = true;
             }
-            //나중에 구현
+                        
         }
         else
             clickTime = Time.time;
@@ -65,7 +89,6 @@ public class ItemIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         //slot = null;
         GetComponent<Image>().raycastTarget = false; // 이전에 그림에 영향을 받기위해 false처리한것
-        previousParent = transform.parent;
         transform.SetParent(All, false);
         transform.SetAsLastSibling();
         //드래그 시작

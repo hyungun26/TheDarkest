@@ -44,7 +44,6 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler
             {
                 haveItem.transform.SetParent(item.previousParent, false);
                 haveItem.transform.localScale = Vector3.one;
-                //여기가 문제인듯
             }
             eventData.pointerDrag.transform.SetParent(transform, false);//icon이 slot에서 drop되었을때 현재 ItemSlot class를 가지고 있는
             eventData.pointerDrag.transform.localPosition = Vector2.zero;

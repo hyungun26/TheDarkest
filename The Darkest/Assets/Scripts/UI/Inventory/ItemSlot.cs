@@ -12,7 +12,6 @@ public class ItemSlot : MonoBehaviour, IDropHandler
         ItemIcon icon = transform.GetComponentInChildren<ItemIcon>(); //가만히 있던 icon
         ItemIcon icon2 = eventData.pointerDrag.GetComponent<ItemIcon>(); //드래그 중인 icon
 
-
         eventData.pointerDrag.transform.SetParent(transform, false);//icon이 slot에서 drop되었을때 현재 ItemSlot class를 가지고 있는
         eventData.pointerDrag.transform.localScale = Vector3.one;
         eventData.pointerDrag.transform.localPosition = Vector2.zero;
