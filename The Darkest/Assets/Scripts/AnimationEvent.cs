@@ -8,6 +8,11 @@ public class AnimationEvent : MonoBehaviour
     public Transform Arch2;
     public Transform RightHand;
 
+    public Transform DragonHead;
+    public GameObject fire;
+    public GameObject fireBreath;
+    bool fireTF = false;
+
     public bool animAming = false;
     public bool ReadyToShoot = false;
     public bool ReadyToAim = true;
@@ -93,6 +98,22 @@ public class AnimationEvent : MonoBehaviour
     public void OnUnAttack()
     {
         Fight = false;
+    }
+
+    public void OnFireActive()
+    {
+        fireTF = !fireTF;
+        fire.SetActive(fireTF);
+        fire.transform.localScale = Vector3.one * 40f;
+    }
+    public void OnFireGrow()
+    {
+        fire.transform.localScale *= 1.2f;
+    }
+    public void OnFireCreatActive()
+    {
+        fireTF = !fireTF;
+        fireBreath.SetActive(fireTF);
     }
 
     public void OnRayRange()

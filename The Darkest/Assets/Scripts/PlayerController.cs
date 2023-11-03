@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class PlayerController : AnimatorAll
 {
+    public DataManager dataManager;
+    public UpButton2[] button;
+    public ItemSlot[] slot;
+
     public GameObject UI_Aiming;
 
     Vector2 targetDir = Vector2.zero;
@@ -79,8 +83,26 @@ public class PlayerController : AnimatorAll
         Play, Die, HitDown, Aim, Heal
     }
     int n = 0;
+
+    private void Awake()
+    {
+        dataManager.LoadDate();//임시로 처음 시작하면 load되게끔
+    }
     void Start()
     {
+        //저장한 데이터 가져오기
+        Level = dataManager.nowPlayer.level;
+        LevelT.text = Level.ToString(); //text도 초기화
+        MaxExp = dataManager.nowPlayer.Maxexp;
+        Exp = dataManager.nowPlayer.Exp;
+        this.transform.position = new Vector3(dataManager.nowPlayer.x, dataManager.nowPlayer.y, dataManager.nowPlayer.z);
+        PlayerUI.Point.text = dataManager.uIData.point.ToString();
+        button[0].num = dataManager.uIData.DamageP;
+        button[1].num = dataManager.uIData.HealthP;
+        button[2].num = dataManager.uIData.StaminaP;
+        button[3].num = dataManager.uIData.DefenceP;
+        button[4].num = dataManager.uIData.CriticalP;
+
         n = transform.childCount;
         color = Color.white;
         HealOura.Stop();
@@ -110,7 +132,7 @@ public class PlayerController : AnimatorAll
             Stamina.value += 2.0f * Time.deltaTime;
         }
 
-        if(n < transform.childCount)
+        if(n < transform.childCount) //아이템을 먹을때 잠시 player안으로 들어오는데 바로 없애기위함
         {
             if (transform.GetChild(7).GetComponent<Item>())
             {
@@ -378,11 +400,11 @@ public class PlayerController : AnimatorAll
             Vector3 myPosition = (DragonTr.position - Left.position).normalized;
             if (Vector3.Dot(checkDir, myPosition) < 0.0f)
             {
-                myAnim.SetTrigger("isGettingBackUp");
+                myAnim.SetTrigger("isGettingFrontUp");
             }
             else if (Vector3.Dot(checkDir, myPosition) > 0.0f)
             {
-                myAnim.SetTrigger("isGettingFrontUp");
+                myAnim.SetTrigger("isGettingBackUp");
             }
 
             ChangeState(PlayerState.HitDown);
@@ -396,7 +418,6 @@ public class PlayerController : AnimatorAll
     {
         
         ExpGauge.fillAmount = Exp / MaxExp;
-        Debug.Log(ExpGauge.fillAmount);
         if (ExpGauge.fillAmount == 1.0f) 
         {
             GameObject obj = Instantiate(Resources.Load("Prefabs/LevelUp") as GameObject);
@@ -413,6 +434,13 @@ public class PlayerController : AnimatorAll
         double LevelVal = ExpGauge.fillAmount * 100.0f;
         LevelVal = System.Math.Truncate(LevelVal * 100) / 100;
         LevelDecimal.text = LevelVal.ToString() + "%";
+    }
+
+    public void PlayerHitCode(float damage)
+    {
+        hit = true;
+        Attacked(damage);
+        ChangeState(MyState = PlayerController.PlayerState.HitDown);
     }
 
     void PlayerStatus()

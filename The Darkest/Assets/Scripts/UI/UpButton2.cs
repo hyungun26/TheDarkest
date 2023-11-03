@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 
 public class UpButton2 : MonoBehaviour, IPointerClickHandler
 {
+    public DataManager dataManager;
     public PlayerStat Once;
     public int num = 0;
     public TextMeshProUGUI LvPoint;

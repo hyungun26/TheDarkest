@@ -1,10 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
 
 public class Dragon : AnimatorAll
 {
@@ -194,7 +190,7 @@ public class Dragon : AnimatorAll
                 //플레이어가 죽으면 여기로 들어온다.
                 break;
             case MonsterState.Fight:
-                if(PlayerController.MyState == PlayerController.PlayerState.Play) //player가 죽거나 넘어져있는 상태일때만 공격
+                if(PlayerController.MyState == PlayerController.PlayerState.Play) //player가 죽거나 넘어져있는 상태가 아닐때만 공격
                 {
                     AttackLength = 6.0f;
                     //AnimationEvent 에서 Fight false 처리중 애니메이션이 끝나면 다시 들어와서 공격함
@@ -209,7 +205,7 @@ public class Dragon : AnimatorAll
                         Agent.velocity = Vector3.zero;
                         AttackDelay = 5.0f;
                         animEvent.Fight = false;
-                        rnd = Random.Range(0, 2); // 0 ~ 1
+                        rnd = Random.Range(2, 3); // 0 ~ 2
                         switch (rnd)
                         {
                             case 0:
@@ -220,10 +216,13 @@ public class Dragon : AnimatorAll
                                 AttackRange = 2f;
                                 myAnim.SetTrigger("IsClawAttack");
                                 break;
+                            case 2:
+                                AttackRange = 5f;
+                                myAnim.SetTrigger("IsBreath");
+                                break;
                             default:
                                 return;
                         }
-
                     }
 
                     if (AttackDelay > 0.0f) // 공격 딜레이에 걸려있으면 쳐다봐라 player를
@@ -319,9 +318,7 @@ public class Dragon : AnimatorAll
             {
                 if (!coll.GetComponent<PlayerController>().invincibility)
                 {
-                    coll.GetComponent<PlayerController>().hit = true;
-                    coll.GetComponent<PlayerController>().Attacked(70f);
-                    coll.GetComponent<PlayerController>().ChangeState(PlayerController.MyState = PlayerController.PlayerState.HitDown);
+                    playerController.PlayerHitCode(100f);
                 }
             }
         }
