@@ -75,6 +75,7 @@ public class DataManager : MonoBehaviour
         #endregion
         UIpath = Application.persistentDataPath + "/";
         path = Application.persistentDataPath + "/"; //C:\Users\user\AppData\LocalLow\DefaultCompany\The Darkest
+        Debug.Log(path);
     }
     // Start is called before the first frame update
     void Start()
