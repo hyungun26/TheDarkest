@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: b9c3c3c65300c0949a8157b852551151, type: 2}
 --- !u!1001 &2613311
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2203,13 +2203,15 @@ GameObject:
   - component: {fileID: 116130569}
   - component: {fileID: 116130568}
   - component: {fileID: 116130567}
+  - component: {fileID: 116130570}
+  - component: {fileID: 116130571}
   m_Layer: 0
   m_Name: Monster_X_Purple
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &116130567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2253,7 +2255,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116130566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.05, y: 1.0694847, z: 35.47}
+  m_LocalPosition: {x: 70.08386, y: 11.28, z: -2.749707}
   m_LocalScale: {x: 0.06, y: 0.06, z: 0.06}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2262,9 +2264,40 @@ Transform:
   - {fileID: 1325460617}
   - {fileID: 1058887630}
   - {fileID: 1646387842}
+  - {fileID: 715594893}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &116130570
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116130566}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!136 &116130571
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116130566}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 8.2
+  m_Height: 41.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 20.4, z: 0}
 --- !u!1 &121153691
 GameObject:
   m_ObjectHideFlags: 0
@@ -23608,6 +23641,64 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7252558960003844797, guid: 3170954ce342dc54d8a012fd444c8f69, type: 3}
   m_PrefabInstance: {fileID: 890255299}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &715594891
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 715594893}
+  - component: {fileID: 715594892}
+  - component: {fileID: 715594894}
+  m_Layer: 0
+  m_Name: SearchEnemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!135 &715594892
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715594891}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 100
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &715594893
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715594891}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 116130569}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &715594894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715594891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df17ef8749d8b544ca5cd025ea66b1ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &724160365
 GameObject:
   m_ObjectHideFlags: 0
@@ -29227,6 +29318,64 @@ Transform:
   m_Father: {fileID: 87196039}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &809626163
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 809626166}
+  - component: {fileID: 809626165}
+  - component: {fileID: 809626164}
+  m_Layer: 0
+  m_Name: MonsterArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &809626164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809626163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a94c9d75c4fa36c48bf539c7bfd5666b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &809626165
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809626163}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 28.85
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &809626166
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 809626163}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 69.2, y: 0, z: -5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &815454463
 GameObject:
   m_ObjectHideFlags: 0
@@ -34511,7 +34660,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1167058829}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 65.41767, y: 3.07, z: 61.35958}
+  m_LocalPosition: {x: 63.318344, y: 3.0976226, z: 57.66056}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -50208,7 +50357,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1324542427}
   m_LocalRotation: {x: 0.02835011, y: 0, z: -0, w: 0.9995981}
-  m_LocalPosition: {x: -0.000000077034144, y: -0.03451109, z: -0.17149734}
+  m_LocalPosition: {x: -5.065579, y: -4.7512546, z: 16.0523}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -79166,6 +79315,7 @@ GameObject:
   - component: {fileID: 2290454760287860753}
   - component: {fileID: 5090057803338839760}
   - component: {fileID: 7354138277697821480}
+  - component: {fileID: 7354138277697821481}
   m_Layer: 0
   m_Name: PT_Medieval_Village_Fence_04 (18)
   m_TagString: Untagged
@@ -79386,6 +79536,7 @@ GameObject:
   - component: {fileID: 2140393665033014109}
   - component: {fileID: 6816666449530380464}
   - component: {fileID: 2143407770427688911}
+  - component: {fileID: 6816666449530380465}
   m_Layer: 0
   m_Name: PT_Medieval_Village_Fence_01 (1)
   m_TagString: Untagged
@@ -79586,6 +79737,7 @@ GameObject:
   - component: {fileID: 8979181842242389856}
   - component: {fileID: 780493962537327971}
   - component: {fileID: 1182572444941081137}
+  - component: {fileID: 8979181842242389857}
   m_Layer: 0
   m_Name: PT_Medieval_Village_Fence_01 (19)
   m_TagString: Untagged
@@ -79647,6 +79799,7 @@ GameObject:
   - component: {fileID: 6207808757023936191}
   - component: {fileID: 3750760619182817155}
   - component: {fileID: 6962734990879645836}
+  - component: {fileID: 7813133667078834583}
   m_Layer: 0
   m_Name: PT_Medieval_Village_Fence_02 (25)
   m_TagString: Untagged
@@ -79682,6 +79835,7 @@ GameObject:
   - component: {fileID: 3344551550190633591}
   - component: {fileID: 4138531335035745277}
   - component: {fileID: 6804238502111507802}
+  - component: {fileID: 6804238502111507803}
   m_Layer: 0
   m_Name: PT_Medieval_Village_Fence_02 (26)
   m_TagString: Untagged
@@ -79745,6 +79899,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: b67d2b761d3397348831d776dbb33e03, type: 3}
+--- !u!65 &6804238502111507803
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6234443267830521434}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.200231, y: 1.1585845, z: 0.24500173}
+  m_Center: {x: 0.9507393, y: 0.47181684, z: 0.028425504}
 --- !u!23 &6816666449530380464
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -79787,6 +79954,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6816666449530380465
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3032652061029732389}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2002304, y: 1.1585845, z: 0.24500169}
+  m_Center: {x: 0.9507364, y: 0.47181684, z: 0.028419252}
 --- !u!4 &6907951032277150090
 Transform:
   m_ObjectHideFlags: 0
@@ -79828,6 +80008,7 @@ GameObject:
   - component: {fileID: 5770256207339252855}
   - component: {fileID: 6367598540219866654}
   - component: {fileID: 8318547738003258769}
+  - component: {fileID: 8318547738003258770}
   m_Layer: 0
   m_Name: PT_Medieval_Village_Fence_01 (7)
   m_TagString: Untagged
@@ -79849,6 +80030,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: faaede3d1773ae2488a568c13e10cee4, type: 3}
+--- !u!65 &7354138277697821481
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609756017982624639}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2002313, y: 1.1585845, z: 0.24500187}
+  m_Center: {x: 0.95073515, y: 0.47181684, z: 0.028421734}
 --- !u!23 &7599610711174372333
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -79914,6 +80108,19 @@ Transform:
   m_Father: {fileID: 529876361632659801}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: -351.705, z: 0}
+--- !u!65 &7813133667078834583
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5229349018375819977}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2002308, y: 1.1585845, z: 0.24500173}
+  m_Center: {x: 0.9507323, y: 0.47181684, z: 0.028425513}
 --- !u!1001 &7913427507762250116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80996,6 +81203,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: ed920bad5318ee347ad3e34dd82e273f, type: 3}
+--- !u!65 &8318547738003258770
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7279959120195784715}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.200231, y: 1.1585845, z: 0.24500181}
+  m_Center: {x: 0.95073026, y: 0.4718169, z: 0.028419008}
 --- !u!1 &8608133304327716624
 GameObject:
   m_ObjectHideFlags: 0
@@ -81008,6 +81228,7 @@ GameObject:
   - component: {fileID: 3255042653795736130}
   - component: {fileID: 2735860717956003035}
   - component: {fileID: 121956369135500881}
+  - component: {fileID: 9041292912608285281}
   m_Layer: 0
   m_Name: PT_Medieval_Village_Fence_01 (9)
   m_TagString: Untagged
@@ -81027,6 +81248,7 @@ GameObject:
   - component: {fileID: 7755328271307938793}
   - component: {fileID: 3434310107743862282}
   - component: {fileID: 3025064262850048298}
+  - component: {fileID: 8933570297175644594}
   m_Layer: 0
   m_Name: PT_Medieval_Village_Fence_02 (2)
   m_TagString: Untagged
@@ -81034,6 +81256,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
+--- !u!65 &8933570297175644594
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8933570297175644593}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2002316, y: 1.1585845, z: 0.24500176}
+  m_Center: {x: 0.9507353, y: 0.47181684, z: 0.028417626}
 --- !u!33 &8979181842242389856
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -81042,6 +81277,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4864937182696129756}
   m_Mesh: {fileID: -7129513904718193985, guid: b67d2b761d3397348831d776dbb33e03, type: 3}
+--- !u!65 &8979181842242389857
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4864937182696129756}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.200231, y: 1.1585845, z: 0.24500184}
+  m_Center: {x: 0.95073265, y: 0.47181684, z: 0.02841971}
 --- !u!4 &9041292912608285280
 Transform:
   m_ObjectHideFlags: 0
@@ -81057,6 +81305,19 @@ Transform:
   m_Father: {fileID: 529876361632659801}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0.062, y: -450.36798, z: -0.654}
+--- !u!65 &9041292912608285281
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8608133304327716624}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2002318, y: 1.1585845, z: 0.24500187}
+  m_Center: {x: 0.95073754, y: 0.47181684, z: 0.028418612}
 --- !u!1 &9067060075298480054
 GameObject:
   m_ObjectHideFlags: 0
@@ -81069,6 +81330,7 @@ GameObject:
   - component: {fileID: 3273783206532616395}
   - component: {fileID: 7599610711174372333}
   - component: {fileID: 1764299933577238841}
+  - component: {fileID: 9067060075298480055}
   m_Layer: 0
   m_Name: PT_Medieval_Village_Fence_04 (13)
   m_TagString: Untagged
@@ -81076,3 +81338,16 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
+--- !u!65 &9067060075298480055
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9067060075298480054}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2002313, y: 1.1585845, z: 0.24500187}
+  m_Center: {x: 0.95073515, y: 0.47181696, z: 0.02841852}
