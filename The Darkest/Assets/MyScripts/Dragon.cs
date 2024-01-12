@@ -4,6 +4,7 @@ using UnityEngine.AI;
 
 public class Dragon : AnimatorAll
 {
+    //드래곤에 문제점 움직임이 이상함 고쳐야함
     public GameObject DragonUI;
     public NavMeshAgent Agent;
     public AnimationEvent animEvent;
@@ -17,6 +18,7 @@ public class Dragon : AnimatorAll
     public float HP = 5000.0f;
     float DHP;
     public float AttackDelay = 0f;
+    private string attackType = "StrongAttack";
     public Collider search;
 
     public Transform DragonTr;
@@ -153,21 +155,22 @@ public class Dragon : AnimatorAll
                 {
                     if(PlayerController.MyState == PlayerController.PlayerState.Play) //플레이어가 살아있다면 쫓아가라
                     {
-                        if (Vector3.Distance(DragonTr.position, Player.position) < AttackLength) // player 공격사거리
+                        float dis = Vector3.Distance(DragonTr.position, Player.position);
+                        if (dis < AttackLength) // player 공격사거리
                         {
                             animEvent.Fight = false;
                             ChangeState(MonsterState.Fight);
                         }
                         dir = Player.transform.position - DragonTr.position;
                         DragonTr.rotation = Quaternion.Lerp(DragonTr.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 5.0f);
-                        if (Vector3.Distance(DragonTr.position, Player.position) > runORwalk && !run && !attackPossible) //거리가 멀면 뛰어가라
+                        if (dis > runORwalk && !run && !attackPossible) //거리가 멀면 뛰어가라
                         {
                             Agent.isStopped = false;
                             run = true;
                             Agent.speed = 60.0f;
                             myAnim.SetTrigger("IsChaingRun");
                         }
-                        else if(Vector3.Distance(DragonTr.position, Player.position) < runORwalk && !run && !attackPossible) //거리가 가까우면 걸어가라
+                        else if(dis < runORwalk && !run && !attackPossible) //거리가 가까우면 걸어가라
                         {
                             Agent.isStopped = false;
                             run = true;
@@ -205,7 +208,7 @@ public class Dragon : AnimatorAll
                         Agent.velocity = Vector3.zero;
                         AttackDelay = 5.0f;
                         animEvent.Fight = false;
-                        rnd = Random.Range(2, 3); // 0 ~ 2
+                        rnd = Random.Range(0, 3); // 0 ~ 2
                         switch (rnd)
                         {
                             case 0:
@@ -285,10 +288,11 @@ public class Dragon : AnimatorAll
                 if (!coll.GetComponent<PlayerController>().invincibility)
                 {
                     //if(coll.GetComponent<PlayerController>().MyState != PlayerController.PlayerState.Die)
-                    coll.GetComponent<PlayerController>().hit = true;
-                    coll.GetComponent<PlayerController>().Attacked(100f);
-
-                    coll.GetComponent<PlayerController>().ChangeState(PlayerController.MyState = PlayerController.PlayerState.HitDown);
+                    //coll.GetComponent<PlayerController>().hit = true;
+                    // coll.GetComponent<PlayerController>().Attacked(100f, attackType);
+                    // coll.GetComponent<PlayerController>().ChangeState(PlayerController.MyState = PlayerController.PlayerState.HitDown);
+                    playerController.Attacked(20.0f, attackType);
+                    playerController.hit = true;
                 }
             }
         }
@@ -305,9 +309,11 @@ public class Dragon : AnimatorAll
             {
                 if (!coll.GetComponent<PlayerController>().invincibility)
                 {
-                    coll.GetComponent<PlayerController>().hit = true;
-                    coll.GetComponent<PlayerController>().Attacked(70f);
-                    coll.GetComponent<PlayerController>().ChangeState(PlayerController.MyState = PlayerController.PlayerState.HitDown);
+                    // coll.GetComponent<PlayerController>().hit = true;
+                    // coll.GetComponent<PlayerController>().Attacked(70f, attackType);
+                    // coll.GetComponent<PlayerController>().ChangeState(PlayerController.MyState = PlayerController.PlayerState.HitDown);
+                    playerController.Attacked(20.0f, attackType);
+                    playerController.hit = true;    
                 }
             }
         }
@@ -318,7 +324,11 @@ public class Dragon : AnimatorAll
             {
                 if (!coll.GetComponent<PlayerController>().invincibility)
                 {
-                    playerController.PlayerHitCode(100f);
+                    // coll.GetComponent<PlayerController>().hit = true;
+                    // coll.GetComponent<PlayerController>().Attacked(70f, attackType);
+                    // coll.GetComponent<PlayerController>().ChangeState(PlayerController.MyState = PlayerController.PlayerState.HitDown);
+                    playerController.Attacked(20.0f, attackType);
+                    playerController.hit = true;
                 }
             }
         }

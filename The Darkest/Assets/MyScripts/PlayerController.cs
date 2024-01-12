@@ -382,11 +382,16 @@ public class PlayerController : AnimatorAll
         }
     }
 
-    public void Attacked(float dam)
+    public void Attacked(float dam, string s)
     {
-        if (hit && !invincibility) 
+        if (!invincibility) 
         {
-            PlayerHP.value -= dam - PlayerStat.Defence;
+            float d = dam - PlayerStat.Defence;
+            if(d < 0f)
+            {
+                d = 1.0f;
+            }
+            PlayerHP.value -= d;
 
             if(PlayerHP.value <= 0.0f)
             {
@@ -394,22 +399,32 @@ public class PlayerController : AnimatorAll
                 return;
             }
 
-            Vector3 hori = Right.localPosition - Left.localPosition;
-            checkDir = Vector3.Cross(Vector3.up, hori);
-            checkDir.Normalize();
-            Vector3 myPosition = (DragonTr.position - Left.position).normalized;
-            if (Vector3.Dot(checkDir, myPosition) < 0.0f)
+            //이 코드 때문에 무조건 넘어짐 그럼 방법이 공격에 종류를 만들어 분류를 해야함
+            //Mob한태 맞을때는 약공격으로 경직 모션을 넣고 
+            //Boss한태 맞을때는 강공격으로 아래에 넘어짐 모션을 사용해야할듯
+            //
+            switch(s)
             {
-                myAnim.SetTrigger("isGettingFrontUp");
+                case "WeekAttack": myAnim.SetTrigger("IsHit");
+                break;
+                case "StrongAttack": 
+                Vector3 hori = Right.localPosition - Left.localPosition;
+                checkDir = Vector3.Cross(Vector3.up, hori);
+                checkDir.Normalize();
+                Vector3 myPosition = (DragonTr.position - Left.position).normalized;
+                if (Vector3.Dot(checkDir, myPosition) < 0.0f)
+                {
+                    myAnim.SetTrigger("isGettingFrontUp");
+                }
+                else if (Vector3.Dot(checkDir, myPosition) > 0.0f)
+                {
+                    myAnim.SetTrigger("isGettingBackUp");
+                }
+                break;
             }
-            else if (Vector3.Dot(checkDir, myPosition) > 0.0f)
-            {
-                myAnim.SetTrigger("isGettingBackUp");
-            }
-
-            ChangeState(PlayerState.HitDown);
-            animEvent.PlayerDown = false;
-            hit = false;
+            //ChangeState(PlayerState.HitDown);
+            //animEvent.PlayerDown = false;
+            //hit = false;
             invincibility = true;
         }
     }
@@ -435,14 +450,14 @@ public class PlayerController : AnimatorAll
         LevelVal = System.Math.Truncate(LevelVal * 100) / 100;
         LevelDecimal.text = LevelVal.ToString() + "%";
     }
-
-    public void PlayerHitCode(float damage)
-    {
-        hit = true;
-        Attacked(damage);
-        ChangeState(MyState = PlayerController.PlayerState.HitDown);
-    }
-
+    #region 혹시몰라 남겨둔 player hit 코드
+    // public void PlayerHitCode(float damage)
+    // {
+    //     hit = true;
+    //     //Attacked(damage);
+    //     ChangeState(MyState = PlayerController.PlayerState.HitDown);
+    // }
+    #endregion 
     void PlayerStatus()
     {
         if (PlayerStat.Health != hea)

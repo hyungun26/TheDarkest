@@ -14,7 +14,7 @@ public class PlayerHit : MonoBehaviour
         PlayerController player = other.GetComponent<PlayerController>();
         if(player != null)
         {
-            player.PlayerHitCode(30f);
+            player.Attacked(30.0f, "StrongAttack");
         }
     }
 
