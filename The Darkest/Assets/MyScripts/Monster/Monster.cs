@@ -37,12 +37,7 @@ public class Monster : AnimatorAll
             attackDelay += 1.0f * Time.deltaTime;
         }
 
-        StateProcess();
-
-        if(hp <= 0.0f)
-        {
-            ChangeState(MonsterState.Dead);
-        }
+        StateProcess();        
     }
 
     public enum MonsterState
@@ -197,7 +192,12 @@ public class Monster : AnimatorAll
 
     public void monsterHit(float dam)
     {
-        myAnim.SetTrigger("IsHit");
         hp -= dam;
+        if(hp <= 0.0f)
+        {
+            ChangeState(MonsterState.Dead);
+            return;
+        }
+        myAnim.SetTrigger("IsHit");
     }
 }

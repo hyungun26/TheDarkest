@@ -36,18 +36,26 @@ public class ItemIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        //땠을때 
+        //땠을때
     }
     public void OnPointerClick(PointerEventData eventData)
     {
         //누르고 땠을때 반응한다
         if ((Time.time - clickTime) < 0.3f) // 더블 클릭
         {
+            
             clickTime = -1;
             EquipmentSlot equip = transform.GetComponentInParent<EquipmentSlot>();
             ItemSlot Slot = transform.GetComponentInParent<ItemSlot>();
             if (equip != null) // 착용중 이라는 뜻
             {
+                bool active = false;
+                GameObject status = GameObject.Find("All").transform.Find("Inventory").gameObject;
+                if(!status.activeSelf && status != null)
+                {
+                    status.SetActive(true);
+                    active = true;
+                }
                 GameObject obj = GameObject.Find("Content");
                 ItemSlot[] itemSlots = obj.GetComponentsInChildren<ItemSlot>();
                 for (int i = 0; i < itemSlots.Length; i++)
@@ -59,9 +67,20 @@ public class ItemIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                         break;
                     }
                 }
+                if(active)
+                {
+                    status.SetActive(false);
+                }
             }
             if (Slot != null) //slot에 있다는뜻
-            {                 
+            {
+                bool active = false;
+                GameObject status = GameObject.Find("All").transform.Find("PlayerStatus").gameObject;
+                if(!status.activeSelf && status != null)
+                {
+                    status.SetActive(true);
+                    active = true;
+                }
                 Item Check = IT.GetComponent<Item>();
                 string str = Check.equipMent.ToString();
                 GameObject s = GameObject.Find(str); // find함수에 문제점 장비창이 비활성화 되어있을때는 찾지못한다
@@ -77,8 +96,16 @@ public class ItemIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                     this.transform.SetParent(equipmentSlot.transform, false);
                 }
                 equipmentSlot.pStat.once = true;
+                if(active)
+                {
+                    EquipmentSlot eq = transform.parent.GetComponent<EquipmentSlot>(); 
+                    if(eq != null)
+                    {
+                        eq.have = true;
+                    }
+                    status.SetActive(false);
+                }
             }
-                        
         }
         else
             clickTime = Time.time;
