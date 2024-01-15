@@ -8,8 +8,7 @@ public class MonsterArea : MonoBehaviour
     {
         if(other.CompareTag("Monster"))
         {
-            //Debug.Log("어허 나가면 안돼");
-            //이곳에서 몬스터가 영역을 나갔을때 돌아오도록 유도해야함
+            Debug.Log("어허 나가면 안돼");
         }
     }
 }

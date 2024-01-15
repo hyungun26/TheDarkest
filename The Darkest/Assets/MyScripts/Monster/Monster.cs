@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.TextCore.Text;
 
 public class Monster : AnimatorAll
@@ -12,6 +13,7 @@ public class Monster : AnimatorAll
     private float walkDelay = 5.0f;
     private string attackType = "WeekAttack";
 
+    float dis;
     private Transform target;
     private bool isAttacking = false;
     private Animator animator;
@@ -25,11 +27,32 @@ public class Monster : AnimatorAll
     public Rigidbody gravity;
     public CapsuleCollider capColl;
     Vector3 vec;
+
+    //hp bar
+    public Transform Head;
+    public Slider slid;
+    private Camera camera;
+    private float failChase = 0.0f;
     private void Start()
     {
+        GameObject ob = GameObject.Find("MainCamera");
+        camera = ob.GetComponent<Camera>();
+        slid.gameObject.SetActive(false);
         vec = transform.position;
+        slid.maxValue = hp;
+        slid.value = hp;
     }
+    private void LateUpdate()
+    {
+        slid.transform.position = camera.WorldToScreenPoint(Head.position);
 
+        //만들어야할것 거리가 멀면 bar를 비활성화하고 맞았을때 활성화 할것
+        //몬스터 위에 체력바가 다른곳을 봤을때 보이는것을 방지하기 위한 if문
+        if (slid.transform.position.z < 0.0f)
+        {
+            slid.transform.position *= -1.0f;
+        }
+    }
     private void Update()
     {
         if(attackDelay < 3.0f)
@@ -54,6 +77,7 @@ public class Monster : AnimatorAll
         switch(State)
         {
             case MonsterState.Idle:
+            failChase = 0.0f;
             myAnim.SetBool("IsChasing", false);
             myAnim.SetBool("IsWalk", false);
             break;
@@ -61,10 +85,12 @@ public class Monster : AnimatorAll
             myAnim.SetBool("IsWalk", true);
             break;
             case MonsterState.Chase:
+            slid.gameObject.SetActive(true);
             break;
             case MonsterState.Attack:
             break;
             case MonsterState.Dead:
+            slid.gameObject.SetActive(false);
             myAnim.SetTrigger("IsDead");
             gravity.useGravity = false;
             capColl.enabled = false;
@@ -76,12 +102,22 @@ public class Monster : AnimatorAll
         switch(State)
         {
             case MonsterState.Idle:
-            walkDelay -= 1.0f * Time.deltaTime;
-            if(walkDelay < 0.0f)
+            //player와 거리가 멀고 더이상 공격하지 않는다 판단하면 hpSlider 끄는 코드
+            if (slid.gameObject.activeSelf)
             {
-                ChangeState(MonsterState.Walk);
-                walkDelay = Random.RandomRange(5, 10);
-                rot = Random.RandomRange(0, 361); 
+                failChase += 1.0f * Time.deltaTime;
+                if (failChase > 10.0f)
+                {
+                    slid.gameObject.SetActive(false);
+                    failChase = 0.0f;
+                }
+            }
+            walkDelay -= 1.0f * Time.deltaTime;
+            if (walkDelay < 0.0f)
+            {
+            ChangeState(MonsterState.Walk);
+            walkDelay = Random.RandomRange(5, 10);
+            rot = Random.RandomRange(0, 361); 
             }
             break;
             case MonsterState.Walk:
@@ -95,20 +131,22 @@ public class Monster : AnimatorAll
             break;
             case MonsterState.Chase:
             LookPlayer(PlayerTransform);
-            if(Vector3.Distance(this.transform.position, PlayerTransform.position) > 10.0f) // 많이 멀어지면 쫓지 않기
+            dis = Vector3.Distance(this.transform.position, PlayerTransform.position);
+            if (dis > 10.0f) // 많이 멀어지면 쫓지 않기
             {
                 ChangeState(MonsterState.Idle);
             }
-            if(Vector3.Distance(this.transform.position, PlayerTransform.position) < attackRange)
+            if(dis < attackRange)
             {
                 ChangeState(MonsterState.Attack);
                 myAnim.SetBool("IsChasing", false);
             }
             break;
             case MonsterState.Attack:
+            dis = Vector3.Distance(this.transform.position, PlayerTransform.position);
             Attack();
             LookPlayer(PlayerTransform);
-            if(Vector3.Distance(this.transform.position, PlayerTransform.position) > attackRange)
+            if(dis > attackRange)
             {
                 ChangeState(MonsterState.Chase);
                 myAnim.SetBool("IsChasing", true);
@@ -142,14 +180,11 @@ public class Monster : AnimatorAll
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    public void Search()
     {
-        if(other.CompareTag("Player"))
-        {
-            if(State == MonsterState.Chase) return;
-            myAnim.SetBool("IsChasing", true);
-            ChangeState(MonsterState.Chase);
-        }
+        if (State == MonsterState.Chase || State == MonsterState.Dead) return;
+        myAnim.SetBool("IsChasing", true);
+        ChangeState(MonsterState.Chase);
     }
 
     void LookPlayer(Transform player)
@@ -192,7 +227,13 @@ public class Monster : AnimatorAll
 
     public void monsterHit(float dam)
     {
+        failChase = 0.0f;
+        if(!slid.gameObject.activeSelf)
+        {
+            slid.gameObject.SetActive(true);
+        }
         hp -= dam;
+        slid.value = hp;
         if(hp <= 0.0f)
         {
             ChangeState(MonsterState.Dead);
