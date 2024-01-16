@@ -7,7 +7,7 @@ public class MonsterSearch : MonoBehaviour
     Monster mon;
     private void Start()
     {
-        mon = transform.root.GetComponent<Monster>();
+        mon = transform.parent.GetComponent<Monster>();
     }
     void OnTriggerEnter(Collider other)
     {

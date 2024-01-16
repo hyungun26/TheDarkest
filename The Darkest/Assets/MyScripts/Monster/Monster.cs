@@ -4,7 +4,7 @@ using UnityEngine.TextCore.Text;
 
 public class Monster : AnimatorAll
 {
-    public float hp = 500.0f;
+    private float hp = 500.0f;
     public Transform PlayerTransform;
     public float moveSpeed = 3f;
     public float rotationSpeed = 1f;
@@ -33,8 +33,12 @@ public class Monster : AnimatorAll
     public Slider slid;
     private Camera camera;
     private float failChase = 0.0f;
+
+    //spawner
+    public Spawner spawner;
     private void Start()
     {
+        spawner = GameObject.Find("Spawner").GetComponent<Spawner>();
         GameObject ob = GameObject.Find("MainCamera");
         camera = ob.GetComponent<Camera>();
         slid.gameObject.SetActive(false);
@@ -174,6 +178,8 @@ public class Monster : AnimatorAll
                 if(vec.y > this.transform.position.y+3)
                 {
                     this.gameObject.SetActive(false);
+                    if(!transform.gameObject.activeSelf)
+                        spawner.num--;
                 }
             }
             break;
@@ -240,5 +246,16 @@ public class Monster : AnimatorAll
             return;
         }
         myAnim.SetTrigger("IsHit");
+    }
+
+    private void OnEnable()
+    {
+        hp = 500.0f;
+        deadDelay = 3.0f;
+        ChangeState(MonsterState.Idle);
+        for(int i = 7; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
+        }
     }
 }

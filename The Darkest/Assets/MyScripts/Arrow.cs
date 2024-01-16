@@ -34,10 +34,11 @@ public class Arrow : MonoBehaviour
                 //이곳에서 치명타도 관리
                 Hit a = hit.transform.GetComponent<Hit>();
                 GameObject rootObj = a.transform.root.gameObject;
+                GameObject monsterPar = a.transform.gameObject;
 
                 Dragon dragon = rootObj.GetComponent<Dragon>();
-                Monster mon = rootObj.GetComponent<Monster>();
-
+                Monster mon = monsterPar.GetComponent<Monster>();
+                Debug.Log(mon);
                 int rnd = Random.Range(1, 101); //1에서 100까지의 랜덤 수를 넣음
                 int moreDam = 1;
 
