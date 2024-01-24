@@ -50,6 +50,8 @@ public class Dragon : AnimatorAll
     float currentTime = 0.0f;
     bool once = false;
 
+    float Exp = 5000.0f;
+
     public PlayerStat PlayerStat;
 
     public enum MonsterState
@@ -126,8 +128,7 @@ public class Dragon : AnimatorAll
             case MonsterState.Fight:
                 break;
             case MonsterState.Dead:
-                PlayerController.Exp += 5000; //player에게 주는 경험치
-                PlayerController.expC = true;
+                PlayerController.PlayerExp(Exp);
                 DragonUI.GetComponent<UIController>().dragonDead = true; // 값변경
                 DragonUI.GetComponent<UIController>().dragonState = true; // UI삭제
                 myAnim.SetTrigger("IsDead");

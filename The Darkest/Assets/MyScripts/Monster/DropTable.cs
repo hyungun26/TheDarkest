@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class DropTable : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject[] dropItem;
+    public void DropItem()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        int num = Random.RandomRange(0, dropItem.Length);
+        Instantiate(dropItem[num], this.transform.position, this.transform.rotation);
     }
 }

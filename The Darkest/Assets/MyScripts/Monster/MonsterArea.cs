@@ -4,11 +4,37 @@ using UnityEngine;
 
 public class MonsterArea : MonoBehaviour
 {
+    Monster mon;
     void OnTriggerExit(Collider other) 
     {
         if(other.CompareTag("Monster"))
         {
-            Debug.Log("ì–´í—ˆ ë‚˜ê°€ë©´ ì•ˆë¼");
+            mon = other.GetComponent<Monster>();
+            if(mon != null)
+            {
+                mon.MonsterArea = GameObject.Find("Flag").GetComponent<Transform>();
+                Debug.Log(mon.MonsterArea);
+                mon.outOfRange = true;
+            }            
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Monster"))
+        {
+            mon = other.GetComponent<Monster>();
+            if(mon.outOfRange && mon.State == Monster.MonsterState.Idle)
+            {
+                Debug.Log("µé¾î¿Ã¼öÀÖ³ª");
+                mon.outOfRange = false;
+            }
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Monster"))
+        {
+            Monster mon = other.GetComponent<Monster>();
         }
     }
 }

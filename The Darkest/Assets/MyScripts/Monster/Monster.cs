@@ -6,18 +6,22 @@ public class Monster : AnimatorAll
 {
     private float hp = 500.0f;
     public Transform PlayerTransform;
+    PlayerController player;
     public float moveSpeed = 3f;
     public float rotationSpeed = 1f;
     public float attackRange = 4f;
     public float attackDelay = 1f;
     private float walkDelay = 5.0f;
     private string attackType = "WeekAttack";
+    public float Exp = 0.0f;
 
     float dis;
     private Transform target;
     private bool isAttacking = false;
     private Animator animator;
     float rot = 0.0f;
+    public Transform MonsterArea;
+    public bool outOfRange = false;
 
     public Transform arm1;
     public Transform arm2;
@@ -31,13 +35,18 @@ public class Monster : AnimatorAll
     //hp bar
     public Transform Head;
     public Slider slid;
-    private Camera camera;
-    private float failChase = 0.0f;
+    private new Camera camera;
+    public float failChase = 0.0f;
 
     //spawner
     public Spawner spawner;
+
+    //drop table
+    DropTable drop;
     private void Start()
     {
+        drop = this.transform.GetComponent<DropTable>();
+        player = GameObject.Find("Player").GetComponent<PlayerController>();
         spawner = GameObject.Find("Spawner").GetComponent<Spawner>();
         GameObject ob = GameObject.Find("MainCamera");
         camera = ob.GetComponent<Camera>();
@@ -81,7 +90,6 @@ public class Monster : AnimatorAll
         switch(State)
         {
             case MonsterState.Idle:
-            failChase = 0.0f;
             myAnim.SetBool("IsChasing", false);
             myAnim.SetBool("IsWalk", false);
             break;
@@ -94,6 +102,8 @@ public class Monster : AnimatorAll
             case MonsterState.Attack:
             break;
             case MonsterState.Dead:
+            drop.DropItem();
+            player.PlayerExp(Exp);
             slid.gameObject.SetActive(false);
             myAnim.SetTrigger("IsDead");
             gravity.useGravity = false;
@@ -121,13 +131,20 @@ public class Monster : AnimatorAll
             {
             ChangeState(MonsterState.Walk);
             walkDelay = Random.RandomRange(5, 10);
-            rot = Random.RandomRange(0, 361); 
+            rot = Random.RandomRange(0, 361);
             }
             break;
             case MonsterState.Walk:
             walkDelay -= 1.0f * Time.deltaTime;
-            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.AngleAxis(rot, Vector3.up), 2.0f * Time.deltaTime);
-            if(walkDelay < 0.0f)
+            if(!outOfRange)
+            {
+                this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.AngleAxis(rot, Vector3.up), 2.0f * Time.deltaTime);
+            }
+            else
+            {
+                LookPlayer(MonsterArea);
+            }
+            if (walkDelay < 0.0f)
             {
                 ChangeState(MonsterState.Idle);
                 walkDelay = 5.0f;
@@ -193,18 +210,18 @@ public class Monster : AnimatorAll
         ChangeState(MonsterState.Chase);
     }
 
-    void LookPlayer(Transform player)
+    void LookPlayer(Transform pos)
     {
-        Vector3 dir = player.position - this.transform.position;
+        Vector3 dir = pos.position - this.transform.position;
         this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * rotationSpeed);
     }
-
+        
     void GiveUpChase() //현재 애니메이션 상태가 무엇인지알 수 있는 코드
     {
-        if(myAnim.GetCurrentAnimatorStateInfo(0).nameHash == Animator.StringToHash("Base Layer.Idle"))
-        {
-            ChangeState(MonsterState.Idle);
-        }
+        //if(myAnim.GetCurrentAnimatorStateInfo(0).nameHash == Animator.StringToHash("Base Layer.Idle"))
+        //{
+        //    ChangeState(MonsterState.Idle);
+        //}
     }
 
     void Attack()
@@ -253,9 +270,9 @@ public class Monster : AnimatorAll
         hp = 500.0f;
         deadDelay = 3.0f;
         ChangeState(MonsterState.Idle);
-        for(int i = 7; i < transform.childCount; i++)
-        {
-            transform.GetChild(i).gameObject.SetActive(false);
-        }
+        gravity.useGravity = true;
+        capColl.enabled = true;
+        slid.maxValue = hp;
+        slid.value = hp;
     }
 }

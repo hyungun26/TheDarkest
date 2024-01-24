@@ -2,15 +2,16 @@
 
 public class Arrow : MonoBehaviour
 {
-    public GameObject CrashArrow;
+    //public GameObject CrashArrow;
     public LayerMask crashMask;
     public PlayerStat playerStat;
+    public Transform ArrowPos;
     [SerializeField]
     float Power = 1.0f;
 
     void Start()
     {
-        playerStat = GameObject.Find("StatValue").GetComponent<PlayerStat>();
+        playerStat = GameObject.Find("StatValue1").GetComponent<PlayerStat>();
     }
 
     // Update is called once per frame
@@ -24,7 +25,6 @@ public class Arrow : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, delta, crashMask))
         {
             //앞에있는 물체 검사
-            GameObject brokenArrow = Instantiate(CrashArrow);
             Vector3 pos = transform.position;
 
             if(hit.transform.CompareTag("Monster"))
@@ -38,7 +38,6 @@ public class Arrow : MonoBehaviour
 
                 Dragon dragon = rootObj.GetComponent<Dragon>();
                 Monster mon = monsterPar.GetComponent<Monster>();
-                Debug.Log(mon);
                 int rnd = Random.Range(1, 101); //1에서 100까지의 랜덤 수를 넣음
                 int moreDam = 1;
 
@@ -58,11 +57,19 @@ public class Arrow : MonoBehaviour
                     dragon.HP -= playerStat.Damage * moreDam;
                 }
             }
-
-            brokenArrow.transform.SetParent(hit.transform);
-
-            brokenArrow.transform.position = pos;
-            Destroy(this.gameObject);
+            this.transform.gameObject.SetActive(false);
         }
+
+        if(this.transform.position.y <= -100.0f)
+        {
+            this.transform.gameObject.SetActive(false);
+        }
+    }
+
+    private void OnEnable()
+    {
+        ArrowPos = GameObject.Find("Arrow").GetComponent<Transform>();
+        this.transform.position = ArrowPos.transform.position;
+        this.transform.rotation = ArrowPos.transform.rotation;
     }
 }

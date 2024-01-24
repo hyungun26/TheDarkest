@@ -13,6 +13,7 @@ public class MonsterSearch : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            mon.PlayerTransform = other.transform;
             mon.Search();
         }
     }

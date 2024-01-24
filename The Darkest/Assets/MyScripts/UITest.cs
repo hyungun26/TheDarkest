@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UITest : MonoBehaviour
 {
-    public Camera camera;
+    public new Camera camera;
     public Slider slid;
     public Transform child;
     

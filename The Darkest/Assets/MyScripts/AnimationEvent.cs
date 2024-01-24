@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class AnimationEvent : MonoBehaviour
 {
+    public PoolManager pool;
     //Player Animator Controll    
     public GameObject Arrow;
     public GameObject ArrowClone;
@@ -39,8 +40,9 @@ public class AnimationEvent : MonoBehaviour
     }
 
     public void OnCreateArrow()
-    {         
-        Instantiate(ArrowClone, Arrow.transform.position, Arrow.transform.rotation);
+    {
+        pool.Get(1);
+        //Instantiate(ArrowClone, Arrow.transform.position, Arrow.transform.rotation);
     }
 
     public void Aiming()

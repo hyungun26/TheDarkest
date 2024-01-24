@@ -3,12 +3,13 @@ using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : AnimatorAll
 {
+    public PoolManager pool;
     public DataManager dataManager;
     public UpButton2[] button;
-    public ItemSlot[] slot;
 
     public GameObject UI_Aiming;
 
@@ -76,8 +77,9 @@ public class PlayerController : AnimatorAll
     public int Level = 0;
     public float Exp = 0;
     public float MaxExp = 1000;
-    public bool expC = false; // 몹을 잡았을때 expC를 넣어 주어야한다
 
+    //scene 관련
+    
     public enum PlayerState
     {
         Play, Die, HitDown, Aim, Heal
@@ -86,28 +88,30 @@ public class PlayerController : AnimatorAll
 
     private void Awake()
     {
-        dataManager.LoadDate();//임시로 처음 시작하면 load되게끔
+        dataManager.LoadDate();//임시로 처음 using UnityEngine.SceneManagement;시작하면 load되게끔
     }
     void Start()
     {
         //저장한 데이터 가져오기
-        Level = dataManager.nowPlayer.level;
-        LevelT.text = Level.ToString(); //text도 초기화
-        MaxExp = dataManager.nowPlayer.Maxexp;
-        Exp = dataManager.nowPlayer.Exp;
-        this.transform.position = new Vector3(dataManager.nowPlayer.x, dataManager.nowPlayer.y, dataManager.nowPlayer.z);
-        PlayerUI.Point.text = dataManager.uIData.point.ToString();
-        button[0].num = dataManager.uIData.DamageP;
-        button[1].num = dataManager.uIData.HealthP;
-        button[2].num = dataManager.uIData.StaminaP;
-        button[3].num = dataManager.uIData.DefenceP;
-        button[4].num = dataManager.uIData.CriticalP;
+        //Level = dataManager.nowPlayer.level;
+        //LevelT.text = Level.ToString(); //text도 초기화
+        //MaxExp = dataManager.nowPlayer.Maxexp;
+        //Exp = dataManager.nowPlayer.Exp;
+        //this.transform.position = new Vector3(dataManager.nowPlayer.x, dataManager.nowPlayer.y, dataManager.nowPlayer.z);
+        //PlayerUI.Point.text = dataManager.uIData.point.ToString();
+        //button[0].num = dataManager.uIData.DamageP;
+        //button[1].num = dataManager.uIData.HealthP;
+        //button[2].num = dataManager.uIData.StaminaP;
+        //button[3].num = dataManager.uIData.DefenceP;
+        //button[4].num = dataManager.uIData.CriticalP;
 
         n = transform.childCount;
         color = Color.white;
         HealOura.Stop();
         Arch2Oripos.position = Arch2.position;
+        this.transform.position = Vector3.up;
     }
+    
 
     // Update is called once per frame
     void Update()
@@ -116,13 +120,8 @@ public class PlayerController : AnimatorAll
         InvincibleTime();
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            expC = true;
-            Exp += 5000;
-        }
-        if(expC || Exp > MaxExp)
-        {
-            PlayerExp();
-            expC = false;
+            //PlayerExp(5000.0f);
+            ChangeState(PlayerState.Die);
         }
 
         PlayerStatus();
@@ -152,6 +151,9 @@ public class PlayerController : AnimatorAll
             case PlayerState.Play:
                 break;
             case PlayerState.Die:
+                time = 0;
+                currentTime = 0;
+                DeadText.fontSize = 100.0f;
                 UIAll.gameObject.SetActive(false);
                 DeadSceneAll.gameObject.SetActive(true);
                 DeadCamera.SetTrigger("DeadScene");
@@ -429,15 +431,13 @@ public class PlayerController : AnimatorAll
         }
     }
 
-    void PlayerExp()
+    public void PlayerExp(float num)
     {
-        
+        Exp += num;
         ExpGauge.fillAmount = Exp / MaxExp;
         if (ExpGauge.fillAmount == 1.0f) 
         {
-            GameObject obj = Instantiate(Resources.Load("Prefabs/LevelUp") as GameObject);
-            obj.name = "LevelUpParticle";
-            obj.transform.SetParent(this.transform, false);
+            pool.Get(2, this.transform);
             PlayerUI.GetPoint(4); // Stat창 에 4포인트준다
             float carriedOver = Exp - MaxExp;
             Level += 1;

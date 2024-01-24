@@ -19,7 +19,6 @@ public class PoolManager : MonoBehaviour
         {
             pools[index] = new List<GameObject>();
         }
-
     }
 
     public GameObject Get(int index, float x, float z, float rotY, Transform par)
@@ -52,8 +51,7 @@ public class PoolManager : MonoBehaviour
 
         return select;
     }
-
-    public GameObject Get(int index) //오버로딩 효과음 같은 오브젝트를 여기서 관리하면 좋을듯
+    public GameObject Get(int index) // 최상위에 생성삭제를 해야하면 이곳에서
     {
         GameObject select = null;
 
@@ -69,14 +67,38 @@ public class PoolManager : MonoBehaviour
             }
         }
 
-        // ... 못 찾았으면?
+        //못 찾았으면?
         if (!select) // null값이면 false값이 나온다
         {
-            // ... 새롭게 생성하고 select 변수에 할당
-            select = Instantiate(prefabs[index], transform);
+            //새롭게 생성하고 select 변수에 할당
+            select = Instantiate(prefabs[index]);
             pools[index].Add(select);
         }
+        return select;
+    }
+    public GameObject Get(int index, Transform Pos) // 부모가 필요하면 이걸로
+    {
+        GameObject select = null;
 
+        // ... 선택한 풀의 놀고 (비활성화 된) 있는 게임오브젝트 접근
+        foreach (GameObject item in pools[index])
+        {
+            // ... 발견하면 select 변수에 할당
+            if (!item.activeSelf)
+            {
+                select = item;
+                select.SetActive(true);
+                break;
+            }
+        }
+
+        //못 찾았으면?
+        if (!select) // null값이면 false값이 나온다
+        {
+            //새롭게 생성하고 select 변수에 할당
+            select = Instantiate(prefabs[index], Pos);
+            pools[index].Add(select);
+        }
         return select;
     }
 }
