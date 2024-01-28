@@ -15,7 +15,7 @@ public abstract class Scenes : MonoBehaviour
     //여기서 씬이 변경이되면 초기화 해준다.
     public abstract void OnSceneLoaded(Scene scene, LoadSceneMode mode);
 
-    // 게임이 종료되면 호출이 된다라...
+    // 게임이 종료되면 호출이 된다
     void OnDisable()
     {
         Debug.Log("OnDisable");

@@ -9,7 +9,6 @@ public class CanvasScenes : Scenes
     {
         if (SceneManager.GetActiveScene().name == "LoadingScene")
         {
-            Debug.Log("왜이러냐");
             this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
         }
         else if (SceneManager.GetActiveScene().name == "Testing")
