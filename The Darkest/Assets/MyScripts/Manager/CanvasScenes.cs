@@ -11,7 +11,7 @@ public class CanvasScenes : Scenes
         {
             this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
         }
-        else if (SceneManager.GetActiveScene().name == "Testing")
+        else if (SceneManager.GetActiveScene().name != "LoadingScene")
         {
             this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
         }

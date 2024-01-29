@@ -6,6 +6,7 @@ public class Portal : MonoBehaviour
 {
     public UIControll UIControll;
     public RectTransform PortalUI;
+    public RectTransform InteractUI;
     private void OnTriggerEnter(Collider other)
     {
         //들어오면 ui켜지고 player마우스 움직임 통제
@@ -16,6 +17,7 @@ public class Portal : MonoBehaviour
             if (!PortalUI.gameObject.activeSelf)
             {
                 PortalUI.gameObject.SetActive(true);
+                PortalUI.parent.SetAsLastSibling();
                 UIControll.list.Add(PortalUI.gameObject);
             }
             Debug.Log("player가 이동준비중임");
@@ -31,6 +33,11 @@ public class Portal : MonoBehaviour
             {
                 UIControll.list.Remove(PortalUI.gameObject);
                 PortalUI.gameObject.SetActive(false);
+                if (InteractUI.gameObject.activeSelf)
+                {
+                    InteractUI.gameObject.SetActive(false);
+                    UIControll.list.Remove(InteractUI.gameObject);
+                }
             }
             Debug.Log("player가 범위를 이탈함");
         }

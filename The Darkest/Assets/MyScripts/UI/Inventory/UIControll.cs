@@ -51,7 +51,7 @@ public class UIControll : DataManager
                 list[list.Count-1].SetActive(false);
                 list.Remove(list[list.Count-1]);
             }
-            //else //나가기 버튼 //임시 esc 저장기능
+            /*else //나가기 버튼 //임시 esc 저장기능
             //{
             //    nowPlayer.Name = "Archer";
             //    //nowPlayer.PlayerPos.position = playerController.transform.position;
@@ -90,7 +90,7 @@ public class UIControll : DataManager
             //    }
             //    Debug.Log("저장");
             //    SaveData();
-            //}
+            }*/
         }
 
         if (Input.GetKeyDown(KeyCode.U)) //중복코드 간단하게 처리 할 수 있으면 좋겠다.

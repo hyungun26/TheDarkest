@@ -12,9 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/The Darkest.unity
     guid: f4fc660ad7cf6eb4eb8cd6d109f7608e
   - enabled: 1
+    path: Assets/Scenes/The Darkest RestPlace.unity
+    guid: c732593fe76e5a84197f9cd13963f706
+  - enabled: 1
     path: Assets/Scenes/LoadingScene.unity
     guid: c5246b08231273f4a918bf23fa2f7bd3
   - enabled: 1
-    path: Assets/Scenes/Testing.unity
-    guid: cd61b2461d4ef624d830e34e48626d5d
+    path: Assets/Scenes/BossStage.unity
+    guid: d9417f086d326b941a14d3c97776a578
+  - enabled: 1
+    path: Assets/Scenes/MonsterArea.unity
+    guid: a7cf8bc4c6b77684b84063c100f3bb31
   m_configObjects: {}

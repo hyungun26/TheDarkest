@@ -288,7 +288,7 @@ public class PlayerController : AnimatorAll
                 time += Time.deltaTime;
                 if (ReloadingTime <= time)
                 {
-                    LoadingSceneManager.LoadScene("Testing");
+                    LoadingSceneManager.LoadScene("The Darkest RestPlace");
                     time = 0;
                 }
                 

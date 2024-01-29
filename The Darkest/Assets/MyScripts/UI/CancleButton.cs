@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class CancleButton : JustButton
 {
-    public UIControll UIControll;
-    public RectTransform PortalUI;
     public override void OnClick()
     {
         this.transform.parent.gameObject.SetActive(false);
-        UIControll.list.Remove(PortalUI.gameObject);
+        UIControll.list.Remove(UI.gameObject);
     }
 }
