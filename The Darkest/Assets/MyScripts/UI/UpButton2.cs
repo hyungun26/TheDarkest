@@ -33,7 +33,7 @@ public class UpButton2 : MonoBehaviour, IPointerClickHandler
                 break;
         }
     }
-    //보자보자 어디보자
+    
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)

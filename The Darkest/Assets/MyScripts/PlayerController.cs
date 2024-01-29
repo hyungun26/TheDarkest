@@ -26,7 +26,8 @@ public class PlayerController : AnimatorAll
     float invincibilityTime = 3.0f; // 무적시간
     bool running = false;
     public bool hit = false;
-    
+
+    public Spine spine;
     public AnimationEvent animEvent;
 
     Vector3 checkDir = Vector3.zero;
@@ -120,8 +121,8 @@ public class PlayerController : AnimatorAll
         InvincibleTime();
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //PlayerExp(5000.0f);
-            ChangeState(PlayerState.Die);
+            PlayerExp(5000.0f);
+            //ChangeState(PlayerState.Die);
         }
 
         PlayerStatus();
@@ -149,8 +150,16 @@ public class PlayerController : AnimatorAll
         switch (MyState)
         { 
             case PlayerState.Play:
+                if(!spine.enabled)
+                {
+                    Arch2.position = Arch2Oripos.position;
+                    spine.enabled = true;
+                    animEvent.OnInactiveArrow();
+                }
                 break;
             case PlayerState.Die:
+                myAnim.SetBool("Aiming", false);
+                spine.enabled = false;
                 time = 0;
                 currentTime = 0;
                 DeadText.fontSize = 100.0f;
@@ -160,10 +169,15 @@ public class PlayerController : AnimatorAll
                 myAnim.SetTrigger("IsDead");
                 break;
             case PlayerState.HitDown:
+                spine.enabled = false;
                 break;
             case PlayerState.Aim:
                 break;
             case PlayerState.Heal:
+                Arch2.position = Arch2Oripos.position;
+                spine.enabled = false;
+                animEvent.OnInactiveArrow();
+                myAnim.SetBool("Aiming", false);
                 currentTime = 0;
                 HealOura.gameObject.SetActive(true);
                 HealOura.startColor = Color.white;
@@ -230,12 +244,12 @@ public class PlayerController : AnimatorAll
                 {
                     if (!running)
                     {
-                        UnPossibleRun();
+                        InPossibleRun();
                     }
                 }
                 if (!running)
                 {
-                    UnPossibleRun();
+                    InPossibleRun();
                 }
 
                 if (Input.GetKeyUp(KeyCode.LeftShift))
@@ -355,7 +369,7 @@ public class PlayerController : AnimatorAll
         float val = Mathf.Lerp(Start, End, currentTime / lerp);
         return val;
     }
-    void UnPossibleRun()
+    void InPossibleRun()
     {
         if((uint)run <= a)
         {

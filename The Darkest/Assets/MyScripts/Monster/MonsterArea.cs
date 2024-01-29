@@ -13,7 +13,6 @@ public class MonsterArea : MonoBehaviour
             if(mon != null)
             {
                 mon.MonsterArea = GameObject.Find("Flag").GetComponent<Transform>();
-                Debug.Log(mon.MonsterArea);
                 mon.outOfRange = true;
             }            
         }
@@ -25,7 +24,6 @@ public class MonsterArea : MonoBehaviour
             mon = other.GetComponent<Monster>();
             if(mon.outOfRange && mon.State == Monster.MonsterState.Idle)
             {
-                Debug.Log("들어올수있나");
                 mon.outOfRange = false;
             }
         }
