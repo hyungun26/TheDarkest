@@ -89,7 +89,7 @@ public class PlayerController : AnimatorAll
 
     private void Awake()
     {
-        dataManager.LoadDate();//임시로 처음 using UnityEngine.SceneManagement;시작하면 load되게끔
+        //dataManager.LoadDate();//임시로 처음 using UnityEngine.SceneManagement;시작하면 load되게끔
     }
     void Start()
     {

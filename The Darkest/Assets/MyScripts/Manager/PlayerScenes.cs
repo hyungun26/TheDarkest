@@ -19,7 +19,7 @@ public class PlayerScenes : Scenes
         if (SceneName == "The Darkest RestPlace")
         {
             player.DeadSceneAll.gameObject.SetActive(false);
-            player.transform.position = Vector3.up;
+            player.transform.position = Vector3.up * 1.5f;
             player.PlayerHP.value = 100.0f;
         }
         else if(SceneName == "MonsterArea")
@@ -28,7 +28,7 @@ public class PlayerScenes : Scenes
         }
         else if(SceneName == "BossStage")
         {
-            player.transform.position = Vector3.up * 5.0f;
+            player.transform.position = Vector3.forward * 67.0f + Vector3.left * 30.0f;
         }
     }
 }

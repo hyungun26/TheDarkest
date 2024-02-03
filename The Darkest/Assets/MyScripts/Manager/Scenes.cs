@@ -18,7 +18,6 @@ public abstract class Scenes : MonoBehaviour
     // 게임이 종료되면 호출이 된다
     void OnDisable()
     {
-        Debug.Log("OnDisable");
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

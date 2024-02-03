@@ -7,7 +7,7 @@ public class CanvasScenes : Scenes
 {
     public override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (SceneManager.GetActiveScene().name == "LoadingScene")
+        if (SceneManager.GetActiveScene().name == "LoadingScene" || SceneManager.GetActiveScene().name == "Intro")
         {
             this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
         }
