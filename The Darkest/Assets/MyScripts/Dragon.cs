@@ -63,6 +63,7 @@ public class Dragon : AnimatorAll
   
     void Start()
     {
+        DragonUI = GameObject.Find("Dragon");
         DHP = HP;
         Agent = GetComponent<NavMeshAgent>();
         DragonTr = GetComponent<Transform>();
@@ -81,15 +82,6 @@ public class Dragon : AnimatorAll
         {
             ChangeState(MonsterState.Walk);
             wakeUp = true;
-        }
-
-        if (Vector3.Distance(DragonTr.position, Player.position) < AttackLength)
-        {
-            attackPossible = true; // 공격가능
-        }
-        else
-        {
-            attackPossible = false; // 공격 불가능
         }
 
         //테스트 어택 딜레이
@@ -194,7 +186,15 @@ public class Dragon : AnimatorAll
                 //플레이어가 죽으면 여기로 들어온다.
                 break;
             case MonsterState.Fight:
-                if(PlayerController.MyState == PlayerController.PlayerState.Play) //player가 죽거나 넘어져있는 상태가 아닐때만 공격
+                if (Vector3.Distance(DragonTr.position, Player.position) < AttackLength)
+                {
+                    attackPossible = true; // 공격가능
+                }
+                else
+                {
+                    attackPossible = false; // 공격 불가능
+                }
+                if (PlayerController.MyState == PlayerController.PlayerState.Play) //player가 죽거나 넘어져있는 상태가 아닐때만 공격
                 {
                     AttackLength = 6.0f;
                     //AnimationEvent 에서 Fight false 처리중 애니메이션이 끝나면 다시 들어와서 공격함
