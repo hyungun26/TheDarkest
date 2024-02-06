@@ -8,7 +8,7 @@ public class PoolManager : MonoBehaviour
     public GameObject[] prefabs;
 
     // .. 풀 담당을 하는 리스트들이 필요함    
-    List<GameObject>[] pools;
+    public List<GameObject>[] pools;
 
     private void Awake()
     {
@@ -21,14 +21,26 @@ public class PoolManager : MonoBehaviour
         }
     }
 
+    public void PoolManagerInit()
+    {
+        pools = new List<GameObject>[prefabs.Length];
+        for (int index = 0; index < pools.Length; index++)
+        {
+            pools[index] = new List<GameObject>();
+        }
+    }
+
     public GameObject Get(int index, float x, float z, float rotY, Transform par)
     {
+        
         GameObject select = null;
 
         // ... 선택한 풀의 놀고 (비활성화 된) 있는 게임오브젝트 접근
-        foreach(GameObject item in pools[index])
+        
+        foreach (GameObject item in pools[index])
         {
             // ... 발견하면 select 변수에 할당
+            
             if (!item.activeSelf)
             {
                 select = item;
@@ -38,7 +50,7 @@ public class PoolManager : MonoBehaviour
                 break;
             }
         }
-
+        
         // ... 못 찾았으면?
         if (!select) // null값이면 false값이 나온다
         {

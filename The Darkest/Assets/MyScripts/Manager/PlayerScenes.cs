@@ -14,25 +14,22 @@ public class PlayerScenes : Scenes
         player.DeadCamera.enabled = false;
         player.anim.enabled = false;
         player.anim.enabled = true;
-        Debug.Log("확인");
+        
         player.ChangeState(PlayerController.PlayerState.Play);
-        string SceneName = scene.name;
+        string SceneName = SceneManager.GetActiveScene().name;
         if (SceneName == "The Darkest RestPlace")
         {
             player.DeadSceneAll.gameObject.SetActive(false);
             player.transform.position = Vector3.up * 1.5f;
-            player.PlayerHP.value = 100.0f;
+            //이건 이동할때가 아니라 죽었다가 살았을때 작동해야함 그러므로 이쪽에서 하는게 아닌듯
         }
         else if(SceneName == "MonsterArea")
         {
-            Debug.Log("MonsterArea 입장");
             player.transform.position = Vector3.up;
         }
         else if(SceneName == "BossStage")
         {
-            Debug.Log("왜 안들어옴???");
             player.transform.position = Vector3.forward * 67.0f + Vector3.left * 30.0f;
-            Debug.Log(player.transform.position);
         }
     }
 }

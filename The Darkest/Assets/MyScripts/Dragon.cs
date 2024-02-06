@@ -23,7 +23,6 @@ public class Dragon : AnimatorAll
 
     public Transform DragonTr;
     public Transform Player;
-    public Transform LookingPlayer;
     public PlayerController PlayerController;
 
     public LayerMask enemyMask;
@@ -111,6 +110,8 @@ public class Dragon : AnimatorAll
             case MonsterState.Sleep:
                 break;
             case MonsterState.Scream:
+                PlayerController = GameObject.Find("Player").GetComponent<PlayerController>();
+                Player = PlayerController.gameObject.transform;
                 DragonUI.GetComponent<UIController>().dragonState = true; // UI생성
                 break;
             case MonsterState.Walk:

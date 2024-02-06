@@ -8,10 +8,12 @@ public class Portal : MonoBehaviour
     public UIControll UIControll;
     public RectTransform PortalUI;
     public RectTransform InteractUI;
+    private PoolManager pool;
     private bool Teleport = false;
     private float TeleportTime;
     private void OnTriggerEnter(Collider other)
     {
+        pool = GameObject.Find("PoolManager").GetComponent<PoolManager>();
         if(UIControll == null)
         {
             UIControll = GameObject.Find("Canvas").GetComponent<UIControll>();
@@ -26,11 +28,11 @@ public class Portal : MonoBehaviour
             InteractUI = GameObject.Find("InteractUI").GetComponent<RectTransform>();
             InteractUI = InteractUI.GetChild(0).GetComponent<RectTransform>();
         }
-        //µé¾î¿À¸é uiÄÑÁö°í player¸¶¿ì½º ¿òÁ÷ÀÓ ÅëÁ¦
-        //2°³ÀÇ ¼±ÅÃÁö°¡ ÁÖ¾îÁü ´©¸£´Â °÷À¸·Î ÀÌµ¿ ½ÃÅ°±â ¿©±â¿¡ SceneÀ» ¿¬µ¿ÇÏ¸é µÉµíÇÕ´Ï´Ù.
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ uiï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ playerï¿½ï¿½ï¿½ì½º ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        //2ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡ Sceneï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Éµï¿½ï¿½Õ´Ï´ï¿½.
         if (other.CompareTag("Player"))
         {
-            //uiÃ¢ÀÌ ÄÑÁö°í x¹öÆ°À» ´©¸£¸é ´Ù½Ã ¿òÁ÷ÀÌ±â
+            //uiÃ¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ xï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì±ï¿½
             if(SceneManager.GetActiveScene().name == "The Darkest RestPlace")
             {
                 if (!PortalUI.gameObject.activeSelf)
@@ -56,13 +58,17 @@ public class Portal : MonoBehaviour
             {
                 TeleportTime = 0.0f;
                 Teleport = false;
+                //if(SceneManager.GetActiveScene().name == "MonsterArea")
+                //{
+                //    pool.PoolManagerInit();
+                //}
                 LoadingSceneManager.LoadScene("The Darkest RestPlace");
             }
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        //³ª°¡¸é uiÁ¦°Å
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ uiï¿½ï¿½ï¿½ï¿½
         if (other.CompareTag("Player"))
         {
             if(SceneManager.GetActiveScene().name == "The Darkest RestPlace")

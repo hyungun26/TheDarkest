@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class LoadingSceneManager : MonoBehaviour
 {
+    PoolManager pool;
     public static string nextScene;
     [SerializeField]
     Slider progressBar;
@@ -26,12 +27,19 @@ public class LoadingSceneManager : MonoBehaviour
 
     IEnumerator LoadScene()
     {
+        if(pool == null)
+        {
+            pool = GameObject.Find("PoolManager").GetComponent<PoolManager>();
+            pool.PoolManagerInit();
+            
+        }
         AsyncOperation op = SceneManager.LoadSceneAsync(nextScene);
         op.allowSceneActivation = false;//장면이 준비된 즉 시 장면이 활성화되는 것을 허용할지 안할지
 
         float timer = 0f;
         while (!op.isDone)//씬로딩이 끝나지 않았다면
         {
+            
             yield return null;
             if(op.progress < 0.9f)
             {
@@ -44,6 +52,8 @@ public class LoadingSceneManager : MonoBehaviour
                 if(progressBar.value == 1.0f)
                 {
                     op.allowSceneActivation = true;
+                    Debug.Log("횟수");
+                    pool = null;
                     yield break;
                 }
             }

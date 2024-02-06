@@ -72,8 +72,8 @@ public class Monster : AnimatorAll
         {
             attackDelay += 1.0f * Time.deltaTime;
         }
-
-        StateProcess();        
+        
+        StateProcess();
     }
 
     public enum MonsterState

@@ -126,7 +126,10 @@ public class PlayerController : AnimatorAll
         }
 
         PlayerStatus();
-
+        if(DragonTr == null)
+        {
+            DragonTr = GameObject.Find("Dragon").transform;
+        }
         if (Stamina.value != Stamina.maxValue && SGaugeFill)
         {
             Stamina.value += 2.0f * Time.deltaTime;
@@ -302,6 +305,9 @@ public class PlayerController : AnimatorAll
                 time += Time.deltaTime;
                 if (ReloadingTime <= time)
                 {
+                    Slider slid = HpBar.GetComponent<Slider>();
+                    PlayerHP.value = slid.maxValue;
+                    Stamina.value = Stamina.maxValue;
                     LoadingSceneManager.LoadScene("The Darkest RestPlace");
                     time = 0;
                 }

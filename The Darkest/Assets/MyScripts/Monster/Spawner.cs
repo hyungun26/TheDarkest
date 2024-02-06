@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour
     public PoolManager pool;
     public float spawnTime;
     public int num = 0;
-    private int Maxnum = 3;
+    private const int Maxnum = 3;
     //Update is called once per frame
     void LateUpdate()
     {
