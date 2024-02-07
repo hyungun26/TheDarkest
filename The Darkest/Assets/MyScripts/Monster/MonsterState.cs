@@ -17,6 +17,7 @@ public abstract class MonsterState : AnimatorAll
     //공격 사거리
     public float AttackLength;
     public static PlayerController playerController;
+    public Transform[] attackPos;
     public enum MonsterStates
     {
         Idle, Walk, Fight, Chase, Attack, Dead, Scream, Sleep
@@ -25,4 +26,22 @@ public abstract class MonsterState : AnimatorAll
     {
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
+    public IEnumerator Attack()
+    {
+        for (int i = 0; i < attackPos.Length; i++)
+        {
+            Collider[] attack = Physics.OverlapSphere(attackPos[i].position, AttackRange, enemyMask);
+            foreach (Collider coll in attack)
+            {
+                PlayerController playerController = coll.GetComponent<PlayerController>();
+                if (playerController != null)
+                {
+                    playerController.Attacked(20.0f, attackType);
+                    playerController.hit = true;
+                }
+            }
+        }
+        yield return null;
+    }
+    public abstract void monsterHit(float dam);
 }

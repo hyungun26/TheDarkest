@@ -1,24 +1,21 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.TextCore.Text;
 
 public class Monster : MonsterState
 {   
     public float rotationSpeed = 1f;
-
     private float walkDelay = 5.0f;
+    float rot;
 
-    float rot = 0.0f;
     public Transform MonsterArea;
     public bool outOfRange = false;
 
-    public Transform arm1;
-    public Transform arm2;
-    
-
     private float deadDelay = 3.0f;
-    public Rigidbody gravity;
-    public CapsuleCollider capColl;
+    Rigidbody gravity;
+    CapsuleCollider capColl;
     Vector3 vec;
 
     //hp bar
@@ -32,13 +29,14 @@ public class Monster : MonsterState
 
     //drop table
     DropTable drop;
+
+    
     private void Start()
     {
         Hp = 500.0f;
         drop = this.transform.GetComponent<DropTable>();
         spawner = GameObject.Find("Spawner").GetComponent<Spawner>();
-        GameObject ob = GameObject.Find("MainCamera");
-        camera = ob.GetComponent<Camera>();
+        camera = GameObject.Find("MainCamera").GetComponent<Camera>();
         slid.gameObject.SetActive(false);
         vec = transform.position;
         slid.maxValue = Hp;
@@ -64,11 +62,6 @@ public class Monster : MonsterState
         
         StateProcess();
     }
-
-    //public enum MonsterState
-    //{
-    //    Idle, Walk, Chase, Attack, Dead
-    //}
 
     public MonsterStates State = MonsterStates.Idle;
 
@@ -119,8 +112,8 @@ public class Monster : MonsterState
             if (walkDelay < 0.0f)
             {
             ChangeState(MonsterStates.Walk);
-            walkDelay = Random.RandomRange(5, 10);
-            rot = Random.RandomRange(0, 361);
+            walkDelay = Random.Range(5, 10);
+            rot = Random.Range(0, 361);
             }
             break;
             case MonsterStates.Walk:
@@ -154,14 +147,15 @@ public class Monster : MonsterState
             break;
             case MonsterStates.Attack:
             dis = Vector3.Distance(this.transform.position, PlayerTransform.position);
-            Attack();
+            
             LookPlayer(PlayerTransform);
             if(dis > AttackLength)
             {
                 ChangeState(MonsterStates.Chase);
                 myAnim.SetBool("IsChasing", true);
             }
-            if(attackDelay > 3.0f)
+            StartCoroutine(Attack());
+            if (attackDelay > 3.0f)
             {
                 int n = Random.Range(0,2);
                 attackDelay = 0.0f;
@@ -204,58 +198,16 @@ public class Monster : MonsterState
         Vector3 dir = pos.position - this.transform.position;
         this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * rotationSpeed);
     }
-        
-    void GiveUpChase() //현재 애니메이션 상태가 무엇인지알 수 있는 코드
-    {
-        //if(myAnim.GetCurrentAnimatorStateInfo(0).nameHash == Animator.StringToHash("Base Layer.Idle"))
-        //{
-        //    ChangeState(MonsterStates.Idle);
-        //}
-    }
 
-    void Attack()
-    {
-        Collider[] list1 = Physics.OverlapSphere(arm1.position, AttackRange, enemyMask);
-        Collider[] list2 = Physics.OverlapSphere(arm2.position, AttackRange, enemyMask);
-        foreach(Collider coll in list1)
-        {
-            PlayerController playerController = coll.GetComponent<PlayerController>();
-            if(playerController != null)
-            {
-                playerController.Attacked(20.0f, attackType);
-                playerController.hit = true;
-            }
-        }
-        foreach(Collider coll in list2)
-        {
-            PlayerController playerController = coll.GetComponent<PlayerController>();
-            if(playerController != null)
-            {
-                playerController.Attacked(20.0f, attackType);
-                playerController.hit = true;
-            }
-        }
-    }
-
-    public void monsterHit(float dam)
-    {
-        failChase = 0.0f;
-        if(!slid.gameObject.activeSelf)
-        {
-            slid.gameObject.SetActive(true);
-        }
-        Hp -= dam;
-        slid.value = Hp;
-        if(Hp <= 0.0f)
-        {
-            ChangeState(MonsterStates.Dead);
-            return;
-        }
-        myAnim.SetTrigger("IsHit");
-    }
+    //IEnumerator Attack()
+    //{
+    //    
+    //}
 
     private void OnEnable()
     {
+        gravity = this.transform.GetComponent<Rigidbody>();
+        capColl = this.transform.GetComponent<CapsuleCollider>();
         Hp = 500.0f;
         deadDelay = 3.0f;
         ChangeState(MonsterStates.Idle);
@@ -263,5 +215,22 @@ public class Monster : MonsterState
         capColl.enabled = true;
         slid.maxValue = Hp;
         slid.value = Hp;
+    }
+
+    public override void monsterHit(float dam)
+    {
+        failChase = 0.0f;
+        if (!slid.gameObject.activeSelf)
+        {
+            slid.gameObject.SetActive(true);
+        }
+        Hp -= dam;
+        slid.value = Hp;
+        if (Hp <= 0.0f)
+        {
+            ChangeState(MonsterStates.Dead);
+            return;
+        }
+        myAnim.SetTrigger("IsHit");
     }
 }

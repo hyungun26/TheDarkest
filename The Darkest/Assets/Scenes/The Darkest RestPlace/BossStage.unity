@@ -21664,25 +21664,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Hp: 0
+  attackDelay: 0
+  moveSpeed: 0
   attackType: StrongAttack
+  dis: 0
+  Exp: 0
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  PlayerTransform: {fileID: 0}
+  AttackRange: 0
+  AttackLength: 5
+  attackPos:
+  - {fileID: 506758282}
+  - {fileID: 496548204}
+  - {fileID: 1654862967}
+  - {fileID: 202253930}
   DragonUI: {fileID: 0}
   Agent: {fileID: 1256532152}
   animEvent: {fileID: 538054444}
   attackPossible: 0
-  AttackDelay: 3
-  search: {fileID: 0}
-  DragonTr: {fileID: 1256532154}
-  Player: {fileID: 0}
-  PlayerController: {fileID: 0}
-  enemyMask:
-    serializedVersion: 2
-    m_Bits: 1024
-  AttackPoint: {fileID: 506758282}
-  AttackPoint1: {fileID: 496548204}
-  AttackPoint2: {fileID: 1654862967}
-  Head: {fileID: 202253930}
-  AttackRange: 0
-  AttackLength: 5
   smokeEffect:
   - {fileID: 195101136}
   - {fileID: 518792460}

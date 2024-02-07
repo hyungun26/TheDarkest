@@ -709,14 +709,15 @@ MonoBehaviour:
     m_Bits: 1024
   PlayerTransform: {fileID: 0}
   AttackRange: 0.5
-  AttackLength: 1.5
+  AttackLength: 2
   rotationSpeed: 5
   MonsterArea: {fileID: 0}
   outOfRange: 0
+  attackPos:
+  - {fileID: 4526069564800234191}
+  - {fileID: 4526069563581157298}
   arm1: {fileID: 4526069564800234191}
   arm2: {fileID: 4526069563581157298}
-  gravity: {fileID: 4526069563002825232}
-  capColl: {fileID: 4526069563002825233}
   Head: {fileID: 4526069562830057238}
   slid: {fileID: 4526069564248639204}
   failChase: 0

@@ -44,17 +44,15 @@ public class Arrow : MonoBehaviour
                 if(playerStat.Critical > rnd)
                 {
                     moreDam = 2;
-                    Debug.Log("크리티컬!");
                 }
-                //a.sendDam += playerStat.Damage * moreDam;
-                Debug.Log("데미지" + playerStat.Damage * moreDam);
+                //몹을 추가하면 여기도 건드려야하는 매우 불편한 코드
                 if(mon != null)
                 {
                     mon.monsterHit(playerStat.Damage * moreDam);
                 }
                 if(dragon != null)
                 {
-                    dragon.Hp -= playerStat.Damage * moreDam;
+                    dragon.monsterHit(playerStat.Damage * moreDam);
                 }
             }
             this.transform.gameObject.SetActive(false);

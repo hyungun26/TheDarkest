@@ -15,15 +15,6 @@ public class Dragon : MonsterState
     bool attackPossible = false;
     float runORwalk = 10.0f;
     
-    float DHP;
-
-    //공격 부위
-    public Transform AttackPoint;
-    public Transform AttackPoint1;
-    public Transform AttackPoint2;
-    public Transform Head;
-
-    int rnd;
     Vector3 dir = Vector3.zero;
 
     //effect on off & dead State Production
@@ -47,7 +38,6 @@ public class Dragon : MonsterState
         Agent.speed = moveSpeed;
         DragonUI = GameObject.Find("Dragon");
         Hp = 5000.0f;
-        DHP = Hp;
         Agent = GetComponent<NavMeshAgent>();
     }
 
@@ -65,23 +55,6 @@ public class Dragon : MonsterState
             ChangeState(MonsterStates.Walk);
             wakeUp = true;
         }
-
-        //테스트 어택 딜레이
-        attackDelay -= Time.deltaTime;
-        if(DHP != Hp)
-        {
-            DragonUI.GetComponent<UIController>().DecreaseHP.value = Hp;
-            DHP = Hp;
-        }
-
-        if (DragonUI.GetComponent<UIController>().DecreaseHP2.value != DragonUI.GetComponent<UIController>().DecreaseHP.value)
-        {
-            if (!once)
-            {
-                once = true;
-                StartCoroutine(HpEffect());
-            }
-        }
     }
 
     public void ChangeState(MonsterStates s) //행동이 바뀔때 최초 한번 실행 하는곳
@@ -93,6 +66,8 @@ public class Dragon : MonsterState
             case MonsterStates.Sleep:
                 break;
             case MonsterStates.Scream:
+                ChangeState(MonsterStates.Walk);
+                myAnim.SetTrigger("IsScream");
                 playerController = GameObject.Find("Player").GetComponent<PlayerController>();
                 PlayerTransform = playerController.gameObject.transform;
                 DragonUI.GetComponent<UIController>().dragonState = true; // UI생성
@@ -117,8 +92,6 @@ public class Dragon : MonsterState
         switch (State)
         {
             case MonsterStates.Scream:
-                myAnim.SetTrigger("IsScream");
-                ChangeState(MonsterStates.Walk);
                 break;
             case MonsterStates.Walk:
                 AttackLength = 5.0f;
@@ -193,7 +166,8 @@ public class Dragon : MonsterState
                         Agent.velocity = Vector3.zero;
                         attackDelay = 5.0f;
                         animEvent.Fight = false;
-                        rnd = Random.Range(0, 3); // 0 ~ 2
+                        int rnd = Random.Range(0, 3); // 0 ~ 2
+                        StartCoroutine(Attack());
                         switch (rnd)
                         {
                             case 0:
@@ -217,16 +191,6 @@ public class Dragon : MonsterState
                     {
                         dir = PlayerTransform.transform.position - this.transform.position;
                         this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 5.0f);
-                    }
-
-                    switch (rnd)
-                    {
-                        case 0:
-                            RangeAttack1();
-                            break;
-                        case 1:
-                            RangeAttack2();
-                            break;
                     }
 
                     if (!attackPossible && animEvent.Fight) // 범위 안이 아니면 빠져나가야함
@@ -261,64 +225,6 @@ public class Dragon : MonsterState
         }
     }
 
-    void RangeAttack1()
-    {
-        Collider[] list = Physics.OverlapSphere(AttackPoint.position, AttackRange, enemyMask);
-        
-        foreach (Collider coll in list)
-        {
-            PlayerController playerController = coll.GetComponent<PlayerController>();
-            if(playerController != null)
-            {
-                if (!coll.GetComponent<PlayerController>().invincibility)
-                {
-                    //if(coll.GetComponent<PlayerController>().MyState != PlayerController.PlayerState.Die)
-                    //coll.GetComponent<PlayerController>().hit = true;
-                    // coll.GetComponent<PlayerController>().Attacked(100f, attackType);
-                    // coll.GetComponent<PlayerController>().ChangeState(PlayerController.MyState = PlayerController.PlayerState.HitDown);
-                    playerController.Attacked(20.0f, attackType);
-                    playerController.hit = true;
-                }
-            }
-        }
-    }
-
-    void RangeAttack2()
-    {
-        Collider[] list1 = Physics.OverlapSphere(AttackPoint1.position, AttackRange, enemyMask);
-        Collider[] list2 = Physics.OverlapSphere(AttackPoint2.position, AttackRange, enemyMask);
-        foreach (Collider coll in list1)
-        {
-            PlayerController playerController = coll.GetComponent<PlayerController>();
-            if (playerController != null)
-            {
-                if (!coll.GetComponent<PlayerController>().invincibility)
-                {
-                    // coll.GetComponent<PlayerController>().hit = true;
-                    // coll.GetComponent<PlayerController>().Attacked(70f, attackType);
-                    // coll.GetComponent<PlayerController>().ChangeState(PlayerController.MyState = PlayerController.PlayerState.HitDown);
-                    playerController.Attacked(20.0f, attackType);
-                    playerController.hit = true;    
-                }
-            }
-        }
-        foreach (Collider coll in list2)
-        {
-            PlayerController playerController = coll.GetComponent<PlayerController>();
-            if (playerController != null)
-            {
-                if (!coll.GetComponent<PlayerController>().invincibility)
-                {
-                    // coll.GetComponent<PlayerController>().hit = true;
-                    // coll.GetComponent<PlayerController>().Attacked(70f, attackType);
-                    // coll.GetComponent<PlayerController>().ChangeState(PlayerController.MyState = PlayerController.PlayerState.HitDown);
-                    playerController.Attacked(20.0f, attackType);
-                    playerController.hit = true;
-                }
-            }
-        }
-    }
-
     IEnumerator HpEffect()
     {
         while(!Mathf.Approximately(DragonUI.GetComponent<UIController>().DecreaseHP.value, 
@@ -330,11 +236,27 @@ public class Dragon : MonsterState
                 currentTime = lerpTime;
             }
             DragonUI.GetComponent<UIController>().DecreaseHP2.value =
-                Mathf.Lerp(DragonUI.GetComponent<UIController>().DecreaseHP2.value,
-                DragonUI.GetComponent<UIController>().DecreaseHP.value, currentTime/lerpTime);
+            Mathf.Lerp(DragonUI.GetComponent<UIController>().DecreaseHP2.value,
+            DragonUI.GetComponent<UIController>().DecreaseHP.value, currentTime/lerpTime);
             yield return null;
         }
         currentTime = 0.0f;
         once = false;
+    }
+
+    public override void monsterHit(float dam)
+    {
+        if(!once) //딱 한번만 실행
+        {
+            ChangeState(MonsterStates.Scream);
+            //여기서
+            once = true;
+        }
+        StartCoroutine(HpEffect());
+        Hp -= dam;
+        if(Hp <= 0.0f)
+        {
+            ChangeState(MonsterStates.Dead);
+        }
     }
 }
