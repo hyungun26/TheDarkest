@@ -22,7 +22,7 @@ public class MonsterArea : MonoBehaviour
         if (other.CompareTag("Monster"))
         {
             mon = other.GetComponent<Monster>();
-            if(mon.outOfRange && mon.State == Monster.MonsterState.Idle)
+            if(mon.outOfRange && mon.State == Monster.MonsterStates.Idle)
             {
                 mon.outOfRange = false;
             }

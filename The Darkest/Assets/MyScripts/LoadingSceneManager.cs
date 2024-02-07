@@ -52,7 +52,6 @@ public class LoadingSceneManager : MonoBehaviour
                 if(progressBar.value == 1.0f)
                 {
                     op.allowSceneActivation = true;
-                    Debug.Log("횟수");
                     pool = null;
                     yield break;
                 }

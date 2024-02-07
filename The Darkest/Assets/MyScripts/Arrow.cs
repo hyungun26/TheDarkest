@@ -54,7 +54,7 @@ public class Arrow : MonoBehaviour
                 }
                 if(dragon != null)
                 {
-                    dragon.HP -= playerStat.Damage * moreDam;
+                    dragon.Hp -= playerStat.Damage * moreDam;
                 }
             }
             this.transform.gameObject.SetActive(false);

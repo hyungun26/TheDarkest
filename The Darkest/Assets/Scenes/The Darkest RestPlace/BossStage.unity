@@ -21663,11 +21663,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d78b9ca1dadbd944ab78d9e6050a072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Hp: 0
+  attackType: StrongAttack
   DragonUI: {fileID: 0}
   Agent: {fileID: 1256532152}
   animEvent: {fileID: 538054444}
   attackPossible: 0
-  HP: 5000
   AttackDelay: 3
   search: {fileID: 0}
   DragonTr: {fileID: 1256532154}
@@ -21690,7 +21691,6 @@ MonoBehaviour:
   changeMaterial: {fileID: 2100000, guid: 179555ab8bd66734b8c1ac67e84c7cbc, type: 2}
   dragonMaterial: {fileID: 690462703}
   PlayerStat: {fileID: 0}
-  State: 5
 --- !u!4 &1256532154
 Transform:
   m_ObjectHideFlags: 0

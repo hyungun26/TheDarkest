@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Dragon : AnimatorAll
+public class Dragon : MonsterState
 {
     //드래곤에 문제점 움직임이 이상함 고쳐야함
     public GameObject DragonUI;
@@ -14,25 +14,14 @@ public class Dragon : AnimatorAll
     [SerializeField]
     bool attackPossible = false;
     float runORwalk = 10.0f;
-    [SerializeField]
-    public float HP = 5000.0f;
+    
     float DHP;
-    public float AttackDelay = 0f;
-    private string attackType = "StrongAttack";
-    public Collider search;
 
-    public Transform DragonTr;
-    public Transform Player;
-    public PlayerController PlayerController;
-
-    public LayerMask enemyMask;
+    //공격 부위
     public Transform AttackPoint;
     public Transform AttackPoint1;
     public Transform AttackPoint2;
     public Transform Head;
-
-    public float AttackRange = 0.0f;
-    public float AttackLength = 5.0f;
 
     int rnd;
     Vector3 dir = Vector3.zero;
@@ -49,23 +38,17 @@ public class Dragon : AnimatorAll
     float currentTime = 0.0f;
     bool once = false;
 
-    float Exp = 5000.0f;
-
     public PlayerStat PlayerStat;
-
-    public enum MonsterState
-    {
-        Idle, Walk, Fight, Dead, Scream, Sleep
-    }
     
-    public MonsterState State = MonsterState.Sleep;
+    MonsterStates State = MonsterStates.Sleep;
   
     void Start()
     {
+        Agent.speed = moveSpeed;
         DragonUI = GameObject.Find("Dragon");
-        DHP = HP;
+        Hp = 5000.0f;
+        DHP = Hp;
         Agent = GetComponent<NavMeshAgent>();
-        DragonTr = GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -73,22 +56,22 @@ public class Dragon : AnimatorAll
     {
         StateProcess();
 
-        if (HP <= 0.0f)
+        if (Hp <= 0.0f)
         {
-            ChangeState(MonsterState.Dead);
+            ChangeState(MonsterStates.Dead);
         }
-        else if (HP != DragonUI.GetComponent<UIController>().DecreaseHP.value && !wakeUp)
+        else if (Hp != DragonUI.GetComponent<UIController>().DecreaseHP.value && !wakeUp)
         {
-            ChangeState(MonsterState.Walk);
+            ChangeState(MonsterStates.Walk);
             wakeUp = true;
         }
 
         //테스트 어택 딜레이
-        AttackDelay -= Time.deltaTime;
-        if(DHP != HP)
+        attackDelay -= Time.deltaTime;
+        if(DHP != Hp)
         {
-            DragonUI.GetComponent<UIController>().DecreaseHP.value = HP;
-            DHP = HP;
+            DragonUI.GetComponent<UIController>().DecreaseHP.value = Hp;
+            DHP = Hp;
         }
 
         if (DragonUI.GetComponent<UIController>().DecreaseHP2.value != DragonUI.GetComponent<UIController>().DecreaseHP.value)
@@ -101,27 +84,27 @@ public class Dragon : AnimatorAll
         }
     }
 
-    public void ChangeState(MonsterState s) //행동이 바뀔때 최초 한번 실행 하는곳
+    public void ChangeState(MonsterStates s) //행동이 바뀔때 최초 한번 실행 하는곳
     {
         if (State == s) return;
         State = s;
         switch (State)
         {
-            case MonsterState.Sleep:
+            case MonsterStates.Sleep:
                 break;
-            case MonsterState.Scream:
-                PlayerController = GameObject.Find("Player").GetComponent<PlayerController>();
-                Player = PlayerController.gameObject.transform;
+            case MonsterStates.Scream:
+                playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+                PlayerTransform = playerController.gameObject.transform;
                 DragonUI.GetComponent<UIController>().dragonState = true; // UI생성
                 break;
-            case MonsterState.Walk:
+            case MonsterStates.Walk:
                 break;
-            case MonsterState.Idle:
+            case MonsterStates.Idle:
                 break;
-            case MonsterState.Fight:
+            case MonsterStates.Fight:
                 break;
-            case MonsterState.Dead:
-                PlayerController.PlayerExp(Exp);
+            case MonsterStates.Dead:
+                playerController.PlayerExp(Exp);
                 DragonUI.GetComponent<UIController>().dragonDead = true; // 값변경
                 DragonUI.GetComponent<UIController>().dragonState = true; // UI삭제
                 myAnim.SetTrigger("IsDead");
@@ -133,30 +116,30 @@ public class Dragon : AnimatorAll
     {
         switch (State)
         {
-            case MonsterState.Scream:
+            case MonsterStates.Scream:
                 myAnim.SetTrigger("IsScream");
-                ChangeState(MonsterState.Walk);
+                ChangeState(MonsterStates.Walk);
                 break;
-            case MonsterState.Walk:
+            case MonsterStates.Walk:
                 AttackLength = 5.0f;
                 if (!scream) // 1회성 코드
                 {
                     myAnim.SetBool("IsWalk", true);
                     scream = true;
-                    ChangeState(MonsterState.Scream);
+                    ChangeState(MonsterStates.Scream);
                 }
                 if (animEvent.Scream)
                 {
-                    if(PlayerController.MyState == PlayerController.PlayerState.Play) //플레이어가 살아있다면 쫓아가라
+                    if(playerController.MyState == PlayerController.PlayerState.Play) //플레이어가 살아있다면 쫓아가라
                     {
-                        float dis = Vector3.Distance(DragonTr.position, Player.position);
+                        dis = Vector3.Distance(this.transform.position, PlayerTransform.position);
                         if (dis < AttackLength) // player 공격사거리
                         {
                             animEvent.Fight = false;
-                            ChangeState(MonsterState.Fight);
+                            ChangeState(MonsterStates.Fight);
                         }
-                        dir = Player.transform.position - DragonTr.position;
-                        DragonTr.rotation = Quaternion.Lerp(DragonTr.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 5.0f);
+                        dir = PlayerTransform.transform.position - this.transform.position;
+                        this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 5.0f);
                         if (dis > runORwalk && !run && !attackPossible) //거리가 멀면 뛰어가라
                         {
                             Agent.isStopped = false;
@@ -171,23 +154,23 @@ public class Dragon : AnimatorAll
                             Agent.speed = 10.0f;
                             myAnim.SetTrigger("IsChaingWalk");
                         }
-                        Agent.SetDestination(Player.position);
+                        Agent.SetDestination(PlayerTransform.position);
                     }
                 }
                 break;
-            case MonsterState.Idle:
-                if(AttackDelay > 0)
+            case MonsterStates.Idle:
+                if(attackDelay > 0)
                 {
-                    ChangeState(MonsterState.Idle);
+                    ChangeState(MonsterStates.Idle);
                 }
                 else
                 {
-                    ChangeState(MonsterState.Fight);
+                    ChangeState(MonsterStates.Fight);
                 }
                 //플레이어가 죽으면 여기로 들어온다.
                 break;
-            case MonsterState.Fight:
-                if (Vector3.Distance(DragonTr.position, Player.position) < AttackLength)
+            case MonsterStates.Fight:
+                if (Vector3.Distance(this.transform.position, PlayerTransform.position) < AttackLength)
                 {
                     attackPossible = true; // 공격가능
                 }
@@ -195,7 +178,7 @@ public class Dragon : AnimatorAll
                 {
                     attackPossible = false; // 공격 불가능
                 }
-                if (PlayerController.MyState == PlayerController.PlayerState.Play) //player가 죽거나 넘어져있는 상태가 아닐때만 공격
+                if (playerController.MyState == PlayerController.PlayerState.Play) //player가 죽거나 넘어져있는 상태가 아닐때만 공격
                 {
                     AttackLength = 6.0f;
                     //AnimationEvent 에서 Fight false 처리중 애니메이션이 끝나면 다시 들어와서 공격함
@@ -204,11 +187,11 @@ public class Dragon : AnimatorAll
                     //fight상태에서 못나올때가 있음 animEvent.Fight가 true처리 안될때가 있음
                     //공격범위 안에 있지만 걷는다. 이유를 파악함 플레이어가 hitdown으로 거리가 attackRange보다 조금 멀어짐 그래서
                     //걷는 상태로 들어가자마자 공격범위 안에 들어와서 공격을 하는 부자연스러운 현상이 생김
-                    if (AttackDelay <= 0.0f)
+                    if (attackDelay <= 0.0f)
                     {
                         Agent.isStopped = true;
                         Agent.velocity = Vector3.zero;
-                        AttackDelay = 5.0f;
+                        attackDelay = 5.0f;
                         animEvent.Fight = false;
                         rnd = Random.Range(0, 3); // 0 ~ 2
                         switch (rnd)
@@ -230,10 +213,10 @@ public class Dragon : AnimatorAll
                         }
                     }
 
-                    if (AttackDelay > 0.0f) // 공격 딜레이에 걸려있으면 쳐다봐라 player를
+                    if (attackDelay > 0.0f) // 공격 딜레이에 걸려있으면 쳐다봐라 player를
                     {
-                        dir = Player.transform.position - DragonTr.position;
-                        DragonTr.rotation = Quaternion.Lerp(DragonTr.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 5.0f);
+                        dir = PlayerTransform.transform.position - this.transform.position;
+                        this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 5.0f);
                     }
 
                     switch (rnd)
@@ -248,12 +231,12 @@ public class Dragon : AnimatorAll
 
                     if (!attackPossible && animEvent.Fight) // 범위 안이 아니면 빠져나가야함
                     {
-                        ChangeState(MonsterState.Walk);
+                        ChangeState(MonsterStates.Walk);
                         run = false;
                     }
                 }
                 break;
-            case MonsterState.Dead:
+            case MonsterStates.Dead:
                 changeTime -= 1.0f * Time.deltaTime;
 
                 if (changeTime <= 0.0f)

@@ -2,30 +2,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.TextCore.Text;
 
-public class Monster : AnimatorAll
-{
-    private float hp = 500.0f;
-    public Transform PlayerTransform;
-    PlayerController player;
-    public float moveSpeed = 3f;
+public class Monster : MonsterState
+{   
     public float rotationSpeed = 1f;
-    public float attackRange = 4f;
-    public float attackDelay = 1f;
-    private float walkDelay = 5.0f;
-    private string attackType = "WeekAttack";
-    public float Exp = 0.0f;
 
-    float dis;
-    private Transform target;
-    private bool isAttacking = false;
-    private Animator animator;
+    private float walkDelay = 5.0f;
+
     float rot = 0.0f;
     public Transform MonsterArea;
     public bool outOfRange = false;
 
     public Transform arm1;
     public Transform arm2;
-    public LayerMask enemyMask;
+    
 
     private float deadDelay = 3.0f;
     public Rigidbody gravity;
@@ -45,15 +34,15 @@ public class Monster : AnimatorAll
     DropTable drop;
     private void Start()
     {
+        Hp = 500.0f;
         drop = this.transform.GetComponent<DropTable>();
-        player = GameObject.Find("Player").GetComponent<PlayerController>();
         spawner = GameObject.Find("Spawner").GetComponent<Spawner>();
         GameObject ob = GameObject.Find("MainCamera");
         camera = ob.GetComponent<Camera>();
         slid.gameObject.SetActive(false);
         vec = transform.position;
-        slid.maxValue = hp;
-        slid.value = hp;
+        slid.maxValue = Hp;
+        slid.value = Hp;
     }
     private void LateUpdate()
     {
@@ -76,34 +65,34 @@ public class Monster : AnimatorAll
         StateProcess();
     }
 
-    public enum MonsterState
-    {
-        Idle, Walk, Chase, Attack, Dead
-    }
+    //public enum MonsterState
+    //{
+    //    Idle, Walk, Chase, Attack, Dead
+    //}
 
-    public MonsterState State = MonsterState.Idle;
+    public MonsterStates State = MonsterStates.Idle;
 
-    public void ChangeState(MonsterState s) //행동이 바뀔때 최초 한번 실행 하는곳
+    public void ChangeState(MonsterStates s) //행동이 바뀔때 최초 한번 실행 하는곳
     {
         if (State == s) return;
         State = s;
         switch(State)
         {
-            case MonsterState.Idle:
+            case MonsterStates.Idle:
             myAnim.SetBool("IsChasing", false);
             myAnim.SetBool("IsWalk", false);
             break;
-            case MonsterState.Walk:
+            case MonsterStates.Walk:
             myAnim.SetBool("IsWalk", true);
             break;
-            case MonsterState.Chase:
+            case MonsterStates.Chase:
             slid.gameObject.SetActive(true);
             break;
-            case MonsterState.Attack:
+            case MonsterStates.Attack:
             break;
-            case MonsterState.Dead:
+            case MonsterStates.Dead:
             drop.DropItem();
-            player.PlayerExp(Exp);
+            playerController.PlayerExp(Exp);
             slid.gameObject.SetActive(false);
             myAnim.SetTrigger("IsDead");
             gravity.useGravity = false;
@@ -115,7 +104,7 @@ public class Monster : AnimatorAll
     {
         switch(State)
         {
-            case MonsterState.Idle:
+            case MonsterStates.Idle:
             //player와 거리가 멀고 더이상 공격하지 않는다 판단하면 hpSlider 끄는 코드
             if (slid.gameObject.activeSelf)
             {
@@ -129,12 +118,12 @@ public class Monster : AnimatorAll
             walkDelay -= 1.0f * Time.deltaTime;
             if (walkDelay < 0.0f)
             {
-            ChangeState(MonsterState.Walk);
+            ChangeState(MonsterStates.Walk);
             walkDelay = Random.RandomRange(5, 10);
             rot = Random.RandomRange(0, 361);
             }
             break;
-            case MonsterState.Walk:
+            case MonsterStates.Walk:
             walkDelay -= 1.0f * Time.deltaTime;
             if(!outOfRange)
             {
@@ -146,30 +135,30 @@ public class Monster : AnimatorAll
             }
             if (walkDelay < 0.0f)
             {
-                ChangeState(MonsterState.Idle);
+                ChangeState(MonsterStates.Idle);
                 walkDelay = 5.0f;
             }
             break;
-            case MonsterState.Chase:
+            case MonsterStates.Chase:
             LookPlayer(PlayerTransform);
             dis = Vector3.Distance(this.transform.position, PlayerTransform.position);
             if (dis > 10.0f) // 많이 멀어지면 쫓지 않기
             {
-                ChangeState(MonsterState.Idle);
+                ChangeState(MonsterStates.Idle);
             }
-            if(dis < attackRange)
+            if(dis < AttackLength)
             {
-                ChangeState(MonsterState.Attack);
+                ChangeState(MonsterStates.Attack);
                 myAnim.SetBool("IsChasing", false);
             }
             break;
-            case MonsterState.Attack:
+            case MonsterStates.Attack:
             dis = Vector3.Distance(this.transform.position, PlayerTransform.position);
             Attack();
             LookPlayer(PlayerTransform);
-            if(dis > attackRange)
+            if(dis > AttackLength)
             {
-                ChangeState(MonsterState.Chase);
+                ChangeState(MonsterStates.Chase);
                 myAnim.SetBool("IsChasing", true);
             }
             if(attackDelay > 3.0f)
@@ -187,7 +176,7 @@ public class Monster : AnimatorAll
                 }
             }
             break;
-            case MonsterState.Dead:
+            case MonsterStates.Dead:
             deadDelay -= 1.0f * Time.deltaTime;
             if(deadDelay < 0.0f)
             {
@@ -205,9 +194,9 @@ public class Monster : AnimatorAll
 
     public void Search()
     {
-        if (State == MonsterState.Chase || State == MonsterState.Dead) return;
+        if (State == MonsterStates.Chase || State == MonsterStates.Dead) return;
         myAnim.SetBool("IsChasing", true);
-        ChangeState(MonsterState.Chase);
+        ChangeState(MonsterStates.Chase);
     }
 
     void LookPlayer(Transform pos)
@@ -220,14 +209,14 @@ public class Monster : AnimatorAll
     {
         //if(myAnim.GetCurrentAnimatorStateInfo(0).nameHash == Animator.StringToHash("Base Layer.Idle"))
         //{
-        //    ChangeState(MonsterState.Idle);
+        //    ChangeState(MonsterStates.Idle);
         //}
     }
 
     void Attack()
     {
-        Collider[] list1 = Physics.OverlapSphere(arm1.position, 0.5f, enemyMask);
-        Collider[] list2 = Physics.OverlapSphere(arm2.position, 0.5f, enemyMask);
+        Collider[] list1 = Physics.OverlapSphere(arm1.position, AttackRange, enemyMask);
+        Collider[] list2 = Physics.OverlapSphere(arm2.position, AttackRange, enemyMask);
         foreach(Collider coll in list1)
         {
             PlayerController playerController = coll.GetComponent<PlayerController>();
@@ -255,11 +244,11 @@ public class Monster : AnimatorAll
         {
             slid.gameObject.SetActive(true);
         }
-        hp -= dam;
-        slid.value = hp;
-        if(hp <= 0.0f)
+        Hp -= dam;
+        slid.value = Hp;
+        if(Hp <= 0.0f)
         {
-            ChangeState(MonsterState.Dead);
+            ChangeState(MonsterStates.Dead);
             return;
         }
         myAnim.SetTrigger("IsHit");
@@ -267,12 +256,12 @@ public class Monster : AnimatorAll
 
     private void OnEnable()
     {
-        hp = 500.0f;
+        Hp = 500.0f;
         deadDelay = 3.0f;
-        ChangeState(MonsterState.Idle);
+        ChangeState(MonsterStates.Idle);
         gravity.useGravity = true;
         capColl.enabled = true;
-        slid.maxValue = hp;
-        slid.value = hp;
+        slid.maxValue = Hp;
+        slid.value = Hp;
     }
 }
