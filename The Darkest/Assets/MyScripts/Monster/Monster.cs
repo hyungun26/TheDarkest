@@ -33,6 +33,7 @@ public class Monster : MonsterState
     
     private void Start()
     {
+        AttackRange = 0.5f;
         Hp = 500.0f;
         drop = this.transform.GetComponent<DropTable>();
         spawner = GameObject.Find("Spawner").GetComponent<Spawner>();
@@ -198,11 +199,6 @@ public class Monster : MonsterState
         Vector3 dir = pos.position - this.transform.position;
         this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * rotationSpeed);
     }
-
-    //IEnumerator Attack()
-    //{
-    //    
-    //}
 
     private void OnEnable()
     {

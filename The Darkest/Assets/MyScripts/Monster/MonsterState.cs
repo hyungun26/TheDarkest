@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class MonsterState : AnimatorAll
@@ -13,7 +14,7 @@ public abstract class MonsterState : AnimatorAll
     public LayerMask enemyMask;
     public Transform PlayerTransform;
     //공격 범위
-    public float AttackRange;
+    public static float AttackRange;
     //공격 사거리
     public float AttackLength;
     public static PlayerController playerController;
@@ -27,7 +28,7 @@ public abstract class MonsterState : AnimatorAll
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
     public IEnumerator Attack()
-    {
+    { 
         for (int i = 0; i < attackPos.Length; i++)
         {
             Collider[] attack = Physics.OverlapSphere(attackPos[i].position, AttackRange, enemyMask);
@@ -36,8 +37,9 @@ public abstract class MonsterState : AnimatorAll
                 PlayerController playerController = coll.GetComponent<PlayerController>();
                 if (playerController != null)
                 {
-                    playerController.Attacked(20.0f, attackType);
+                    playerController.Attacked(20.0f, attackType, this.transform);
                     playerController.hit = true;
+                    yield return null;
                 }
             }
         }

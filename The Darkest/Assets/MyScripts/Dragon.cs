@@ -167,7 +167,6 @@ public class Dragon : MonsterState
                         attackDelay = 5.0f;
                         animEvent.Fight = false;
                         int rnd = Random.Range(0, 3); // 0 ~ 2
-                        StartCoroutine(Attack());
                         switch (rnd)
                         {
                             case 0:
@@ -175,17 +174,18 @@ public class Dragon : MonsterState
                                 myAnim.SetTrigger("IsBasicAttack");
                                 break;
                             case 1:
-                                AttackRange = 2f;
+                                AttackRange = 3f;
                                 myAnim.SetTrigger("IsClawAttack");
                                 break;
                             case 2:
-                                AttackRange = 5f;
                                 myAnim.SetTrigger("IsBreath");
                                 break;
                             default:
                                 return;
                         }
                     }
+
+                    StartCoroutine(Attack());
 
                     if (attackDelay > 0.0f) // 공격 딜레이에 걸려있으면 쳐다봐라 player를
                     {
@@ -228,7 +228,7 @@ public class Dragon : MonsterState
     IEnumerator HpEffect()
     {
         while(!Mathf.Approximately(DragonUI.GetComponent<UIController>().DecreaseHP.value, 
-            DragonUI.GetComponent<UIController>().DecreaseHP2.value))
+        DragonUI.GetComponent<UIController>().DecreaseHP2.value))
         {
             currentTime += Time.deltaTime;
             if (currentTime >= lerpTime)
@@ -238,10 +238,10 @@ public class Dragon : MonsterState
             DragonUI.GetComponent<UIController>().DecreaseHP2.value =
             Mathf.Lerp(DragonUI.GetComponent<UIController>().DecreaseHP2.value,
             DragonUI.GetComponent<UIController>().DecreaseHP.value, currentTime/lerpTime);
-            yield return null;
+            Debug.Log("이거 확인");
+            yield return new WaitForSeconds(currentTime / lerpTime);
         }
         currentTime = 0.0f;
-        once = false;
     }
 
     public override void monsterHit(float dam)
@@ -252,9 +252,10 @@ public class Dragon : MonsterState
             //여기서
             once = true;
         }
-        StartCoroutine(HpEffect());
         Hp -= dam;
-        if(Hp <= 0.0f)
+        DragonUI.GetComponent<UIController>().DecreaseHP.value = Hp;
+        StartCoroutine(HpEffect());
+        if (Hp <= 0.0f)
         {
             ChangeState(MonsterStates.Dead);
         }

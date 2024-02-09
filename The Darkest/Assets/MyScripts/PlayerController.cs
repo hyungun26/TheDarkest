@@ -126,10 +126,6 @@ public class PlayerController : AnimatorAll
         }
 
         PlayerStatus();
-        if(DragonTr == null)
-        {
-            DragonTr = GameObject.Find("Dragon").transform;
-        }
         if (Stamina.value != Stamina.maxValue && SGaugeFill)
         {
             Stamina.value += 2.0f * Time.deltaTime;
@@ -404,7 +400,8 @@ public class PlayerController : AnimatorAll
         }
     }
 
-    public void Attacked(float dam, string s)
+
+    public void Attacked(float dam, string s, Transform pos)
     {
         if (!invincibility) 
         {
@@ -423,17 +420,17 @@ public class PlayerController : AnimatorAll
 
             //이 코드 때문에 무조건 넘어짐 그럼 방법이 공격에 종류를 만들어 분류를 해야함
             //Mob한태 맞을때는 약공격으로 경직 모션을 넣고 
-            //Boss한태 맞을때는 강공격으로 아래에 넘어짐 모션을 사용해야할듯
-            //
+            //Boss한태 맞을때는 강공격으로 아래에 넘어짐 모션을 사용해야할듯            
             switch(s)
             {
                 case "WeekAttack": myAnim.SetTrigger("IsHit");
                 break;
-                case "StrongAttack": 
+                case "StrongAttack":
+
                 Vector3 hori = Right.localPosition - Left.localPosition;
                 checkDir = Vector3.Cross(Vector3.up, hori);
                 checkDir.Normalize();
-                Vector3 myPosition = (DragonTr.position - Left.position).normalized;
+                Vector3 myPosition = (pos.position - Left.position).normalized;
                 if (Vector3.Dot(checkDir, myPosition) < 0.0f)
                 {
                     myAnim.SetTrigger("isGettingFrontUp");
@@ -444,9 +441,6 @@ public class PlayerController : AnimatorAll
                 }
                 break;
             }
-            //ChangeState(PlayerState.HitDown);
-            //animEvent.PlayerDown = false;
-            //hit = false;
             invincibility = true;
         }
     }
