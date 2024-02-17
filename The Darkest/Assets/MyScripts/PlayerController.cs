@@ -179,7 +179,6 @@ public class PlayerController : AnimatorAll
                 myAnim.SetBool("Aiming", false);
                 currentTime = 0;
                 HealOura.gameObject.SetActive(true);
-                HealOura.startColor = Color.white;
                 break;
         }
     }
@@ -335,7 +334,6 @@ public class PlayerController : AnimatorAll
                         currentTime = lerpTime;
                     }
                     color = Color.white;
-                    HealOura.startColor = color;
                     HealOura.Play();
                     RestCheck = true;
                     PlayerHP.value = alphaVal(PlayerHP.value, PlayerHP.maxValue, 100.0f);
@@ -351,7 +349,6 @@ public class PlayerController : AnimatorAll
                     }
                     
                     color.a = alphaVal(1, 0.01f, 1.0f);
-                    HealOura.startColor = color;
                     if(Mathf.Approximately(color.a, 0.01f) && animEvent.RestEnd)
                     {
                         Arrow.gameObject.SetActive(true);
@@ -449,7 +446,7 @@ public class PlayerController : AnimatorAll
     {
         Exp += num;
         ExpGauge.fillAmount = Exp / MaxExp;
-        if (ExpGauge.fillAmount == 1.0f) 
+        while(ExpGauge.fillAmount >= 1.0f) 
         {
             pool.Get(2, this.transform);
             PlayerUI.GetPoint(4); // Stat창 에 4포인트준다
@@ -485,7 +482,7 @@ public class PlayerController : AnimatorAll
         {
             sta = PlayerStat.Stamina;
             float val = 10 * (sta - 100);
-            StaminaBar.offsetMax = new Vector2(val, 25);
+            StaminaBar.offsetMax = new Vector2(val, 0);
             Stamina.maxValue = (val * 0.1f) + 100;
         }
     }

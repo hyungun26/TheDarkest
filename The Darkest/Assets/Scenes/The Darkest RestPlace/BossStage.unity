@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12112779, g: 0.15458497, b: 0.22906259, a: 1}
+  m_IndirectSpecularColor: {r: 0.12112766, g: 0.15458483, b: 0.22906205, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -22343,12 +22343,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d78b9ca1dadbd944ab78d9e6050a072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 0
-  attackDelay: 0
-  moveSpeed: 0
+  Hp: 5000
+  attackDelay: 3
+  moveSpeed: 5
   attackType: StrongAttack
-  dis: 0
-  Exp: 0
+  Exp: 5000
   enemyMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -22370,6 +22369,7 @@ MonoBehaviour:
   changeMaterial: {fileID: 2100000, guid: 179555ab8bd66734b8c1ac67e84c7cbc, type: 2}
   dragonMaterial: {fileID: 690462703}
   PlayerStat: {fileID: 0}
+  State: 7
 --- !u!4 &1256532154
 Transform:
   m_ObjectHideFlags: 0

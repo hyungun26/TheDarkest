@@ -6,13 +6,13 @@ using UnityEngine;
 public abstract class MonsterState : AnimatorAll
 {
     public float Hp;
-    public float attackDelay;
     public float moveSpeed;
     public string attackType;
-    public float dis;
     public float Exp = 0.0f;
     public LayerMask enemyMask;
     public Transform PlayerTransform;
+    //공격 딜레이
+    public static float attackDelay;
     //공격 범위
     public static float AttackRange;
     //공격 사거리
@@ -21,7 +21,7 @@ public abstract class MonsterState : AnimatorAll
     public Transform[] attackPos;
     public enum MonsterStates
     {
-        Idle, Walk, Fight, Chase, Attack, Dead, Scream, Sleep
+        Idle, Walk, Fight, Chase, Attack, Dead, Scream, Sleep, Delay
     }
     private void Awake()
     {

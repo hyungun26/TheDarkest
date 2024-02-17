@@ -30,7 +30,7 @@ public class Monster : MonsterState
     //drop table
     DropTable drop;
 
-    
+    public float CrashArrwoDistance;
     private void Start()
     {
         AttackRange = 0.5f;
@@ -135,7 +135,7 @@ public class Monster : MonsterState
             break;
             case MonsterStates.Chase:
             LookPlayer(PlayerTransform);
-            dis = Vector3.Distance(this.transform.position, PlayerTransform.position);
+            float dis = Vector3.Distance(this.transform.position, PlayerTransform.position);
             if (dis > 10.0f) // 많이 멀어지면 쫓지 않기
             {
                 ChangeState(MonsterStates.Idle);
@@ -220,6 +220,7 @@ public class Monster : MonsterState
         {
             slid.gameObject.SetActive(true);
         }
+
         Hp -= dam;
         slid.value = Hp;
         if (Hp <= 0.0f)

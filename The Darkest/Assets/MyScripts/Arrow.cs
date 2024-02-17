@@ -2,10 +2,10 @@
 
 public class Arrow : MonoBehaviour
 {
-    //public GameObject CrashArrow;
+    public GameObject CrashArrow;
     public LayerMask crashMask;
     public PlayerStat playerStat;
-    public Transform ArrowPos;
+    new Transform camera;
     [SerializeField]
     float Power = 1.0f;
 
@@ -15,17 +15,16 @@ public class Arrow : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         float delta = Power * Time.deltaTime;
-
+        
         this.transform.position += transform.forward * delta;
         
         Ray ray = new Ray(transform.position, transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, delta, crashMask))
         {
-            //앞에있는 물체 검사
-            Vector3 pos = transform.position;
+            //앞에있는 물체 검사           
 
             if(hit.transform.CompareTag("Monster"))
             {
@@ -66,8 +65,8 @@ public class Arrow : MonoBehaviour
 
     private void OnEnable()
     {
-        ArrowPos = GameObject.Find("Arrow").GetComponent<Transform>();
-        this.transform.position = ArrowPos.transform.position;
-        this.transform.rotation = ArrowPos.transform.rotation;
+        camera = GameObject.Find("MainCamera").GetComponent<Transform>();
+        this.transform.position = camera.transform.position;
+        this.transform.rotation = camera.transform.rotation;
     }
 }

@@ -42,7 +42,6 @@ public class AnimationEvent : MonoBehaviour
     public void OnCreateArrow()
     {
         pool.Get(1);
-        //Instantiate(ArrowClone, Arrow.transform.position, Arrow.transform.rotation);
     }
 
     public void Aiming()

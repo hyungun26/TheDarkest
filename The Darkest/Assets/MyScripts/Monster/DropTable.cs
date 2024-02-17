@@ -7,7 +7,7 @@ public class DropTable : MonoBehaviour
     public GameObject[] dropItem;
     public void DropItem()
     {
-        int num = Random.RandomRange(0, dropItem.Length);
+        int num = Random.Range(0, dropItem.Length);
         Instantiate(dropItem[num], this.transform.position, this.transform.rotation);
     }
 }
