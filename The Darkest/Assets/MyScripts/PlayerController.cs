@@ -110,7 +110,6 @@ public class PlayerController : AnimatorAll
         color = Color.white;
         HealOura.Stop();
         Arch2Oripos.position = Arch2.position;
-        this.transform.position = Vector3.up;
     }
     
 

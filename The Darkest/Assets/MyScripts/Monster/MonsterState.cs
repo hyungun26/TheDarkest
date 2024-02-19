@@ -32,6 +32,7 @@ public abstract class MonsterState : AnimatorAll
         for (int i = 0; i < attackPos.Length; i++)
         {
             Collider[] attack = Physics.OverlapSphere(attackPos[i].position, AttackRange, enemyMask);
+            Debug.Log(attackPos[i]);
             foreach (Collider coll in attack)
             {
                 PlayerController playerController = coll.GetComponent<PlayerController>();
@@ -39,11 +40,11 @@ public abstract class MonsterState : AnimatorAll
                 {
                     playerController.Attacked(20.0f, attackType, this.transform);
                     playerController.hit = true;
-                    yield return null;
+                    Debug.Log(attackPos[i]);
                 }
             }
         }
-        yield return null;
+        yield return new WaitForSeconds(1.0f);
     }
     public abstract void monsterHit(float dam);
 }

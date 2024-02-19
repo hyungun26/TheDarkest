@@ -38,8 +38,9 @@ public class PlayerScenes : Scenes
         }
         else //Loading & Intro Scene player gravity false
         {
-            if(rigid != null)
-                rigid.useGravity = false;
+            //if(rigid != null)
+            //    rigid.useGravity = false;
+            //bossStage 테스트로 풀어놨음 테스트 종료되면 주석풀것
         }
     }
 }
