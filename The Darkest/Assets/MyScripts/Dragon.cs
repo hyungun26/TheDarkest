@@ -74,11 +74,13 @@ public class Dragon : MonsterState
                 ChangeState(MonsterStates.Chase);
                 break;
             case MonsterStates.Chase:
+                Agent.updateRotation = true;
                 Agent.isStopped = false;
                 break;
             case MonsterStates.Idle:
                 break;
             case MonsterStates.Fight:
+                Agent.updateRotation = false;
                 Agent.isStopped = true;
                 Agent.velocity = Vector3.zero;
                 myAnim.SetBool("IsChasingWalk", false);
@@ -145,7 +147,7 @@ public class Dragon : MonsterState
                 //현재 문제 공격중일때 거리가 attackLength보다 멀어지면 Chase상태로 변경되어 버림 
                 //해결 방법 Fight 공격모션이 끝나면 chase로 보내기
                 //한가지더 문제 Fight에서 나가지 않고 사정거리안에 계속있으면 멍청하게 앞만보고 공격을 냅다 갈김 뒤잡으면 끝남
-                //이 문제를 해결해야함 공격모션이 끝나면 한번 rotation을 해야할듯함
+                //이 문제를 해결해야함 공격모션이 끝나면 한번 rotation을 해야할듯
                 if (Vector3.Distance(this.transform.position, PlayerTransform.position) < AttackLength)
                 {
                     //방향벡터 계산후 player방향보기
@@ -178,11 +180,15 @@ public class Dragon : MonsterState
                             }
                             attackPossible = false;
                         }
+                    }    
+                    else if(attackDelay > 2.0f)
+                    {
+                        Debug.Log("asdf");
+                        StartCoroutine(LookPlayer());
                     }
                 }
                 if(attackPossible)
                 {
-                    StartCoroutine(LookPlayer());
                     ChangeState(MonsterStates.Chase);
                 }
                 break;
@@ -230,10 +236,10 @@ public class Dragon : MonsterState
     }
 
     IEnumerator LookPlayer()
-    {
+    {   
         Vector3 dir = PlayerTransform.position - this.transform.position;
         this.transform.rotation = Quaternion.Lerp(Quaternion.LookRotation(dir), this.transform.rotation, 1.0f);
-        yield return new WaitForSeconds(1.0f);
+        yield return null;
     }
     public override void monsterHit(float dam)
     {
