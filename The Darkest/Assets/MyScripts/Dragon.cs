@@ -47,6 +47,10 @@ public class Dragon : MonsterState
         StateProcess();
         if (attackDelay <= 5.0f)
         {
+            if(State == MonsterStates.Dead)
+            {
+                StopAllCoroutines();
+            }
             StartCoroutine(Attack());
             attackDelay += 1.0f * Time.deltaTime;
         }
@@ -160,7 +164,7 @@ public class Dragon : MonsterState
                             Agent.velocity = Vector3.zero;
                             animEvent.Fight = false;
                             attackDelay = 0;
-                            int rnd = Random.Range(0, 2); // 0 ~ 2
+                            int rnd = Random.Range(0, 3); // 0 ~ 2
                             switch (rnd)
                             {
                                 case 0:
@@ -181,9 +185,9 @@ public class Dragon : MonsterState
                             attackPossible = false;
                         }
                     }    
-                    else if(attackDelay > 2.0f)
+
+                    if(attackDelay > 2.0f)
                     {
-                        Debug.Log("asdf");
                         StartCoroutine(LookPlayer());
                     }
                 }
@@ -217,6 +221,12 @@ public class Dragon : MonsterState
         }
     }
 
+    IEnumerator LookPlayer()
+    {
+        Vector3 dir = PlayerTransform.position - this.transform.position;
+        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(dir), 2.0f * Time.deltaTime);
+        yield return null;
+    }
     IEnumerator HpEffect()
     {
         while(!Mathf.Approximately(DragonUI.GetComponent<UIController>().DecreaseHP.value, 
@@ -235,12 +245,6 @@ public class Dragon : MonsterState
         currentTime = 0.0f;
     }
 
-    IEnumerator LookPlayer()
-    {   
-        Vector3 dir = PlayerTransform.position - this.transform.position;
-        this.transform.rotation = Quaternion.Lerp(Quaternion.LookRotation(dir), this.transform.rotation, 1.0f);
-        yield return null;
-    }
     public override void monsterHit(float dam)
     {
         if(!once) //딱 한번만 실행
