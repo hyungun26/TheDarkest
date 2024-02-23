@@ -16,7 +16,7 @@ public class Portal : MonoBehaviour
         pool = GameObject.Find("PoolManager").GetComponent<PoolManager>();
         if(UIControll == null)
         {
-            UIControll = GameObject.Find("Canvas").GetComponent<UIControll>();
+            UIControll = GameObject.Find("InitCanvas").GetComponent<UIControll>();
         }
         if (PortalUI == null)
         {

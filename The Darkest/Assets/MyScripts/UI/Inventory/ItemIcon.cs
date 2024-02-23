@@ -29,7 +29,7 @@ public class ItemIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         All = GameObject.Find("All").transform;
-        Canvas = GameObject.Find("Canvas").transform;
+        Canvas = GameObject.Find("InitCanvas").transform;
         previousParent = transform.parent;
         //눌렀을때 
     }

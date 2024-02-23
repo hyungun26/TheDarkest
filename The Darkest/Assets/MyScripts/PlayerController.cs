@@ -8,11 +8,11 @@ using UnityEngine.SceneManagement;
 public class PlayerController : AnimatorAll
 {
     public PoolManager pool;
-    public DataManager dataManager;
+    //public DataManager dataManager;
     public UpButton2[] button;
 
     public GameObject UI_Aiming;
-
+    
     Vector2 targetDir = Vector2.zero;
     public Transform Left;
     public Transform Right;
@@ -21,7 +21,10 @@ public class PlayerController : AnimatorAll
     public Transform RightThumb;
     public Transform Arrow;
     float run = 0.5f;
-    [SerializeField]
+    public float x;
+    public float y; 
+        
+
     public bool invincibility = false;
     float invincibilityTime = 3.0f; // 무적시간
     bool running = false;
@@ -208,8 +211,8 @@ public class PlayerController : AnimatorAll
 
                 targetDir.x = Input.GetAxisRaw("Horizontal");
                 targetDir.y = Input.GetAxisRaw("Vertical");
-                float x = Mathf.Lerp(myAnim.GetFloat("X"), targetDir.x, Time.deltaTime * 3.0f);
-                float y = Mathf.Lerp(myAnim.GetFloat("Y"), targetDir.y, Time.deltaTime * 3.0f);
+                x = Mathf.Lerp(myAnim.GetFloat("X"), targetDir.x, Time.deltaTime * 3.0f);
+                y = Mathf.Lerp(myAnim.GetFloat("Y"), targetDir.y, Time.deltaTime * 3.0f);
                 if (Input.GetKey(KeyCode.LeftShift) && Stamina.value > 0.0f)
                 {
                     if (!Mathf.Approximately(myAnim.GetFloat("X"), 0) || !Mathf.Approximately(myAnim.GetFloat("Y"), 0))

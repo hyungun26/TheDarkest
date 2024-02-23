@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerScenes : Scenes
 {
+    public RectTransform stamina;
+    public RectTransform hp;
     public PlayerController player;
     Rigidbody rigid;
     public override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -25,6 +27,8 @@ public class PlayerScenes : Scenes
         
         if (SceneName == "The Darkest RestPlace")
         {
+            hp.gameObject.SetActive(true);
+            stamina.gameObject.SetActive(true);
             player.DeadSceneAll.gameObject.SetActive(false);
             player.transform.position = Vector3.up * 1.5f;
         }

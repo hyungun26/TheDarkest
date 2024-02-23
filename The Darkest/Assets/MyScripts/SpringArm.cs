@@ -14,7 +14,8 @@ public class SpringArm : MonoBehaviour
     public AnimationEvent animEvent;
 
     public Transform myCam;
-    public float LookupSpeed = 180.0f;
+    [HideInInspector]
+    public float LookupSpeed;
     Vector3 curRot = Vector3.zero;
     public float Offset = 0.5f;
     public Vector2 LookupRange = new Vector2(-60.0f, 80.0f);

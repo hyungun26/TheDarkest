@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class UIControll : DataManager
 {
@@ -14,6 +14,8 @@ public class UIControll : DataManager
     public PlayerStat stat1;
     public PlayerStat2 stat2;
     public UpButton2[] plusButton;
+    public SettingUI setting;
+
 
     //stat창
     public RectTransform StatWin;
@@ -23,9 +25,7 @@ public class UIControll : DataManager
 
     private void Awake()
     {
-        StatWin.gameObject.SetActive(true);
         stat1.once = true; //저장된 값을 넣고 초기화하기 위한 코드
-        Inventory.gameObject.SetActive(true);
     }
 
     private void Start()
@@ -49,8 +49,17 @@ public class UIControll : DataManager
                 stat = false;
 
                 list[list.Count-1].SetActive(false);
+                if(list[list.Count-1] == setting.transform.GetChild(0).gameObject)
+                {
+                    playerController.enabled = true;
+                }
                 list.Remove(list[list.Count-1]);
             }
+            else
+            {
+                SettingControll();
+            }
+            #region 세이브 기능
             /*else //나가기 버튼 //임시 esc 저장기능
             //{
             //    nowPlayer.Name = "Archer";
@@ -91,32 +100,50 @@ public class UIControll : DataManager
             //    Debug.Log("저장");
             //    SaveData();
             }*/
+            #endregion
         }
-
-        if (Input.GetKeyDown(KeyCode.U)) //중복코드 간단하게 처리 할 수 있으면 좋겠다.
+        if(!setting.transform.GetChild(0).gameObject.activeSelf && SceneManager.GetActiveScene().name != "Intro")
         {
-            stat = !stat;
-            StatWin.gameObject.SetActive(stat);
-            if (stat)
+            if (Input.GetKeyDown(KeyCode.U)) //중복코드 간단하게 처리 할 수 있으면 좋겠다.
             {
-                list.Add(StatWin.gameObject);
-                StatWin.transform.SetAsLastSibling();
+                stat = !stat;
+                StatWin.gameObject.SetActive(stat);
+                if (stat)
+                {
+                    list.Add(StatWin.gameObject);
+                    StatWin.transform.SetAsLastSibling();
+                }
+                else
+                    list.Remove(StatWin.gameObject);
             }
-            else
-                list.Remove(StatWin.gameObject);
+
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                inven = !inven;
+                Inventory.gameObject.SetActive(inven);
+                if (inven)
+                {
+                    list.Add(Inventory.gameObject);
+                    Inventory.transform.SetAsLastSibling();
+                }
+                else
+                    list.Remove(Inventory.gameObject);
+            }
         }
+    }
 
-        if (Input.GetKeyDown(KeyCode.I))
+    public void SettingControll()
+    {
+        setting.transform.GetChild(0).gameObject.SetActive(true);
+        list.Add(setting.transform.GetChild(0).gameObject);
+        //player 애니메이션 다시시작
+        if (SceneManager.GetActiveScene().name != "Intro")
         {
-            inven = !inven;
-            Inventory.gameObject.SetActive(inven);
-            if (inven)
-            {
-                list.Add(Inventory.gameObject);
-                Inventory.transform.SetAsLastSibling();
-            }
-            else
-                list.Remove(Inventory.gameObject);
+            playerController.anim.Rebind();
+            playerController.anim.enabled = false;
+            playerController.anim.enabled = true;
+            //player조종 가능한 모든건 차단
+            playerController.enabled = false;
         }
     }
 }
