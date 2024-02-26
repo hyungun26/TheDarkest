@@ -9,6 +9,7 @@ public class PlayerScenes : Scenes
     public RectTransform stamina;
     public RectTransform hp;
     public PlayerController player;
+    public InitSoundVolume BgmVol;
     Rigidbody rigid;
     public override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {

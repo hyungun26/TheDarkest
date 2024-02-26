@@ -3,26 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GearMoving : MonoBehaviour
+public abstract class GearMoving : MonoBehaviour
 {
     public Slider slid;
     public Sprite changeImage;
-    public SpringArm mouseSensitivity;
-    Image img;
-    Sprite prevImg;
+    
+    [HideInInspector]
+    public Image img;
+    [HideInInspector]
+    public Sprite prevImg;
     // Start is called before the first frame update
     void Start()
     {
-        slid.value = 60;
+        slid.value = 100;
         img = this.transform.GetComponent<Image>();
         prevImg = img.sprite;        
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        mouseSensitivity.LookupSpeed = slid.value * 0.1f;
+        Gearmove();
         this.transform.rotation = Quaternion.Euler(Vector3.forward * -slid.value);
-        if(this.transform.rotation == Quaternion.Euler(Vector3.forward * 360.0f))
+        if (this.transform.rotation == Quaternion.Euler(Vector3.forward * 360.0f))
         {
             img.sprite = changeImage;
         }
@@ -31,4 +33,6 @@ public class GearMoving : MonoBehaviour
             img.sprite = prevImg;
         }
     }
+
+    public abstract void Gearmove();
 }
