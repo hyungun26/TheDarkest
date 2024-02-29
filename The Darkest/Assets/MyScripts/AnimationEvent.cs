@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class AnimationEvent : MonoBehaviour
 {
+    public PlayerSound playerSound;
     public PoolManager pool;
     //Player Animator Controll    
     public GameObject Arrow;
@@ -28,7 +29,6 @@ public class AnimationEvent : MonoBehaviour
     public PlayerRayCast PlayerRayCast;
 
     
-
     public void OnActiveArrow()
     {
         Arrow.SetActive(true);
@@ -56,6 +56,7 @@ public class AnimationEvent : MonoBehaviour
 
     public void OnPullBow()
     {
+        playerSound.BowRealese();
         animAming = true;
     }
 

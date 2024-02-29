@@ -1,12 +1,10 @@
-using System.Security.Claims;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : AnimatorAll
 {
+    public PlayerSound playerSound;
     public PoolManager pool;
     //public DataManager dataManager;
     public UpButton2[] button;
@@ -259,12 +257,13 @@ public class PlayerController : AnimatorAll
                 }
 
                 if (Input.GetMouseButton(1) && animEvent.ReadyToAim)
-                {
+                {                    
                     myAnim.SetBool("Aiming", true);
+                    //이곳에 sound넣으면 될듯
                     //UI_Aiming.GetComponentsInChildren<Image>().enabled = true;
                     if (Input.GetMouseButtonDown(0) && animEvent.ReadyToShoot)
                     {
-
+                        playerSound.ShotArrow();
                         myAnim.SetTrigger("Shooting");
                     }
                 }

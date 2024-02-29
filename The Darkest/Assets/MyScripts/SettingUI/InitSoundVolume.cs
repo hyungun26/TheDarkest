@@ -1,25 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class InitSoundVolume : MonoBehaviour
+public class InitSoundVolume : Scenes
 {
     public GameObject settingUI;
     public SoundVolume soundVol;
-    float vol = 0.2777778f;
-    new AudioSource audio;
-    // Update is called once per frame
-    void Update()
+    public AudioClip[] Bgm;
+    AudioSource audio;
+    private void Awake()
     {
-        if (settingUI.activeSelf)
+        audio = GetComponent<AudioSource>();
+        audio.volume = 0.2777778f;
+    }
+
+    public override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        string SceneName = SceneManager.GetActiveScene().name;
+        switch(SceneName)
         {
-            vol = soundVol.var;
+            case "Intro": audio.clip = Bgm[0];
+                break;
+            case "The Darkest RestPlace": audio.clip = Bgm[1];
+                break;
+            case "BossStage": audio.clip = Bgm[2];
+                break;
+            case "MonsterArea": audio.clip = Bgm[3];
+                break;
         }
-        else
-        {
-            audio = GameObject.Find("Bgm").GetComponent<AudioSource>();
-            audio.volume = vol;
-        }
+        audio.Play();
     }
 }
