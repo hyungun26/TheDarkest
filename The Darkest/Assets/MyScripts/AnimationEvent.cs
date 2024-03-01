@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class AnimationEvent : MonoBehaviour
 {
+    public PlayerController playerController;
     public PlayerSound playerSound;
     public PoolManager pool;
     //Player Animator Controll    
@@ -61,7 +62,7 @@ public class AnimationEvent : MonoBehaviour
     }
 
     public void OnReleaseBow()
-    {
+    {   
         animAming = false;
         ReadyToShoot = false;
     }
@@ -78,9 +79,29 @@ public class AnimationEvent : MonoBehaviour
 
     public void OnUnPossibleAim()
     {
+        playerSound.StopSound();
         ReadyToAim = false;
     }
 
+    public void WalkSound()
+    {
+        if(!playerController.Run)
+        {
+            if (playerController.Walk)
+            {
+                playerSound.Walk();
+            }
+        }
+    }
+    public void RunSound()
+    {
+        if (playerController.Run)
+        {
+            playerSound.Walk();
+        }
+        else
+            playerSound.StopSound();
+    }
     public void WakeUp()
     {
         PlayerDown = true;

@@ -5,26 +5,27 @@ using UnityEngine.UI;
 
 public abstract class GearMoving : MonoBehaviour
 {
-    public Slider slid;
+    protected Slider slid;
     public Sprite changeImage;
-    
-    [HideInInspector]
-    public Image img;
-    [HideInInspector]
-    public Sprite prevImg;
+    protected Image img;
+    protected Sprite prevImg;
+    protected GameObject Gear;
     // Start is called before the first frame update
     void Start()
     {
-        slid.value = 100;
-        img = this.transform.GetComponent<Image>();
+        Gear = this.transform.GetChild(2).gameObject;
+        Gear = Gear.transform.GetChild(0).gameObject;
+        slid = this.transform.GetComponent<Slider>();
+        img = Gear.transform.GetComponent<Image>();
         prevImg = img.sprite;        
     }
 
-    private void FixedUpdate()
+    public abstract void Gearmove();
+
+    public void GearM()
     {
-        Gearmove();
-        this.transform.rotation = Quaternion.Euler(Vector3.forward * -slid.value);
-        if (this.transform.rotation == Quaternion.Euler(Vector3.forward * 360.0f))
+        Gear.transform.rotation = Quaternion.Euler(Vector3.forward * -slid.value);
+        if (Gear.transform.rotation == Quaternion.Euler(Vector3.forward * 360.0f))
         {
             img.sprite = changeImage;
         }
@@ -33,6 +34,4 @@ public abstract class GearMoving : MonoBehaviour
             img.sprite = prevImg;
         }
     }
-
-    public abstract void Gearmove();
 }

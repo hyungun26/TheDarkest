@@ -6,7 +6,8 @@ public class CancleButton : JustButton
 {
     public override void OnClick()
     {
-        this.transform.parent.gameObject.SetActive(false);
         UIControll.list.Remove(UI.gameObject);
+        UIControll.playerController.enabled = true;
+        this.transform.parent.gameObject.SetActive(false);
     }
 }

@@ -25,6 +25,8 @@ public class PlayerController : AnimatorAll
 
     public bool invincibility = false;
     float invincibilityTime = 3.0f; // 무적시간
+    public bool Walk = false;
+    public bool Run = false;
     bool running = false;
     public bool hit = false;
 
@@ -211,16 +213,23 @@ public class PlayerController : AnimatorAll
                 targetDir.y = Input.GetAxisRaw("Vertical");
                 x = Mathf.Lerp(myAnim.GetFloat("X"), targetDir.x, Time.deltaTime * 3.0f);
                 y = Mathf.Lerp(myAnim.GetFloat("Y"), targetDir.y, Time.deltaTime * 3.0f);
+
+                if (Mathf.Abs(x) > 0.35 || Mathf.Abs(y) > 0.35)
+                    Walk = true;
+                else
+                    Walk = false;
+
                 if (Input.GetKey(KeyCode.LeftShift) && Stamina.value > 0.0f)
                 {
+                    Run = true;
                     if (!Mathf.Approximately(myAnim.GetFloat("X"), 0) || !Mathf.Approximately(myAnim.GetFloat("Y"), 0))
                     {
-                        if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W))
+                        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W))
                         {
                             SGaugeFill = false;
                             Stamina.value -= 10.0f * Time.deltaTime;
                         }
-                        else if(MyState != PlayerState.Play)
+                        else if (MyState != PlayerState.Play)
                         {
                             SGaugeFill = true;
                         }
@@ -229,7 +238,7 @@ public class PlayerController : AnimatorAll
                             SGaugeFill = true;
                         }
                     }
-                    
+
                     run = 1.0f;
                     running = true;
                     if (Stamina.value <= 0.1f)
@@ -242,16 +251,17 @@ public class PlayerController : AnimatorAll
                 {
                     if (!running)
                     {
-                        InPossibleRun();
+                        ImPossibleRun();
                     }
                 }
                 if (!running)
                 {
-                    InPossibleRun();
+                    ImPossibleRun();
                 }
 
                 if (Input.GetKeyUp(KeyCode.LeftShift))
                 {
+                    Run = false;
                     running = false;
                     SGaugeFill = true;
                 }
@@ -270,7 +280,7 @@ public class PlayerController : AnimatorAll
                 if (Input.GetMouseButtonUp(1))
                 {
                     UI_Aiming.GetComponentsInChildren<Image>();
-
+                    playerSound.StopSound();
                     animEvent.SAim = false;
                     myAnim.SetBool("Aiming", false);
                 }
@@ -369,7 +379,7 @@ public class PlayerController : AnimatorAll
         float val = Mathf.Lerp(Start, End, currentTime / lerp);
         return val;
     }
-    void InPossibleRun()
+    void ImPossibleRun()
     {
         if((uint)run <= a)
         {
@@ -377,7 +387,6 @@ public class PlayerController : AnimatorAll
             if (run < 0.5f)
             {
                 running = true;
-                return;
             }
         }
     }

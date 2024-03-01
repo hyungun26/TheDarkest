@@ -9,7 +9,7 @@ public class InitSoundVolume : Scenes
     public GameObject settingUI;
     public SoundVolume soundVol;
     public AudioClip[] Bgm;
-    AudioSource audio;
+    new AudioSource audio;
     private void Awake()
     {
         audio = GetComponent<AudioSource>();

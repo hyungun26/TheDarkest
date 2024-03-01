@@ -4218,7 +4218,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -6569,6 +6569,8 @@ MonoBehaviour:
   x: 0
   y: 0
   invincibility: 0
+  Walk: 0
+  Run: 0
   hit: 0
   spine: {fileID: 1444120730}
   animEvent: {fileID: 1444120729}
@@ -6603,7 +6605,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 560085948}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7301,7 +7303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingUI: {fileID: 1167545899}
-  soundVol: {fileID: 1420485956}
+  soundVol: {fileID: 0}
   Bgm:
   - {fileID: 8300000, guid: 6ffabc06c3f47324bbeef65e8bab1d1e, type: 3}
   - {fileID: 8300000, guid: a3c89af73385e77498e965aa53b96366, type: 3}
@@ -7319,7 +7321,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -7412,6 +7414,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 650033927}
+  - component: {fileID: 650033928}
+  - component: {fileID: 650033929}
   m_Layer: 10
   m_Name: mixamorig:RightToeBase
   m_TagString: Untagged
@@ -7435,6 +7439,34 @@ Transform:
   m_Father: {fileID: 317296151}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 41.11875, y: 4.1497293, z: 1.9115641}
+--- !u!65 &650033928
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650033926}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.26, z: 0.04}
+  m_Center: {x: 0, y: -0.03, z: 0.01}
+--- !u!114 &650033929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650033926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df6dce446016bf3458286e05d718f872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audio: {fileID: 1934058248}
+  WalkSound:
+  - {fileID: 8300000, guid: 4e955cec2c3e664478d515e1628b3a0e, type: 3}
 --- !u!1 &651908296
 GameObject:
   m_ObjectHideFlags: 0
@@ -9739,6 +9771,7 @@ GameObject:
   m_Component:
   - component: {fileID: 828842369}
   - component: {fileID: 828842370}
+  - component: {fileID: 828842371}
   m_Layer: 5
   m_Name: SoundVolume
   m_TagString: Untagged
@@ -9817,10 +9850,36 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 360
   m_WholeNumbers: 0
-  m_Value: 360
+  m_Value: 105.6
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 828842371}
+        m_TargetAssemblyTypeName: SoundVolume, Assembly-CSharp
+        m_MethodName: Gearmove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &828842371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828842368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d07b06943e345e54cba5009d013b726a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeImage: {fileID: 776235566075771346, guid: 78d1f73ae35a549409595d6b7e60fe56, type: 3}
+  bgm: {fileID: 647889170}
 --- !u!1 &829231926
 GameObject:
   m_ObjectHideFlags: 0
@@ -9907,6 +9966,7 @@ GameObject:
   m_Component:
   - component: {fileID: 830469002}
   - component: {fileID: 830469003}
+  - component: {fileID: 830469004}
   m_Layer: 5
   m_Name: MouseSensitivity
   m_TagString: Untagged
@@ -9985,10 +10045,36 @@ MonoBehaviour:
   m_MinValue: 1
   m_MaxValue: 360
   m_WholeNumbers: 0
-  m_Value: 360
+  m_Value: 105.6
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 830469004}
+        m_TargetAssemblyTypeName: MouseSensitivity, Assembly-CSharp
+        m_MethodName: Gearmove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &830469004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830469001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61ff0f2ba92ba5441b59f3837782b5f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeImage: {fileID: 776235566075771346, guid: 78d1f73ae35a549409595d6b7e60fe56, type: 3}
+  mouseSensitivity: {fileID: 2099995362}
 --- !u!1 &832229816
 GameObject:
   m_ObjectHideFlags: 0
@@ -12725,7 +12811,6 @@ GameObject:
   - component: {fileID: 1168414755}
   - component: {fileID: 1168414757}
   - component: {fileID: 1168414756}
-  - component: {fileID: 1168414758}
   m_Layer: 5
   m_Name: Handle
   m_TagString: Untagged
@@ -12791,23 +12876,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1168414754}
   m_CullTransparentMesh: 1
---- !u!114 &1168414758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1168414754}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61ff0f2ba92ba5441b59f3837782b5f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slid: {fileID: 830469003}
-  changeImage: {fileID: 776235566075771346, guid: 78d1f73ae35a549409595d6b7e60fe56, type: 3}
-  img: {fileID: 0}
-  prevImg: {fileID: 0}
-  mouseSensitivity: {fileID: 2099995362}
 --- !u!1 &1169618560
 GameObject:
   m_ObjectHideFlags: 0
@@ -15386,7 +15454,6 @@ GameObject:
   - component: {fileID: 1405891096}
   - component: {fileID: 1405891099}
   - component: {fileID: 1405891098}
-  - component: {fileID: 1405891097}
   m_Layer: 5
   m_Name: Handle
   m_TagString: Untagged
@@ -15414,23 +15481,6 @@ RectTransform:
   m_AnchoredPosition: {x: -2.300003, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1405891097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1405891095}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d07b06943e345e54cba5009d013b726a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slid: {fileID: 1975219888}
-  changeImage: {fileID: 776235566075771346, guid: 78d1f73ae35a549409595d6b7e60fe56, type: 3}
-  img: {fileID: 0}
-  prevImg: {fileID: 0}
-  bgm: {fileID: 0}
 --- !u!114 &1405891098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15588,7 +15638,6 @@ GameObject:
   - component: {fileID: 1420485952}
   - component: {fileID: 1420485955}
   - component: {fileID: 1420485954}
-  - component: {fileID: 1420485956}
   m_Layer: 5
   m_Name: Handle
   m_TagString: Untagged
@@ -15654,23 +15703,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1420485951}
   m_CullTransparentMesh: 1
---- !u!114 &1420485956
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1420485951}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d07b06943e345e54cba5009d013b726a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slid: {fileID: 828842370}
-  changeImage: {fileID: 776235566075771346, guid: 78d1f73ae35a549409595d6b7e60fe56, type: 3}
-  img: {fileID: 0}
-  prevImg: {fileID: 0}
-  bgm: {fileID: 647889170}
 --- !u!1 &1444120725
 GameObject:
   m_ObjectHideFlags: 0
@@ -15756,6 +15788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 534eadb4bed7d23429f5fd050c1804a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 560085949}
   playerSound: {fileID: 1934058247}
   pool: {fileID: 102061276}
   Arrow: {fileID: 1819170028}
@@ -19019,6 +19052,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1906560393}
+  - component: {fileID: 1906560394}
+  - component: {fileID: 1906560395}
   m_Layer: 10
   m_Name: mixamorig:LeftToeBase
   m_TagString: Untagged
@@ -19042,6 +19077,34 @@ Transform:
   m_Father: {fileID: 1960086625}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 40.736595, y: -2.0313113, z: -0.6607997}
+--- !u!65 &1906560394
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906560392}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.26, z: 0.04}
+  m_Center: {x: 0, y: -0.03, z: 0.01}
+--- !u!114 &1906560395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906560392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df6dce446016bf3458286e05d718f872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audio: {fileID: 1934058248}
+  WalkSound:
+  - {fileID: 8300000, guid: 4e955cec2c3e664478d515e1628b3a0e, type: 3}
 --- !u!1 &1913598412
 GameObject:
   m_ObjectHideFlags: 0
@@ -19481,6 +19544,8 @@ MonoBehaviour:
   ArrowSound:
   - {fileID: 8300000, guid: 7ae6a1fe85e3b384084018b1adfd40cd, type: 3}
   - {fileID: 8300000, guid: 3add90c93d5273646bd63f37c5152792, type: 3}
+  WalkSound:
+  - {fileID: 8300000, guid: 9179f96fc331020469415460760490a1, type: 3}
 --- !u!82 &1934058248
 AudioSource:
   m_ObjectHideFlags: 0
@@ -19493,7 +19558,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.51
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -20163,6 +20228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1975219887}
   - component: {fileID: 1975219888}
+  - component: {fileID: 1975219889}
   m_Layer: 5
   m_Name: SoundEffectVolume
   m_TagString: Untagged
@@ -20241,10 +20307,38 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 360
   m_WholeNumbers: 0
-  m_Value: 360
+  m_Value: 105.6
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1975219889}
+        m_TargetAssemblyTypeName: SoundEffetVolume, Assembly-CSharp
+        m_MethodName: Gearmove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1975219889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975219886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e88297168341e34daf95ee69b8b2278, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeImage: {fileID: 776235566075771346, guid: 78d1f73ae35a549409595d6b7e60fe56, type: 3}
+  effect:
+  - {fileID: 1934058248}
+  - {fileID: 372974631}
 --- !u!1 &1986002113
 GameObject:
   m_ObjectHideFlags: 0
@@ -22348,3 +22442,4 @@ MonoBehaviour:
   slids:
   - {fileID: 830469003}
   - {fileID: 828842370}
+  - {fileID: 1975219888}
