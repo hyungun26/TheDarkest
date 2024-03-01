@@ -13,6 +13,7 @@ public class PlayerScenes : Scenes
     Rigidbody rigid;
     public override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        player.enabled = true;
         rigid = player.GetComponent<Rigidbody>();
         player.anim.Rebind();
         player.DeadCamera.Rebind();
@@ -43,6 +44,7 @@ public class PlayerScenes : Scenes
         }
         else //Loading & Intro Scene player gravity false
         {
+            player.enabled = false;
             if (rigid != null)
                 rigid.useGravity = false;
         }

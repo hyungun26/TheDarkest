@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class InitSoundVolume : Scenes
 {
-    public GameObject settingUI;
-    public SoundVolume soundVol;
     public AudioClip[] Bgm;
     new AudioSource audio;
     private void Awake()
@@ -29,6 +27,8 @@ public class InitSoundVolume : Scenes
                 break;
             case "MonsterArea": audio.clip = Bgm[3];
                 break;
+            default: audio.clip = null;
+                    break;
         }
         audio.Play();
     }

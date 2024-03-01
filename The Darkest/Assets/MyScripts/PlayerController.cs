@@ -130,7 +130,7 @@ public class PlayerController : AnimatorAll
         PlayerStatus();
         if (Stamina.value != Stamina.maxValue && SGaugeFill)
         {
-            Stamina.value += 2.0f * Time.deltaTime;
+            Stamina.value += 5.0f * Time.deltaTime;
         }
 
         if(n < transform.childCount) //아이템을 먹을때 잠시 player안으로 들어오는데 바로 없애기위함
