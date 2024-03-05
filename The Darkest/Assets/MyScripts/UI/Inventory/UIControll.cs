@@ -30,6 +30,7 @@ public class UIControll : DataManager
 
     private void Start()
     {
+        setting = GameObject.Find("SettingUI").GetComponent<SettingUI>();
         StatWin.gameObject.SetActive(false);
         Inventory.gameObject.SetActive(false);
     }

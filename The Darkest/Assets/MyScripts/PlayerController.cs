@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class PlayerController : AnimatorAll
 {
+    public AudioSource DeadAduio;
+    public AudioClip DeadSound;
     public PlayerSound playerSound;
     public PoolManager pool;
     //public DataManager dataManager;
@@ -159,6 +161,8 @@ public class PlayerController : AnimatorAll
                 }
                 break;
             case PlayerState.Die:
+                DeadAduio.clip = DeadSound;
+                DeadAduio.Play();
                 myAnim.SetBool("Aiming", false);
                 spine.enabled = false;
                 time = 0;

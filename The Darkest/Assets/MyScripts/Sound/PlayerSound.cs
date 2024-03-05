@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerSound : MonoBehaviour
-{
+{ 
     new AudioSource audio;
     public AudioClip[] ArrowSound;
     public AudioClip[] WalkSound;
+    string str;
     private void Awake()
     {
         audio = GetComponent<AudioSource>();
@@ -23,7 +25,14 @@ public class PlayerSound : MonoBehaviour
     }
     public void Walk()
     {
-        audio.clip = WalkSound[0];
+        str = SceneManager.GetActiveScene().name;
+        switch(str)
+        {
+            case "BossStage": audio.clip = WalkSound[1];
+                break;
+            default:  audio.clip = WalkSound[0];
+                break;
+        }
         audio.Play();
     }
 
