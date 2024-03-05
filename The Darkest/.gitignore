@@ -53,7 +53,6 @@ ExportedObj/
 *.opendb
 *.VC.db
 *.settings.jons
-*.meta
 
 # Unity3D generated meta files 
 # Unity3D에서 생성된 메타 파일
