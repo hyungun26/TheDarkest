@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5495,7 +5495,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 501083621}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc8525637a7704645a86188670e1aabe, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e6e66a8f0eb34140b23cef404a5d87b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &502754376
@@ -6552,7 +6552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DeadAduio: {fileID: 647889170}
-  DeadSound: {fileID: 8300000, guid: fb0d25db64531d241b3584a1e575009a, type: 3}
+  DeadSound: {fileID: 8300000, guid: f8b8d4b7e463ec24180f27096d44892c, type: 3}
   playerSound: {fileID: 1934058247}
   pool: {fileID: 102061276}
   button:
@@ -7397,15 +7397,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 647889167}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ada2b569e59dea4cbc4ffe7ee5e44f5, type: 3}
+  m_Script: {fileID: 11500000, guid: 407b2b626fbe6f64eb5616c04c33a0b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Bgm:
-  - {fileID: 8300000, guid: 6ffabc06c3f47324bbeef65e8bab1d1e, type: 3}
-  - {fileID: 8300000, guid: a3c89af73385e77498e965aa53b96366, type: 3}
-  - {fileID: 8300000, guid: cc953a51c803a724ab7bdd6d70fcacba, type: 3}
-  - {fileID: 8300000, guid: 7bd1bd69ce6895247b381efe196d8c85, type: 3}
-  - {fileID: 8300000, guid: fb0d25db64531d241b3584a1e575009a, type: 3}
+  - {fileID: 8300000, guid: 085481a94a89ab244ab29248b2638ff2, type: 3}
+  - {fileID: 8300000, guid: 175f2635279eabe4dac5443caf95effd, type: 3}
+  - {fileID: 8300000, guid: ff731daa52cf3b04bb6c51f607718e9f, type: 3}
+  - {fileID: 8300000, guid: 1ba6cd7a6d1306342879d11413a020bc, type: 3}
 --- !u!1 &650033926
 GameObject:
   m_ObjectHideFlags: 0
@@ -7465,8 +7464,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6dce446016bf3458286e05d718f872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audio: {fileID: 0}
-  WalkSound: []
 --- !u!1 &651908296
 GameObject:
   m_ObjectHideFlags: 0
@@ -9875,7 +9872,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 828842368}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d07b06943e345e54cba5009d013b726a, type: 3}
+  m_Script: {fileID: 11500000, guid: 6060b23de9d583647a678a91359ab642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   changeImage: {fileID: 776235566075771346, guid: 78d1f73ae35a549409595d6b7e60fe56, type: 3}
@@ -10070,7 +10067,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 830469001}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61ff0f2ba92ba5441b59f3837782b5f8, type: 3}
+  m_Script: {fileID: 11500000, guid: 6724263c654de934f84a924202245a4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   changeImage: {fileID: 776235566075771346, guid: 78d1f73ae35a549409595d6b7e60fe56, type: 3}
@@ -19102,8 +19099,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6dce446016bf3458286e05d718f872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audio: {fileID: 0}
-  WalkSound: []
 --- !u!1 &1913598412
 GameObject:
   m_ObjectHideFlags: 0
@@ -19537,15 +19532,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1934058245}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24266c5cedc9e4a4fa0eed6890249159, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d2378d6c75446940a5e83483bb53018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ArrowSound:
-  - {fileID: 8300000, guid: 7ae6a1fe85e3b384084018b1adfd40cd, type: 3}
-  - {fileID: 8300000, guid: 3add90c93d5273646bd63f37c5152792, type: 3}
+  - {fileID: 8300000, guid: d79814ff1f7ab37409c5f5b77d00d931, type: 3}
+  - {fileID: 8300000, guid: f555a6742c493b2438a13e5e2a5eb12d, type: 3}
   WalkSound:
-  - {fileID: 8300000, guid: 9179f96fc331020469415460760490a1, type: 3}
-  - {fileID: 8300000, guid: 897612bbccaa8ca44821ce6cdf39fc18, type: 3}
+  - {fileID: 8300000, guid: 914f96dceaa918c4091751140b8d3cd8, type: 3}
+  - {fileID: 8300000, guid: 6bc74e7a3fad2b14c922f384bc7adaa4, type: 3}
 --- !u!82 &1934058248
 AudioSource:
   m_ObjectHideFlags: 0
@@ -20332,7 +20327,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1975219886}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e88297168341e34daf95ee69b8b2278, type: 3}
+  m_Script: {fileID: 11500000, guid: a5e8d6ede54079f4884dbf611a7cc92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   changeImage: {fileID: 776235566075771346, guid: 78d1f73ae35a549409595d6b7e60fe56, type: 3}
@@ -22433,7 +22428,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8019223137338707297}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de91523e0450e994a980aad2d34820bc, type: 3}
+  m_Script: {fileID: 11500000, guid: 9cf7f1e6e0c957740bcce83e09e4e632, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   UIControll: {fileID: 0}
