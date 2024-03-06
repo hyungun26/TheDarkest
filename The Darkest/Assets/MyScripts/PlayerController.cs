@@ -33,7 +33,7 @@ public class PlayerController : AnimatorAll
     public bool hit = false;
 
     public Spine spine;
-    public AnimationEvent animEvent;
+    public PlayerAE animEvent;
 
     Vector3 checkDir = Vector3.zero;
     public Transform DragonTr;
@@ -52,8 +52,8 @@ public class PlayerController : AnimatorAll
     int cri;
     public RectTransform HpBar;
     public RectTransform StaminaBar;
-    //player DeadScene UI
 
+    //player DeadScene UI
     public RectTransform DeadSceneAll;
     public Image DeadSceneBorder;
     public Image DeadSceneBar;
@@ -92,12 +92,9 @@ public class PlayerController : AnimatorAll
     }
     int n = 0;
 
-    private void Awake()
-    {
-        //dataManager.LoadDate();//임시로 처음 using UnityEngine.SceneManagement;시작하면 load되게끔
-    }
     void Start()
     {
+        #region 저장기능
         //저장한 데이터 가져오기
         //Level = dataManager.nowPlayer.level;
         //LevelT.text = Level.ToString(); //text도 초기화
@@ -110,7 +107,7 @@ public class PlayerController : AnimatorAll
         //button[2].num = dataManager.uIData.StaminaP;
         //button[3].num = dataManager.uIData.DefenceP;
         //button[4].num = dataManager.uIData.CriticalP;
-
+        #endregion
         n = transform.childCount;
         color = Color.white;
         HealOura.Stop();
@@ -123,6 +120,7 @@ public class PlayerController : AnimatorAll
     {
         ProcessState();
         InvincibleTime();
+        //test 코드
         if (Input.GetKeyDown(KeyCode.Space))
         {
             PlayerExp(5000.0f);
@@ -174,15 +172,12 @@ public class PlayerController : AnimatorAll
                 myAnim.SetTrigger("IsDead");
                 break;
             case PlayerState.HitDown:
-                spine.enabled = false;
+                Cancle();
                 break;
             case PlayerState.Aim:
                 break;
             case PlayerState.Heal:
-                Arch2.position = Arch2Oripos.position;
-                spine.enabled = false;
-                animEvent.OnInactiveArrow();
-                myAnim.SetBool("Aiming", false);
+                Cancle();
                 currentTime = 0;
                 HealOura.gameObject.SetActive(true);
                 break;
@@ -277,7 +272,7 @@ public class PlayerController : AnimatorAll
                     //UI_Aiming.GetComponentsInChildren<Image>().enabled = true;
                     if (Input.GetMouseButtonDown(0) && animEvent.ReadyToShoot)
                     {
-                        playerSound.ShotArrow();
+                        playerSound.Attack();
                         myAnim.SetTrigger("Shooting");
                     }
                 }
@@ -330,8 +325,6 @@ public class PlayerController : AnimatorAll
                 }
                 else
                 {
-                    animEvent.OnInactiveArrow();
-                    animEvent.OnReleaseBow();
                     myAnim.SetBool("Aiming", false);
                     if (animEvent.PlayerDown)
                     {
@@ -411,7 +404,6 @@ public class PlayerController : AnimatorAll
         }
     }
 
-
     public void Attacked(float dam, string s, Transform pos)
     {
         if (!invincibility) 
@@ -427,6 +419,10 @@ public class PlayerController : AnimatorAll
             {
                 ChangeState(PlayerState.Die);
                 return;
+            }
+            else
+            {
+                ChangeState(PlayerState.HitDown);
             }
 
             //이 코드 때문에 무조건 넘어짐 그럼 방법이 공격에 종류를 만들어 분류를 해야함
@@ -499,5 +495,13 @@ public class PlayerController : AnimatorAll
             StaminaBar.offsetMax = new Vector2(val, 0);
             Stamina.maxValue = (val * 0.1f) + 100;
         }
+    }
+    void Cancle()
+    {
+        animEvent.OnReleaseBow();
+        Arch2.position = Arch2Oripos.position;
+        animEvent.OnInactiveArrow();
+        spine.enabled = false;
+        myAnim.SetBool("Aiming", false);
     }
 }

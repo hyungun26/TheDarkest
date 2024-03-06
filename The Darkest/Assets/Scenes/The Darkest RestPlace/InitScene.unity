@@ -157,7 +157,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.29333332, y: 1}
   m_AnchoredPosition: {x: 0.000030517578, y: 0}
   m_SizeDelta: {x: 0.000045776, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7414,8 +7414,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 650033927}
-  - component: {fileID: 650033928}
-  - component: {fileID: 650033929}
   m_Layer: 10
   m_Name: mixamorig:RightToeBase
   m_TagString: Untagged
@@ -7439,31 +7437,6 @@ Transform:
   m_Father: {fileID: 317296151}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 41.11875, y: 4.1497293, z: 1.9115641}
---- !u!65 &650033928
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 650033926}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.26, z: 0.04}
-  m_Center: {x: 0, y: -0.03, z: 0.01}
---- !u!114 &650033929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 650033926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df6dce446016bf3458286e05d718f872, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &651908296
 GameObject:
   m_ObjectHideFlags: 0
@@ -11010,7 +10983,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.29333332, y: 1}
   m_AnchoredPosition: {x: 0.000030517578, y: 0}
   m_SizeDelta: {x: 0.000045776, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -11241,7 +11214,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.2913649, y: 1}
   m_AnchoredPosition: {x: 0.000030517578, y: 0}
   m_SizeDelta: {x: 0.000045776, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -12771,7 +12744,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1167545900
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12830,8 +12803,8 @@ RectTransform:
   m_Father: {fileID: 832229817}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.2913649, y: 0}
+  m_AnchorMax: {x: 0.2913649, y: 1}
   m_AnchoredPosition: {x: -2.300003, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -15473,8 +15446,8 @@ RectTransform:
   m_Father: {fileID: 1481250064}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.29333332, y: 0}
+  m_AnchorMax: {x: 0.29333332, y: 1}
   m_AnchoredPosition: {x: -2.300003, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -15657,8 +15630,8 @@ RectTransform:
   m_Father: {fileID: 1648639653}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.29333332, y: 0}
+  m_AnchorMax: {x: 0.29333332, y: 1}
   m_AnchoredPosition: {x: -2.300003, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -15782,9 +15755,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1444120725}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 534eadb4bed7d23429f5fd050c1804a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 56b65da1d50293e4692148f310b59e60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 1934058248}
   playerController: {fileID: 560085949}
   playerSound: {fileID: 1934058247}
   pool: {fileID: 102061276}
@@ -15792,17 +15766,12 @@ MonoBehaviour:
   ArrowClone: {fileID: 6655638492050979814, guid: c6f140ba567d3ee4f9033dd9f7b0460a, type: 3}
   Arch2: {fileID: 2042733339}
   RightHand: {fileID: 792021628}
-  DragonHead: {fileID: 0}
-  fire: {fileID: 0}
-  fireBreath: {fileID: 0}
   animAming: 0
   ReadyToShoot: 0
   ReadyToAim: 1
   SAim: 0
   PlayerDown: 0
   RestEnd: 0
-  Scream: 0
-  Fight: 0
   PlayerRayCast: {fileID: 799711760}
 --- !u!114 &1444120730
 MonoBehaviour:
@@ -19049,8 +19018,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1906560393}
-  - component: {fileID: 1906560394}
-  - component: {fileID: 1906560395}
   m_Layer: 10
   m_Name: mixamorig:LeftToeBase
   m_TagString: Untagged
@@ -19074,31 +19041,6 @@ Transform:
   m_Father: {fileID: 1960086625}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 40.736595, y: -2.0313113, z: -0.6607997}
---- !u!65 &1906560394
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1906560392}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.26, z: 0.04}
-  m_Center: {x: 0, y: -0.03, z: 0.01}
---- !u!114 &1906560395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1906560392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df6dce446016bf3458286e05d718f872, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1913598412
 GameObject:
   m_ObjectHideFlags: 0
@@ -19535,7 +19477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d2378d6c75446940a5e83483bb53018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowSound:
+  AttackSound:
   - {fileID: 8300000, guid: d79814ff1f7ab37409c5f5b77d00d931, type: 3}
   - {fileID: 8300000, guid: f555a6742c493b2438a13e5e2a5eb12d, type: 3}
   WalkSound:

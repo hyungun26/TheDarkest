@@ -1,20 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationEvent : MonoBehaviour
+public class PlayerAE : AnimationEvent
 {
     public PlayerController playerController;
     public PlayerSound playerSound;
     public PoolManager pool;
-    //Player Animator Controll    
+
     public GameObject Arrow;
     public GameObject ArrowClone;
     public Transform Arch2;
     public Transform RightHand;
-
-    public Transform DragonHead;
-    public GameObject fire;
-    public GameObject fireBreath;
-    bool fireTF = false;
 
     public bool animAming = false;
     public bool ReadyToShoot = false;
@@ -23,13 +20,7 @@ public class AnimationEvent : MonoBehaviour
     public bool PlayerDown = false;
     public bool RestEnd = false;
 
-    //Monster Animator Controll
-    public bool Scream = false;
-    public bool Fight = true;
-
     public PlayerRayCast PlayerRayCast;
-
-    
     public void OnActiveArrow()
     {
         Arrow.SetActive(true);
@@ -62,7 +53,7 @@ public class AnimationEvent : MonoBehaviour
     }
 
     public void OnReleaseBow()
-    {   
+    {
         animAming = false;
         ReadyToShoot = false;
     }
@@ -83,9 +74,9 @@ public class AnimationEvent : MonoBehaviour
         ReadyToAim = false;
     }
 
-    public void WalkSound()
+    public override void WalkSound()
     {
-        if(!playerController.Run)
+        if (!playerController.Run)
         {
             if (playerController.Walk)
             {
@@ -93,7 +84,7 @@ public class AnimationEvent : MonoBehaviour
             }
         }
     }
-    public void RunSound()
+    public override void RunSound()
     {
         if (playerController.Run)
         {
@@ -105,38 +96,6 @@ public class AnimationEvent : MonoBehaviour
     public void WakeUp()
     {
         PlayerDown = true;
-    }
-
-    //Dragon Anim State
-    public void OnChaing()
-    {
-        Scream = true;
-    }
-
-    public void OnAttack()
-    {
-        Fight = true;
-    }
-
-    public void OnUnAttack()
-    {
-        Fight = false;
-    }
-
-    public void OnFireActive()
-    {
-        fireTF = !fireTF;
-        fire.SetActive(fireTF);
-        fire.transform.localScale = Vector3.one * 40f;
-    }
-    public void OnFireGrow()
-    {
-        fire.transform.localScale *= 1.2f;
-    }
-    public void OnFireCreatActive()
-    {
-        fireTF = !fireTF;
-        fireBreath.SetActive(fireTF);
     }
 
     public void OnRayRange()

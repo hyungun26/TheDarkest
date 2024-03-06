@@ -4,16 +4,15 @@ using UnityEngine.AI;
 
 public class Dragon : MonsterState
 {
-    //드래곤에 문제점 움직임이 이상함 고쳐야함
+    public DragonSound dragonSound;
+
     public GameObject DragonUI;
     public NavMeshAgent Agent;
-    public AnimationEvent animEvent;
+    public DragonAE animEvent;
 
     [SerializeField]
     bool attackPossible = false;
     float runORwalk = 20.0f;
-    
-    Vector3 dir = Vector3.zero;
 
     //effect on off & dead State Production
     public GameObject[] smokeEffect;
@@ -63,7 +62,6 @@ public class Dragon : MonsterState
 
     public void ChangeState(MonsterStates s) //행동이 바뀔때 최초 한번 실행 하는곳
     {
-        Debug.Log(s);
         if (State == s) return;
         State = s;
         switch (State)
@@ -165,6 +163,7 @@ public class Dragon : MonsterState
                             animEvent.Fight = false;
                             attackDelay = 0;
                             int rnd = Random.Range(0, 3); // 0 ~ 2
+                            dragonSound.Attack(rnd);
                             switch (rnd)
                             {
                                 case 0:

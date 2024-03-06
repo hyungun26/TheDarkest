@@ -1,29 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+
 using UnityEngine.SceneManagement;
 
-public class PlayerSound : MonoBehaviour
+public class PlayerSound : Sounds
 { 
-    new AudioSource audio;
-    public AudioClip[] ArrowSound;
-    public AudioClip[] WalkSound;
-    string str;
-    private void Awake()
-    {
-        audio = GetComponent<AudioSource>();
-    }
     public void BowRealese()
     {
-        audio.clip = ArrowSound[0];
+        audio.clip = AttackSound[0];
         audio.Play();
     }
-    public void ShotArrow()
+    public override void Attack()
     {
-        audio.clip = ArrowSound[1];
+        audio.clip = AttackSound[1];
         audio.Play();
     }
-    public void Walk()
+    public override void Walk()
     {
         str = SceneManager.GetActiveScene().name;
         switch(str)
@@ -36,7 +26,7 @@ public class PlayerSound : MonoBehaviour
         audio.Play();
     }
 
-    public void StopSound()
+    public override void StopSound()
     {
         if (audio.clip == null)
             return;
@@ -44,5 +34,10 @@ public class PlayerSound : MonoBehaviour
         {
             audio.clip = null;
         }
+    }
+
+    public override void Attack(int attackType)
+    {
+        
     }
 }

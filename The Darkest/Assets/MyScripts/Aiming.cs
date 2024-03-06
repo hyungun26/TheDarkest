@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public class Aiming : MonoBehaviour
 {
-    public AnimationEvent animEvent;
+    public PlayerAE animEvent;
     public Animator anim;
     public RectTransform tr;
     new AudioSource audio;

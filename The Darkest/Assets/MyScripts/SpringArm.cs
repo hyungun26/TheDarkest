@@ -11,7 +11,7 @@ public class SpringArm : MonoBehaviour
     public Transform mainCamera;
     public LayerMask crashMask;
 
-    public AnimationEvent animEvent;
+    public PlayerAE animEvent;
 
     public Transform myCam;
     public float LookupSpeed;
@@ -49,16 +49,6 @@ public class SpringArm : MonoBehaviour
             {
                 myCam.localPosition = new Vector3(0, 0, -hit.distance + Offset);
             }
-            else
-            {
-                //if (Mathf.Approximately(startPosition.position.x, myCam.position.x))
-                //{
-                //    if (!anim.GetBool("Aiming"))
-                //    {
-                //        myCam.localPosition = camPos;
-                //    }
-                //}
-            }
 
             if (anim.GetBool("Aiming") && animEvent.ReadyToAim)
             {
@@ -68,7 +58,6 @@ public class SpringArm : MonoBehaviour
             {
                 myCam.localPosition = Vector3.Lerp(myCam.localPosition, startPosition.localPosition, 5.0f * Time.deltaTime);
             }
-            //매우 안좋은 코드 나중에 바꾸자
         }
     }
 }
