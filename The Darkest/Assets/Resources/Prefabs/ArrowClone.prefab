@@ -79,6 +79,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86498986bea4c324288161eff089690d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AudioSource: {fileID: 0}
+  AudioClip: {fileID: 8300000, guid: 0531dbc7b053d6e479793770c9951fda, type: 3}
   CrashArrow: {fileID: 6655638492050979814, guid: 1e241092b3827684291628762178d9e8, type: 3}
   crashMask:
     serializedVersion: 2

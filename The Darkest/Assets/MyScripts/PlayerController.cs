@@ -83,7 +83,6 @@ public class PlayerController : AnimatorAll
     public int Level = 0;
     public float Exp = 0;
     public float MaxExp = 1000;
-
     //scene 관련
     
     public enum PlayerState
@@ -172,7 +171,7 @@ public class PlayerController : AnimatorAll
                 myAnim.SetTrigger("IsDead");
                 break;
             case PlayerState.HitDown:
-                Cancle();
+                Cancle();              
                 break;
             case PlayerState.Aim:
                 break;
@@ -269,7 +268,6 @@ public class PlayerController : AnimatorAll
                 {                    
                     myAnim.SetBool("Aiming", true);
                     //이곳에 sound넣으면 될듯
-                    //UI_Aiming.GetComponentsInChildren<Image>().enabled = true;
                     if (Input.GetMouseButtonDown(0) && animEvent.ReadyToShoot)
                     {
                         playerSound.Attack();
@@ -420,33 +418,32 @@ public class PlayerController : AnimatorAll
                 ChangeState(PlayerState.Die);
                 return;
             }
-            else
-            {
-                ChangeState(PlayerState.HitDown);
-            }
 
             //이 코드 때문에 무조건 넘어짐 그럼 방법이 공격에 종류를 만들어 분류를 해야함
             //Mob한태 맞을때는 약공격으로 경직 모션을 넣고 
-            //Boss한태 맞을때는 강공격으로 아래에 넘어짐 모션을 사용해야할듯            
-            switch(s)
+            //Boss한태 맞을때는 강공격으로 아래에 넘어짐 모션을 사용해야할듯
+            
+            switch (s)
             {
-                case "WeekAttack": myAnim.SetTrigger("IsHit");
-                break;
+                case "WeekAttack": 
+                    myAnim.SetTrigger("IsHit");
+                    playerSound.Attacked();
+                    break;
                 case "StrongAttack":
-
-                Vector3 hori = Right.localPosition - Left.localPosition;
-                checkDir = Vector3.Cross(Vector3.up, hori);
-                checkDir.Normalize();
-                Vector3 myPosition = (pos.position - Left.position).normalized;
-                if (Vector3.Dot(checkDir, myPosition) < 0.0f)
-                {
-                    myAnim.SetTrigger("isGettingFrontUp");
-                }
-                else if (Vector3.Dot(checkDir, myPosition) > 0.0f)
-                {
-                    myAnim.SetTrigger("isGettingBackUp");
-                }
-                break;
+                    ChangeState(PlayerState.HitDown);
+                    Vector3 hori = Right.localPosition - Left.localPosition;
+                    checkDir = Vector3.Cross(Vector3.up, hori);
+                    checkDir.Normalize();
+                    Vector3 myPosition = (pos.position - Left.position).normalized;
+                    if (Vector3.Dot(checkDir, myPosition) < 0.0f)
+                    {
+                        myAnim.SetTrigger("isGettingFrontUp");
+                    }
+                    else if (Vector3.Dot(checkDir, myPosition) > 0.0f)
+                    {
+                        myAnim.SetTrigger("isGettingBackUp");
+                    }
+                    break;
             }
             invincibility = true;
         }

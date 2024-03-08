@@ -19477,12 +19477,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d2378d6c75446940a5e83483bb53018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackSound:
-  - {fileID: 8300000, guid: d79814ff1f7ab37409c5f5b77d00d931, type: 3}
-  - {fileID: 8300000, guid: f555a6742c493b2438a13e5e2a5eb12d, type: 3}
   WalkSound:
   - {fileID: 8300000, guid: 914f96dceaa918c4091751140b8d3cd8, type: 3}
   - {fileID: 8300000, guid: 6bc74e7a3fad2b14c922f384bc7adaa4, type: 3}
+  AttackSound:
+  - {fileID: 8300000, guid: d79814ff1f7ab37409c5f5b77d00d931, type: 3}
+  - {fileID: 8300000, guid: f555a6742c493b2438a13e5e2a5eb12d, type: 3}
+  AttackedSound:
+  - {fileID: 8300000, guid: 3ca6e2fe5af548a4c9e0f35d38ac8c54, type: 3}
 --- !u!82 &1934058248
 AudioSource:
   m_ObjectHideFlags: 0

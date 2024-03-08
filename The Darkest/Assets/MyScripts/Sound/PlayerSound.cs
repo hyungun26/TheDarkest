@@ -40,4 +40,10 @@ public class PlayerSound : Sounds
     {
         
     }
+
+    public override void Attacked()
+    {
+        audio.clip = AttackedSound[0];
+        audio.Play();
+    }
 }

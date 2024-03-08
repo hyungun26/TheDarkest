@@ -64,4 +64,9 @@ public class DragonSound : Sounds
         audio.loop = true;
         audio.Play();
     }
+
+    public override void Attacked()
+    {
+        throw new System.NotImplementedException();
+    }
 }

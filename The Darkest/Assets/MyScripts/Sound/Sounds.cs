@@ -5,14 +5,16 @@ using UnityEngine;
 public abstract class Sounds : MonoBehaviour
 {
     protected new AudioSource audio;
-    public AudioClip[] AttackSound;
     public AudioClip[] WalkSound;
+    public AudioClip[] AttackSound;
+    public AudioClip[] AttackedSound;
     protected static string str;
     private void Awake()
     {
         audio = GetComponent<AudioSource>();
     }
 
+    public abstract void Attacked();
     public abstract void Attack(int attackType);
     public abstract void Attack();
     public abstract void Walk();

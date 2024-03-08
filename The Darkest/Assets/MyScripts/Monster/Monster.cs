@@ -5,7 +5,8 @@ using System.Collections.Generic;
 using UnityEngine.TextCore.Text;
 
 public class Monster : MonsterState
-{   
+{
+    public MonsterSound monsterSound;
     public float rotationSpeed = 1f;
     private float walkDelay = 5.0f;
     float rot;
@@ -73,6 +74,7 @@ public class Monster : MonsterState
         switch(State)
         {
             case MonsterStates.Idle:
+            monsterSound.Idle.enabled = true;
             myAnim.SetBool("IsChasing", false);
             myAnim.SetBool("IsWalk", false);
             break;
@@ -80,6 +82,7 @@ public class Monster : MonsterState
             myAnim.SetBool("IsWalk", true);
             break;
             case MonsterStates.Chase:
+            monsterSound.Idle.enabled = false;
             slid.gameObject.SetActive(true);
             break;
             case MonsterStates.Attack:
@@ -158,7 +161,7 @@ public class Monster : MonsterState
             StartCoroutine(Attack());
             if (attackDelay > 3.0f)
             {
-                int n = Random.Range(0,2);
+                int n = Random.Range(0, 2);                
                 attackDelay = 0.0f;
                 switch(n)
                 {
@@ -178,6 +181,7 @@ public class Monster : MonsterState
                 this.transform.position += Vector3.down * Time.deltaTime;
                 if(vec.y > this.transform.position.y+3)
                 {
+                    monsterSound.StopSound();
                     this.gameObject.SetActive(false);
                     if(!transform.gameObject.activeSelf)
                         spawner.num--;
@@ -202,6 +206,7 @@ public class Monster : MonsterState
 
     private void OnEnable()
     {
+        
         gravity = this.transform.GetComponent<Rigidbody>();
         capColl = this.transform.GetComponent<CapsuleCollider>();
         Hp = 500.0f;
@@ -224,7 +229,7 @@ public class Monster : MonsterState
         Hp -= dam;
         slid.value = Hp;
         if (Hp <= 0.0f)
-        {
+        {            
             ChangeState(MonsterStates.Dead);
             return;
         }

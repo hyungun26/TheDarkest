@@ -2,6 +2,8 @@
 
 public class Arrow : MonoBehaviour
 {
+    public AudioSource AudioSource;
+    public AudioClip AudioClip;
     public GameObject CrashArrow;
     public LayerMask crashMask;
     public PlayerStat playerStat;
@@ -11,6 +13,8 @@ public class Arrow : MonoBehaviour
 
     void Start()
     {
+        GameObject obj = GameObject.Find("InteractSound");
+        AudioSource = obj.GetComponent<AudioSource>();
         playerStat = GameObject.Find("StatValue1").GetComponent<PlayerStat>();
     }
 
@@ -28,8 +32,11 @@ public class Arrow : MonoBehaviour
 
             if(hit.transform.CompareTag("Monster"))
             {
+                AudioSource.clip = null;
+                AudioSource.clip = AudioClip;
+                AudioSource.Play();
                 //이방식으로 Damage처리를 했지만 몹이 늘어나면 방식을 바꿔야함 - 어느정도 바꿈 collider가 있는 곳에 hit script를 넣어 최상위 스크립트에 접근하여 hp를 깎는 방식 최상위 접근방식이 좋은 방법인지는 모르겠으나 짱편리!
-                
+
                 //이곳에서 치명타도 관리
                 Hit a = hit.transform.GetComponent<Hit>();
                 GameObject rootObj = a.transform.root.gameObject;
