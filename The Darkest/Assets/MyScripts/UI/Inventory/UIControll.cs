@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class UIControll : DataManager
 {
     //static의 역할은 대충 다른 스크립트에 영향을 받은 코드에 값을 static을 선언한 class에서도 영향을 받는 것
+    new public AudioSource audio;
+    public AudioClip[] audioClip;
     public List<GameObject> list = new List<GameObject>();
     public SpringArm Controll;
     protected static bool inven = false;
@@ -46,6 +48,8 @@ public class UIControll : DataManager
         {
             if (list.Count != 0)
             {
+                //CloseUI Sound
+                UISound(1);
                 inven = false;
                 stat = false;
 
@@ -58,6 +62,7 @@ public class UIControll : DataManager
             }
             else
             {
+                UISound(0);
                 SettingControll();
             }
             #region 세이브 기능
@@ -111,11 +116,16 @@ public class UIControll : DataManager
                 StatWin.gameObject.SetActive(stat);
                 if (stat)
                 {
+                    UISound(0);
                     list.Add(StatWin.gameObject);
                     StatWin.transform.SetAsLastSibling();
                 }
                 else
+                {
+                    UISound(1);
                     list.Remove(StatWin.gameObject);
+                }
+                    
             }
 
             if (Input.GetKeyDown(KeyCode.I))
@@ -124,11 +134,15 @@ public class UIControll : DataManager
                 Inventory.gameObject.SetActive(inven);
                 if (inven)
                 {
+                    UISound(0);
                     list.Add(Inventory.gameObject);
                     Inventory.transform.SetAsLastSibling();
                 }
                 else
+                {
+                    UISound(1);
                     list.Remove(Inventory.gameObject);
+                }
             }
         }
     }
@@ -146,5 +160,10 @@ public class UIControll : DataManager
             //player조종 가능한 모든건 차단
             playerController.enabled = false;
         }
+    }
+    public void UISound(int num)
+    {
+        audio.clip = audioClip[num];
+        audio.Play();
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Sounds : MonoBehaviour
 {
+    AudioSource interact;
     protected new AudioSource audio;
     public AudioClip[] WalkSound;
     public AudioClip[] AttackSound;
@@ -12,6 +13,17 @@ public abstract class Sounds : MonoBehaviour
     private void Awake()
     {
         audio = GetComponent<AudioSource>();
+        GameObject obj = GameObject.Find("InteractSound");
+        interact = obj.GetComponent<AudioSource>();
+        audio.volume = interact.volume;
+    }
+
+    private void FixedUpdate()
+    {
+        if(audio.volume != interact.volume)
+        {
+            audio.volume = interact.volume;
+        }
     }
 
     public abstract void Attacked();

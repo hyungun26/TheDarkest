@@ -8,6 +8,7 @@ TagManager:
   - Monster
   - Item
   - Ground
+  - Audio
   layers:
   - Default
   - TransparentFX

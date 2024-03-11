@@ -1,11 +1,14 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : AnimatorAll
 {
-    public AudioSource DeadAduio;
+    public AudioSource playerAudioSource;
+    public AudioSource LevelUpSound;
     public AudioClip DeadSound;
+    public AudioClip HealAuraSound;
     public PlayerSound playerSound;
     public PoolManager pool;
     //public DataManager dataManager;
@@ -70,6 +73,7 @@ public class PlayerController : AnimatorAll
 
     //Particle
     public ParticleSystem HealOura;
+    float Svalue;
     bool RestCheck = false;
     Color color;
 
@@ -158,8 +162,8 @@ public class PlayerController : AnimatorAll
                 }
                 break;
             case PlayerState.Die:
-                DeadAduio.clip = DeadSound;
-                DeadAduio.Play();
+                playerAudioSource.clip = DeadSound;
+                playerAudioSource.Play();
                 myAnim.SetBool("Aiming", false);
                 spine.enabled = false;
                 time = 0;
@@ -177,6 +181,9 @@ public class PlayerController : AnimatorAll
                 break;
             case PlayerState.Heal:
                 Cancle();
+                //value = playerAudioSource.volume;
+                playerAudioSource.clip = HealAuraSound;
+                playerAudioSource.Play();
                 currentTime = 0;
                 HealOura.gameObject.SetActive(true);
                 break;
@@ -331,7 +338,6 @@ public class PlayerController : AnimatorAll
                 }
                 break;
             case PlayerState.Heal:
-
                 if(myAnim.GetBool("IsResting"))
                 {
                     currentTime += Time.deltaTime;
@@ -357,6 +363,7 @@ public class PlayerController : AnimatorAll
                     color.a = alphaVal(1, 0.01f, 1.0f);
                     if(Mathf.Approximately(color.a, 0.01f) && animEvent.RestEnd)
                     {
+                        StartCoroutine(SoundDown(playerAudioSource, Svalue));
                         Arrow.gameObject.SetActive(true);
                         HealOura.gameObject.SetActive(false);
                         DeadCamera.enabled = false;
@@ -463,6 +470,8 @@ public class PlayerController : AnimatorAll
             MaxExp += 1000;
             Exp = carriedOver;
             ExpGauge.fillAmount = Exp / MaxExp;
+            LevelUpSound.Play();
+            StartCoroutine(SoundDown(LevelUpSound, Svalue));
         }
         double LevelVal = ExpGauge.fillAmount * 100.0f;
         LevelVal = System.Math.Truncate(LevelVal * 100) / 100;
@@ -500,5 +509,19 @@ public class PlayerController : AnimatorAll
         animEvent.OnInactiveArrow();
         spine.enabled = false;
         myAnim.SetBool("Aiming", false);
+    }
+
+    IEnumerator SoundDown(AudioSource audio, float a)
+    {
+        yield return new WaitForSeconds(2.0f);
+        while(audio.volume > 0f)
+        {
+            audio.volume -= Time.deltaTime * 0.1f;
+            yield return null;
+        }
+        yield return new WaitForSeconds(1.5f);
+        audio.volume = a;
+        if (audio.clip.name != "LevelUpSound")
+            audio.clip = null;
     }
 }

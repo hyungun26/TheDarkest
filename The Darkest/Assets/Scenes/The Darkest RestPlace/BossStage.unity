@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12112779, g: 0.15458497, b: 0.22906259, a: 1}
+  m_IndirectSpecularColor: {r: 0.12112766, g: 0.15458483, b: 0.22906205, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -42416,7 +42416,7 @@ GameObject:
   - component: {fileID: 2132720626}
   m_Layer: 0
   m_Name: AudioSource
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42544,12 +42544,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb2b8c5881c484c41af99c74a39876aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundManager: {fileID: 0}
+  WalkSound:
+  - {fileID: 8300000, guid: 73a657ef6805b4744ae540e7362db701, type: 3}
   AttackSound:
   - {fileID: 8300000, guid: 02dec0737df372b41abb16e72d079652, type: 3}
   - {fileID: 8300000, guid: e11e24f5adc871f4dbaef4e9ee4b7164, type: 3}
   - {fileID: 8300000, guid: 8182965f4bdc85a4faffe8d268ad7791, type: 3}
-  WalkSound:
-  - {fileID: 8300000, guid: 73a657ef6805b4744ae540e7362db701, type: 3}
+  AttackedSound: []
   ScreamSound: {fileID: 8300000, guid: 706af37c2b1792f46959cd372d90a0c8, type: 3}
   BurningSound: {fileID: 8300000, guid: d0d0b7f865e3a50448df4610cf2681dd, type: 3}
   attackC: 0

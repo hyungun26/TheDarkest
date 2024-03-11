@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class SoundEffetVolume : GearMoving
 {
-    public AudioSource[] effect;
+    public List<AudioSource> list = new List<AudioSource>();
+    
     public override void Gearmove()
     {
-        foreach(var i in effect)
+        foreach(var i in list)
         {
             i.volume = slid.value * 0.0027777777777778f;
         }

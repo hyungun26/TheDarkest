@@ -6,7 +6,17 @@ public class MonsterSound : Sounds
 {
     public AudioSource Idle;
     public AudioClip IdleSound;
-    public AudioClip[] DeadSound;    
+    public AudioClip[] DeadSound;
+
+    private void Update()
+    {
+        if(Idle.volume != audio.volume)
+        {
+            Debug.Log("이러면 많이안하겠쭁");
+            Idle.volume = audio.volume;
+        }
+    }
+
     public override void Attack(int attackType)
     {
         audio.clip = AttackSound[0];

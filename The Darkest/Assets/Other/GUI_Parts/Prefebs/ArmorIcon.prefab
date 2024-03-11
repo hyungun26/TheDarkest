@@ -90,6 +90,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179bdd8b0522bfc4a8746b5818ef2739, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audio: {fileID: 0}
+  audioClip:
+  - {fileID: 8300000, guid: 7120a34691ee420448d380775166739b, type: 3}
+  - {fileID: 8300000, guid: d8e29231490b1f0469fdb0d54370aee3, type: 3}
   previousParent: {fileID: 0}
   IT: {fileID: 5322835120201074249, guid: 7cb449af65749824a869da2b7a5a9484, type: 3}
 --- !u!114 &-6318234473259091082

@@ -8,14 +8,22 @@ using UnityEngine.UI;
 public class ItemIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
     IPointerDownHandler, IPointerUpHandler, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    new public AudioSource audio;
+    public AudioClip[] audioClip;
+
     Transform All;
     Transform Canvas;
     public Transform previousParent;
     public GameObject IT;
     GameObject PlayerPos;
 
-
     float clickTime = 0;
+
+    void Awake()
+    {
+        GameObject obj = GameObject.Find("InteractSound");
+        audio = obj.GetComponent<AudioSource>();
+    }
     public void OnPointerEnter(PointerEventData eventData)
     {
         //진입
@@ -43,7 +51,7 @@ public class ItemIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         //누르고 땠을때 반응한다
         if ((Time.time - clickTime) < 0.3f) // 더블 클릭
         {
-            
+            ItemSound(1);
             clickTime = -1;
             EquipmentSlot equip = transform.GetComponentInParent<EquipmentSlot>();
             ItemSlot Slot = transform.GetComponentInParent<ItemSlot>();
@@ -83,7 +91,7 @@ public class ItemIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 }
                 Item Check = IT.GetComponent<Item>();
                 string str = Check.equipMent.ToString();
-                GameObject s = GameObject.Find(str); // find함수에 문제점 장비창이 비활성화 되어있을때는 찾지못한다
+                GameObject s = GameObject.Find(str);
                 EquipmentSlot equipmentSlot = s.GetComponentInChildren<EquipmentSlot>();
                 if(equipmentSlot.have == true) //착용중이면
                 {
@@ -116,6 +124,7 @@ public class ItemIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         GetComponent<Image>().raycastTarget = false; // 이전에 그림에 영향을 받기위해 false처리한것
         transform.SetParent(All, false);
         transform.SetAsLastSibling();
+        ItemSound(0);
         //드래그 시작
     }
 
@@ -127,8 +136,8 @@ public class ItemIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnEndDrag(PointerEventData eventData) // 드래그 끝
     {
         GetComponent<Image>().raycastTarget = true;
- 
-        if(transform.parent == All)
+        ItemSound(1);
+        if (transform.parent == All)
         {
             transform.SetParent(previousParent, false);
             transform.localPosition = Vector2.zero;
@@ -144,4 +153,10 @@ public class ItemIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
 
     private bool IsOverUI() => EventSystem.current.IsPointerOverGameObject();
+
+    void ItemSound(int num)
+    {
+        audio.clip = audioClip[num];
+        audio.Play();
+    }
 }

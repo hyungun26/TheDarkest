@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class ItemSearch : MonoBehaviour
 {
+    new public AudioSource audio;
+    public AudioClip audioClip;
     public List<GameObject> list = new List<GameObject>();
     public TextMeshProUGUI InteractT;
     public Transform content;
     List<GameObject> slotList = new List<GameObject>();
     void Start()
     {
+        audio.clip = audioClip;
         foreach(Transform i in content)
         {
             slotList.Add(i.gameObject);
@@ -40,6 +43,8 @@ public class ItemSearch : MonoBehaviour
             InteractT.text = "Press \"Z\"";
             if (Input.GetKeyDown(KeyCode.Z))
             {
+                audio.clip = audioClip;
+                audio.Play();
                 //일단 생성을 먼저해야합니다 instantiate 를 생성을 해야할것같네요  //완성~
                 //다음문제 slot안에 item이 있다면 다음 slot에 생성
                 Item item = list[0].gameObject.GetComponent<Item>();
