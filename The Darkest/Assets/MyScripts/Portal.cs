@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,12 +9,13 @@ public class Portal : MonoBehaviour
     public UIControll UIControll;
     public RectTransform PortalUI;
     public RectTransform InteractUI;
+    public Slider slider;
     private PoolManager pool;
     private bool Teleport = false;
     private float TeleportTime;
     private void OnTriggerEnter(Collider other)
-    {
-        pool = GameObject.Find("PoolManager").GetComponent<PoolManager>();
+    {        
+        //pool = GameObject.Find("PoolManager").GetComponent<PoolManager>();
         if(UIControll == null)
         {
             UIControll = GameObject.Find("InitCanvas").GetComponent<UIControll>();
@@ -44,6 +46,7 @@ public class Portal : MonoBehaviour
             }
             else
             {
+                slider.gameObject.SetActive(true);
                 Teleport = true;
             }
         }
@@ -54,14 +57,11 @@ public class Portal : MonoBehaviour
         if(Teleport && SceneManager.GetActiveScene().name != "The Darkest RestPlace")
         {
             TeleportTime += Time.deltaTime;
-            if(TeleportTime > 5.0f)
+            slider.value = TeleportTime;
+            if (TeleportTime > 5.0f)
             {
                 TeleportTime = 0.0f;
                 Teleport = false;
-                //if(SceneManager.GetActiveScene().name == "MonsterArea")
-                //{
-                //    pool.PoolManagerInit();
-                //}
                 LoadingSceneManager.LoadScene("The Darkest RestPlace");
             }
         }
@@ -87,6 +87,8 @@ public class Portal : MonoBehaviour
             else
             {
                 TeleportTime = 0.0f;
+                slider.value = TeleportTime;
+                slider.gameObject.SetActive(false);
                 Teleport = false;
             }
         }
