@@ -206,7 +206,6 @@ public class Monster : MonsterState
 
     private void OnEnable()
     {
-        
         gravity = this.transform.GetComponent<Rigidbody>();
         capColl = this.transform.GetComponent<CapsuleCollider>();
         Hp = 500.0f;

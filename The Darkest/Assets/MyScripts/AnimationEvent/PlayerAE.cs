@@ -103,4 +103,14 @@ public class PlayerAE : AnimationEvent
         PlayerRayCast.RayDistance = 2.0f;
         RestEnd = true;
     }
+
+    public void OnHeal()
+    {
+        playerSound.Heal();
+    }
+
+    public void OnHealStop()
+    {
+        playerSound.HealStop();
+    }
 }

@@ -12,7 +12,6 @@ public class MonsterSound : Sounds
     {
         if(Idle.volume != audio.volume)
         {
-            Debug.Log("이러면 많이안하겠쭁");
             Idle.volume = audio.volume;
         }
     }

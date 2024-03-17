@@ -7,8 +7,8 @@ public class PlayerController : AnimatorAll
 {
     public AudioSource playerAudioSource;
     public AudioSource LevelUpSound;
+    public AudioClip LevelUpClip;
     public AudioClip DeadSound;
-    public AudioClip HealAuraSound;
     public PlayerSound playerSound;
     public PoolManager pool;
     //public DataManager dataManager;
@@ -181,9 +181,6 @@ public class PlayerController : AnimatorAll
                 break;
             case PlayerState.Heal:
                 Cancle();
-                //value = playerAudioSource.volume;
-                playerAudioSource.clip = HealAuraSound;
-                playerAudioSource.Play();
                 currentTime = 0;
                 HealOura.gameObject.SetActive(true);
                 break;
@@ -363,7 +360,6 @@ public class PlayerController : AnimatorAll
                     color.a = alphaVal(1, 0.01f, 1.0f);
                     if(Mathf.Approximately(color.a, 0.01f) && animEvent.RestEnd)
                     {
-                        StartCoroutine(SoundDown(playerAudioSource, Svalue));
                         Arrow.gameObject.SetActive(true);
                         HealOura.gameObject.SetActive(false);
                         DeadCamera.enabled = false;
@@ -458,6 +454,7 @@ public class PlayerController : AnimatorAll
 
     public void PlayerExp(float num)
     {
+        Svalue = LevelUpSound.volume;
         Exp += num;
         ExpGauge.fillAmount = Exp / MaxExp;
         while(ExpGauge.fillAmount >= 1.0f) 
@@ -470,8 +467,12 @@ public class PlayerController : AnimatorAll
             MaxExp += 1000;
             Exp = carriedOver;
             ExpGauge.fillAmount = Exp / MaxExp;
-            LevelUpSound.Play();
-            StartCoroutine(SoundDown(LevelUpSound, Svalue));
+            if(LevelUpSound.clip == null)
+            {
+                LevelUpSound.clip = LevelUpClip;
+                LevelUpSound.Play();
+                StartCoroutine(SoundDown(LevelUpSound, Svalue, 2.0f));
+            }
         }
         double LevelVal = ExpGauge.fillAmount * 100.0f;
         LevelVal = System.Math.Truncate(LevelVal * 100) / 100;
@@ -510,18 +511,16 @@ public class PlayerController : AnimatorAll
         spine.enabled = false;
         myAnim.SetBool("Aiming", false);
     }
-
-    IEnumerator SoundDown(AudioSource audio, float a)
+    //지금 현재 문제가 무엇이냐 문제는 바로 레벨업을 하고 레벨업 사운드가 줄어들고 잇는 과정에서 다시 렙업을 했을때 
+    IEnumerator SoundDown(AudioSource audio, float a, float b)
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(b);
         while(audio.volume > 0f)
         {
-            audio.volume -= Time.deltaTime * 0.1f;
+            audio.volume -= Time.deltaTime * 1f;
             yield return null;
         }
-        yield return new WaitForSeconds(1.5f);
         audio.volume = a;
-        if (audio.clip.name != "LevelUpSound")
-            audio.clip = null;
+        audio.clip = null;
     }
 }

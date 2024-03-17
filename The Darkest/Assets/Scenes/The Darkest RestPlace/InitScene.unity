@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6540,8 +6540,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAudioSource: {fileID: 1934058248}
   LevelUpSound: {fileID: 1847905168}
+  LevelUpClip: {fileID: 8300000, guid: f99a522e2aa110544be616203ec4b4eb, type: 3}
   DeadSound: {fileID: 8300000, guid: f8b8d4b7e463ec24180f27096d44892c, type: 3}
-  HealAuraSound: {fileID: 8300000, guid: e1fc3d1a716112d44823df4ba7faf1f7, type: 3}
   playerSound: {fileID: 1934058247}
   pool: {fileID: 102061276}
   button:
@@ -18943,7 +18943,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f99a522e2aa110544be616203ec4b4eb, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.3
   m_Pitch: 1.2
@@ -19607,6 +19607,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f555a6742c493b2438a13e5e2a5eb12d, type: 3}
   AttackedSound:
   - {fileID: 8300000, guid: 3ca6e2fe5af548a4c9e0f35d38ac8c54, type: 3}
+  HealAuraSound: {fileID: 8300000, guid: e1fc3d1a716112d44823df4ba7faf1f7, type: 3}
 --- !u!82 &1934058248
 AudioSource:
   m_ObjectHideFlags: 0
@@ -19617,7 +19618,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 914f96dceaa918c4091751140b8d3cd8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.3
   m_Pitch: 1

@@ -1,8 +1,10 @@
 
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerSound : Sounds
-{ 
+{
+    public AudioClip HealAuraSound;
     public void BowRealese()
     {
         audio.clip = AttackSound[0];
@@ -16,14 +18,31 @@ public class PlayerSound : Sounds
     public override void Walk()
     {
         str = SceneManager.GetActiveScene().name;
-        switch(str)
+        
+        switch (str)
         {
-            case "BossStage": audio.clip = WalkSound[1];
+            case "BossStage":
+                audio.clip = WalkSound[1];
                 break;
-            default:  audio.clip = WalkSound[0];
+            default:
+                audio.clip = WalkSound[0];
                 break;
         }
+        if (audio.clip.name == HealAuraSound.name)
+        {
+            return;
+        }
         audio.Play();
+    }
+    public void Heal()
+    {
+        audio.clip = HealAuraSound;
+        audio.Play();
+    }
+
+    public void HealStop()
+    {
+        audio.Stop();
     }
 
     public override void StopSound()
