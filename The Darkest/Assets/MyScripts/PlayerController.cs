@@ -175,7 +175,7 @@ public class PlayerController : AnimatorAll
                 myAnim.SetTrigger("IsDead");
                 break;
             case PlayerState.HitDown:
-                Cancle();              
+                Cancle();
                 break;
             case PlayerState.Aim:
                 break;
@@ -312,8 +312,7 @@ public class PlayerController : AnimatorAll
                 time += Time.deltaTime;
                 if (ReloadingTime <= time)
                 {
-                    Slider slid = HpBar.GetComponent<Slider>();
-                    PlayerHP.value = slid.maxValue;
+                    PlayerHP.value = PlayerHP.maxValue;
                     Stamina.value = Stamina.maxValue;
                     LoadingSceneManager.LoadScene("The Darkest RestPlace");
                     time = 0;

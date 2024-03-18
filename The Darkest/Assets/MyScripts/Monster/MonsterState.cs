@@ -1,10 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class MonsterState : AnimatorAll
 {
+    public float Damage;
     public float Hp;
     public float moveSpeed;
     public string attackType;
@@ -37,7 +36,7 @@ public abstract class MonsterState : AnimatorAll
                 PlayerController playerController = coll.GetComponent<PlayerController>();
                 if (playerController != null)
                 {
-                    playerController.Attacked(20.0f, attackType, this.transform);
+                    playerController.Attacked(Damage, attackType, this.transform);
                     playerController.hit = true;
                 }
             }

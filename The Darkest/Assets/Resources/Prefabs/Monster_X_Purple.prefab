@@ -700,6 +700,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4045cb4ee4920e543bec2149b735b99c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Damage: 20
   Hp: 500
   moveSpeed: 3
   attackType: WeekAttack
