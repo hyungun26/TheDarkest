@@ -27,7 +27,6 @@ public class PlayerController : AnimatorAll
     public float x;
     public float y; 
         
-
     public bool invincibility = false;
     float invincibilityTime = 3.0f; // 무적시간
     public bool Walk = false;
@@ -123,12 +122,6 @@ public class PlayerController : AnimatorAll
     {
         ProcessState();
         InvincibleTime();
-        //test 코드
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            PlayerExp(5000.0f);
-            //ChangeState(PlayerState.Die);
-        }
 
         PlayerStatus();
         if (Stamina.value != Stamina.maxValue && SGaugeFill)

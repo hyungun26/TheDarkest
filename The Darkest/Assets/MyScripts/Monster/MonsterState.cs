@@ -20,7 +20,7 @@ public abstract class MonsterState : AnimatorAll
     public Transform[] attackPos;
     public enum MonsterStates
     {
-        Idle, Walk, Fight, Chase, Attack, Dead, Scream, Sleep, Delay
+        Idle, Walk, Fight, Chase, Attack, Dead, Scream, Sleep
     }
     private void Awake()
     {

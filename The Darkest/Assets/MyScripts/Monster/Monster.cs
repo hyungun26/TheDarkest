@@ -97,9 +97,9 @@ public class Monster : MonsterState
             break;
         }
     }
-    public void StateProcess()
+    public void StateProcess() //행동을 계속 실행 하는곳
     {
-        switch(State)
+        switch (State)
         {
             case MonsterStates.Idle:
             //player와 거리가 멀고 더이상 공격하지 않는다 판단하면 hpSlider 끄는 코드
@@ -120,6 +120,7 @@ public class Monster : MonsterState
             rot = Random.Range(0, 361);
             }
             break;
+
             case MonsterStates.Walk:
             walkDelay -= 1.0f * Time.deltaTime;
             if(!outOfRange)
@@ -136,6 +137,7 @@ public class Monster : MonsterState
                 walkDelay = 5.0f;
             }
             break;
+
             case MonsterStates.Chase:
             LookPlayer(PlayerTransform);
             float dis = Vector3.Distance(this.transform.position, PlayerTransform.position);
@@ -149,6 +151,7 @@ public class Monster : MonsterState
                 myAnim.SetBool("IsChasing", false);
             }
             break;
+
             case MonsterStates.Attack:
             dis = Vector3.Distance(this.transform.position, PlayerTransform.position);
             
@@ -174,6 +177,7 @@ public class Monster : MonsterState
                 }
             }
             break;
+
             case MonsterStates.Dead:
             deadDelay -= 1.0f * Time.deltaTime;
             if(deadDelay < 0.0f)
