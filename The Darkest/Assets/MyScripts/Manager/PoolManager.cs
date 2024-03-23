@@ -67,10 +67,10 @@ public class PoolManager : MonoBehaviour
     {
         GameObject select = null;
 
-        // ... 선택한 풀의 놀고 (비활성화 된) 있는 게임오브젝트 접근
+        // 선택한 풀의 놀고 (비활성화 된) 있는 게임오브젝트 접근
         foreach (GameObject item in pools[index])
         {
-            // ... 발견하면 select 변수에 할당
+            // 발견하면 select 변수에 할당
             if (!item.activeSelf)
             {
                 select = item;
@@ -79,10 +79,9 @@ public class PoolManager : MonoBehaviour
             }
         }
 
-        //못 찾았으면?
-        if (!select) // null값이면 false값이 나온다
+        if (!select) // 찾지 못했다면
         {
-            //새롭게 생성하고 select 변수에 할당
+            // 새롭게 생성하고 select 변수에 할당
             select = Instantiate(prefabs[index]);
             pools[index].Add(select);
         }

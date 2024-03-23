@@ -140,7 +140,7 @@ public class PlayerController : AnimatorAll
 
     public PlayerState MyState = PlayerState.Play;
 
-    public void ChangeState(PlayerState s)// 이곳은 상태가 바꾸면 한번 실행이 되는곳
+    public void ChangeState(PlayerState s)// 상태가 바뀌면 한번 실행이 되는곳
     {
         if (s == MyState) return;
         MyState = s;
@@ -185,7 +185,7 @@ public class PlayerController : AnimatorAll
         switch (MyState)
         {
             case PlayerState.Play:
-
+                #region Play
                 if (anim.GetBool("Aiming"))
                 {
                     UIAim.SetActive(true);
@@ -285,7 +285,9 @@ public class PlayerController : AnimatorAll
                 myAnim.SetFloat("X", x);
                 myAnim.SetFloat("Y", y);
                 break;
+            #endregion
             case PlayerState.Die:
+                #region Die
                 currentTime += Time.deltaTime;
                 if (currentTime >= lerpTime)
                 {
@@ -310,10 +312,11 @@ public class PlayerController : AnimatorAll
                     LoadingSceneManager.LoadScene("The Darkest RestPlace");
                     time = 0;
                 }
-                
                 break;
+            #endregion
             case PlayerState.HitDown:
-                if(PlayerHP.value <= 0.0f)
+                #region HitDown
+                if (PlayerHP.value <= 0.0f)
                 {
                     ChangeState(PlayerState.Die);
                 }
@@ -326,8 +329,10 @@ public class PlayerController : AnimatorAll
                     }
                 }
                 break;
+            #endregion
             case PlayerState.Heal:
-                if(myAnim.GetBool("IsResting"))
+                #region Heal
+                if (myAnim.GetBool("IsResting"))
                 {
                     currentTime += Time.deltaTime;
                     if (currentTime >= lerpTime)
@@ -360,6 +365,7 @@ public class PlayerController : AnimatorAll
                         ChangeState(PlayerState.Play);
                     }
                 }
+                #endregion
                 break;
         }
     }
