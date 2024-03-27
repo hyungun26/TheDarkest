@@ -2,31 +2,32 @@
 using TMPro;
 using UnityEngine;
 
-public class ItemSearch : MonoBehaviour
+public class ItemSearch : Interact
 {
     new public AudioSource audio;
     public AudioClip audioClip;
     public List<GameObject> list = new List<GameObject>();
-    public TextMeshProUGUI InteractT;
     public Transform content;
     List<GameObject> slotList = new List<GameObject>();
+    Collider col;
     void Start()
     {
         audio.clip = audioClip;
-        foreach(Transform i in content)
+        foreach (Transform i in content)
         {
             slotList.Add(i.gameObject);
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    public override void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Item"))
+        col = other;
+        if (other.gameObject.CompareTag("Item"))
         {
             list.Add(other.gameObject);
         }
     }
-    void OnTriggerExit(Collider other)
+    public override void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Item"))
         {
@@ -52,6 +53,7 @@ public class ItemSearch : MonoBehaviour
                 {
                     for (int i = 0; i < slotList.Count; i++)//아이템 들어온 순서대로 칸에 넣기
                     {
+                        Debug.Log("확인");
                         if (slotList[i].transform.childCount == 0)
                         {
                             Instantiate(item.Items, slotList[i].transform);
