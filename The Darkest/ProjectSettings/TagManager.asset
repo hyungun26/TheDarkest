@@ -9,7 +9,6 @@ TagManager:
   - Item
   - Ground
   - Audio
-  - NPC
   layers:
   - Default
   - TransparentFX
