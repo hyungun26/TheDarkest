@@ -2,12 +2,11 @@
 using TMPro;
 using UnityEngine;
 
-public class ItemSearch : MonoBehaviour
+public class ItemSearch : Interact
 {
     new public AudioSource audio;
     public AudioClip audioClip;
     public List<GameObject> list = new List<GameObject>();
-    public TextMeshProUGUI InteractT;
     public Transform content;
     List<GameObject> slotList = new List<GameObject>();
     void Start()
@@ -19,14 +18,14 @@ public class ItemSearch : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    public override void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("Item"))
         {
             list.Add(other.gameObject);
         }
     }
-    void OnTriggerExit(Collider other)
+    public override void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Item"))
         {
